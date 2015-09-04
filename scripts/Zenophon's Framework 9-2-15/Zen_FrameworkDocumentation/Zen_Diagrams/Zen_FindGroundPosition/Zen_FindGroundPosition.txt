@@ -1,0 +1,59 @@
+/* extracted from http://www.bottlecaps.de/rr/ui on Sat Jan 31, 2015, 15:10 (UTC-08)
+ */
+Zen_FindGroundPosition
+          ::= '(' ((AreaMarker ',' (MinimumRadius ',')?
+                |
+              (Object|Position|Group|IconMarkerName) ',' (MinandMaxRadius ',')
+                |
+              '0 (= Entire Map)')
+              (Exclusions)? )
+
+              ')'
+
+MinandMaxRadius ::= '[' MinimumRadius ',' MaximumRadius ']' | '0 (= ignore parameter)'
+
+Exclusions
+          ::=  ','
+               (AreaMarkerExclusions ',')?
+               (SurfaceRestrictions ',')?
+               (RoadPreferences ',')?
+               (SectorExclusions ',')?
+               (BuildingExclusions ',')?
+               (PositionExclusions ',')?
+               (WaterExclusions ',')?
+               (TerrainSlopeConditions ',')?
+               (TerrainClutterPreferences ',')?
+               (AltitudeExclusions ',')?
+               (MaxUnsatisfiedParameters)?
+
+AreaMarkerExclusions ::= ('[' (BlacklistAreaMarker) (',' BlacklistAreaMarker)* ']') | 
+                         ('[' ('[' ((BlacklistAreaMarker) (',' BlacklistAreaMarker)*)? ']') ','
+                              ('[' ((AllWhitelistAreaMarker) (',' AllWhitelistAreaMarker)*)? ']') ','
+                              ('[' ((OneWhitelistAreaMarker) (',' OneWhitelistAreaMarker)*)? ']')
+                          ']')
+                          | '0 (= ignore parameter)'
+
+SurfaceRestrictions ::= ('0 (=Land and Sea)' | '1 (=Land only)' | '2 (=Sea only)')
+
+RoadPreferences ::= '[' (( '1 (=move to nearby road)' ',' SearchRadius ) | ('2 (=require roads)' ',' '0' ) | ('3 (=ignore roads)' ',' SearchRadius  )) ']' | '0 (=ignore parameter)'
+
+SectorExclusions ::= '[' ( MinMinRadius ',' MaxMinRadius ) ( "," ( 'compass' | 'trig' ))? ']' | '0 (=ignore parameter)'
+
+BuildingExclusions ::=  ( '[' ( '1 (=exclude)' | '2 (=include)' ) ',' AllowedHouses ',' SearchRadius 
+                                                    ']' ) | '0 (=ignore parameter)'
+
+PositionExclusions ::= ('['
+                           ( ( '1 (=exclude)' | '2 (=include)' ) ',' 
+                            '[' ((Object|Position|Group|IconMarkerName)) (',' (Object|Position|Group|IconMarkerName))* ']' ',' SearchRadius )
+                        ']') 
+                         | '0 (=ignore parameter)'
+
+WaterExclusions ::=  '[' ('1 (=exclude)' | '2 (=include)' ) ',' SearchRadius ']' | '0 (=ignore parameter)'
+
+TerrainSlopeConditions ::= '[' ( '1 (=exclude greater than)' | '2 (=exclude less than)' ) ',' SlopeDegree ',' SearchRadius ']' | '0 (=ignore parameter)' 
+
+TerrainClutterPreferences ::= '[' ('1 (=exclude greater than)' | '2 (=exclude less than)' ) ',' ( 'Number of Clutter Objects' | '[' TreeExclusion ',' RockExclusion ',' ShrubExclusion ']' ) ',' MinimumRadius ']'  | '0 (=ignore parameter)'
+
+AltitudeExclusions::= '[' ( '1 (=exclude greater than)' | '2 (=exclude less than)' ) ',' Altitude (',' SearchRadius)? ']' | '0 (=ignore parameter)'
+
+MaxUnsatisfiedParameters::= ('Integer 0 to 12')

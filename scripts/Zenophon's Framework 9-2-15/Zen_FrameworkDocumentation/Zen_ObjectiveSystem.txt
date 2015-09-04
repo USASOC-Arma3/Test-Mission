@@ -1,0 +1,30 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Objective System
+
+Meant to simplify side missions, the objective system allows you to easily add something extra for players to do in a mission, without worrying about getting different parts of an objective to work.  The system handles the object itself, the task, and marker for the objective.  It is up to you to spawn guards and patrols around the objective.
+
+Zen_CreateObjective
+
+Creates an objective and the task for it and completes the task when the objective is
+completed.  Nothing is spawned other than the objective.  The side is that of the
+objective, not who will complete it.  Only the given units see the task and the marker for
+the objective.  You can create invalid combinations of arguments for which function
+behavior is undefined.
+Usage : Call
+Params: 1. Array, object, string, group, the position of the objective
+        2. Array, group, object, or side, units to get the task
+        3. Side, the side of the object being created
+        4. String or array of strings, which objective(s) to create 'Box'
+            'Mortar' 'Wreck' 'Officer' 'POW' 'Convoy' 'Custom'
+        5. String, the type of win condition, 'eliminate' 'reach' 'protect' 'rescue'
+    AND IF (4) == 'Convoy'
+        6. Array, object, group, or string, convoy start position
+ (opt.) 7. String, the speed of the convoy, 'limited' 'normal' 'full', (default: 'limited')
+    OR IF (4) == 'Custom'
+        6. Array, string, the classname(s) of the object to create, can be vehicle(s), person(s) or both
+Return: Array:
+            1. Array of objects, the created objects
+            2. String, the global string name of the task

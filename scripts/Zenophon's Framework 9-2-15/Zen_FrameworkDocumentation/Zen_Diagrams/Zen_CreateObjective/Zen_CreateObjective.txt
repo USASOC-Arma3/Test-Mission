@@ -1,0 +1,22 @@
+/* extracted from http://bottlecaps.de/rr/ui on Tue Nov 26, 2013, 11:43 (UTC-08)
+ */
+
+Zen_CreateObjective
+          ::= '(' 
+               (Object|Position|MarkerName|Group) ',' 
+               Side ','
+               ( 
+                 ('Box'     ',' ('eliminate'|'reach'|'protect'))
+               | ('Mortar'  ',' ('eliminate'|'reach'|'protect'))
+               | ('Officer' ',' ('eliminate'|'reach'|'protect'|'rescue'))
+               | ('POW'     ',' ('eliminate'|'reach'|'protect'|'rescue'))
+               | ('Convoy'  ',' ('eliminate'|'protect') ',' StartingPosition ',' ConvoySpeed )
+               | ('Custom'  ',' ('eliminate'|'reach'|'protect'|'rescue') ',' ObjectClassName )
+               )
+               ')'
+
+Side::= 'EAST'|'WEST'|'CIVILIAN'|'RESISTANCE'
+
+StartingPosition::= Object|Position|MarkerName|Group
+
+ConvoySpeed::= 'limited'|'normal'|'full'

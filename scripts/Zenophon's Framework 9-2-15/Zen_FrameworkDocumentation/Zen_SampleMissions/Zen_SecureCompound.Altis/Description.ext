@@ -1,0 +1,58 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+
+//ensure AI exist
+disabledAI = 0;
+
+//show scoreboard on player death
+respawnDialog = 1;
+
+//settings shown in the small box
+onLoadName = "Attack the Compound";
+author = "Zenophon";
+OnLoadMission = "Assault and secure the compound and surrounding countryside.";
+loadScreen = "SC.jpg";
+// pics must be 1024x512 and .paa or .jpg
+
+// setting in scenario menu
+overviewText = "Assault and secure the compound and surrounding countryside.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+overviewPicture = "SC.jpg";
+// pics must be 1024x512
+// pics must be .jpg
+
+//ensure that the scoreboard appears
+debriefing = 1;
+
+//do not drop items while swimming
+enableItemsDropping = 0;
+
+// debug for admin
+enableDebugConsole = 1;
+
+doneKeys[] = {"BIS_Zen_SecureCompound.Altis_done"};
+
+//defines settings that the server browser reads
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 6;
+};
+
+class CfgDebriefing {
+    class End1 {
+        title = "Mission Completed";
+        subtitle = "Good Job";
+        description = "All objectives completed";
+        // pictureBackground = "";
+        // picture = "b_inf";
+        // pictureColor[] = {0.0,0.3,0.6,1};
+    };
+};

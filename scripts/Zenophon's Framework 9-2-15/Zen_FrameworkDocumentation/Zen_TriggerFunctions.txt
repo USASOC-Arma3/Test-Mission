@@ -1,0 +1,83 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Trigger Functions
+
+Trigger Functions are designed as basic mission events and are meant to be used with the task system.  They eliminate the need to script your own trigger loops in code for simple conditions.  They are not meant to replace editor triggers or detect complex mission events.
+
+Zen_TriggerAreaClear
+
+Completes task (2) when none of (1) are in (4) or the logical polygon.
+Stops executing when all (1) are dead or all (2) are (3).
+Usage : Spawn
+Params: 1. Array, group, object, side, objects that cannot be in the area
+        2. Array of strings or string, global task name(s)
+        3. String, resulting state of the task, 'failed' or 'succeeded'
+    AND
+        4. String, the name of a marker
+ (opt.) 5. Array, markers units cannot be in, (default: [])
+    OR
+        4. Array, group, object, string, the center of the polygon
+        5. Array like so [1, 2], the x,y radius of the polygon
+        6. Scalar, the angle of the polygon as rotated from 0 degrees
+        7. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 8. Array, markers units cannot be in, (default: [])
+Return: Void
+
+Zen_TriggerAreaSecure
+
+Completes task (3) when none of (1) and at least one of (2) are in (5) or the logical polygon.
+Stops executing when all (2) are dead or all (3) are (4).
+Usage : Spawn
+Params: 1. Array, group, object, side, objects that cannot be in the area
+        2. Array, group, object, side, objects that must be in the area
+        3. Array of strings or string, global task name(s)
+        4. String, resulting state of the task, 'failed' or 'succeeded'
+    AND
+        5. String, the name of a marker
+ (opt.) 6. Array, markers units cannot be in, (default: [])
+    OR
+        5. Array, group, object, string, the center of the polygon
+        6. Array like so [1, 2], the x,y radius of the polygon
+        7. Scalar, the angle of the polygon as rotated from 0 degrees
+        8. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 9. Array, markers units cannot be in, (default: [])
+Return: Void
+
+Zen_TriggerAreDead
+
+Completes task (2) when less than (4) of (1) are still alive.
+Stops executing when all (2) are (3).
+Usage : Spawn
+Params: 1. Array, group, object, side, the object(s)
+        2. Array of strings or string, global task name(s)
+        3. String, resulting state of the task, 'failed' or 'succeeded'
+ (opt.) 4. Scalar, the highest number of living objects that counts as completed, (default: 0)
+Return: Void
+
+Zen_TriggerAreNear
+
+Completes task (3) when (2) are near (1).  If multiple points are given (1), (2) must be
+near all of them.  Positions of objects and groups in (1) are updated dynamically.
+Stops executing when all (1) are dead or all (2) are (3).
+Usage : Spawn
+Params: 1. Array, object, group, side, object(s) that can complete
+        2. Array of strings or string, global task name(s)
+        3. String, resulting state of the task, 'failed' or 'succeeded'
+        4. Array, group, object, string, the point(s) to reach
+ (opt.) 5. String, how many objects must be near, 'all' 'one', (default: 'one')
+ (opt.) 6. Scalar, the maximum radius from the center, (default: 10)
+Return: Void
+
+Zen_TriggerAreRescued
+
+Succeeds all (3) when all living (1) are secured by any of (2).  Fails all (3) if all (1)
+die, even after rescue.  Sets all (1) to be captive.  Each hostage is rescued individually
+and joins the nearest rescuer.  The hostage is then set not captive.  Stops executing when
+all (2) are dead.
+Usage : Spawn
+Params: 1. Array, object, group, side, the hostage(s)
+        2. Array, object, group, side, the rescuer(s)
+        3. Array of strings or string, global task name(s)
+Return: Void

@@ -1,0 +1,130 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Loadout Functions
+
+For everything to do with inventories and equipment, loadout functions provide various ways to outfit the soldiers in your mission.
+
+Zen_AddGiveMagazine
+
+Allows every unit in (1) to give a magazine matching a teammate's current weapon
+to them.  The action only appears when the giver gets within 2 meters of the receiver.
+Usage : Call
+Params: 1. Array, group, object, or side, units to add the action to
+ (opt.) 2. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_AddLoadoutDialog
+
+Attaches an action to (1) that allows a player to open a dialog menu and select from (2)
+loadouts.  Works with all preset and custom loadouts.
+Usage : Call
+Params: 1. Array or object, the object(s) to add the action to
+        2. Array of strings, the loadouts to list in order
+ (opt.) 3. Scalar, number of uses, -1 for infinite, (default: -1)
+ (opt.) 4. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_AddRepackMagazines
+
+Adds an action to every unit in (1), allowing the unit to repack remaining rounds into
+the fewest magazines possible.  Does not repack identical rounds from different capacity
+magazines into the same capacity magazine.
+Usage : Call
+Params: 1. Array, group, object, or side, units to add the action to
+ (opt.) 2. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_CreateLoadout
+
+Registers (1) with a unique name (2), for use in Zen_AddLoadoutDialog, Zen_GiveLoadoutCustom
+and Zen_GiveLoadoutCargo.  See the Custom Loadout Demonstration for formatting instructions.
+Usage : Call
+Params: 1. Array, the loadout data
+ (opt.) 2. String, the custom loadout unique name, (default: Random)
+Return: String, the unique loadout name
+
+Zen_GetLoadoutData
+
+Reads the global array and returns the loadout data for (1) formatted for Zen_CreateLoadout.
+See the Custom Loadout Demonstration for formatting instructions.
+Usage : Call
+Params: 1. String, the unique loadout name
+Return: Array, the loadout data
+
+Zen_GetUnitLoadout
+
+Returns the current equipment of (1) in the correct format for Zen_CreateLoadout.
+Usage : Call
+Params: 1. Object, the unit to examine
+Return: Array, the loadout data
+
+Zen_GiveLoadout
+
+Calls the correct loadout function based upon (2).  A 'custom' type can only be given if
+the loadout is given.  Only give people for (1), not vehicles.
+Usage : Call
+Params: 1. Array, group, object, or side, units to be armed
+    AND
+        2. Side, the side of equipment to give
+ (opt.) 3. Array of strings or string, the specific loadout(s) to choose from, (default: Random)
+            Accepts any listed for Zen_GiveLoadoutBlufor etc
+ (opt.) 4. Boolean, true to remote execute the function, (default: true)
+    OR
+        2. String, 'custom' to use custom loadouts
+        3. Array of strings or string, the specific loadout(s) to choose from
+            Accepts any custom from Zen_CreateLoadout
+ (opt.) 4. String, the method to add the loadout, 'additive' or 'complete', (default: 'complete')
+ (opt.) 5. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_GiveLoadoutBlufor, Zen_GiveLoadoutOpfor, and Zen_GiveLoadoutIndfor
+
+Give various, preset but randomized loadouts to (1).
+Usage : Call
+Params: 1. Array, group, object, or side, units to be armed
+ (opt.) 2. Array of strings or string, the loadout(s) to choose from, (default: Random)
+        'Recon', 'Rifleman', 'Grenadier', 'AutoRifleman', 'Marksman', 'Team Leader',
+        'Squad Leader', 'Assistant AA', 'Assistant AT', 'Assistant AR', 'AA Specialist',
+        'AT Rifleman', 'AT Specialist', 'Medic', 'Sapper', 'Miner', 'EOD Specialist',
+        'Officer', 'Sniper', 'Spotter', 'UAV Operator', 'Crewman', 'Fighter Pilot',
+        'Helicopter Pilot', 'Helicopter Crew', 'Diver', 'Diver Sapper', 'Guerrilla'
+        'Diver Land' (diver with a standard rifle), 'Civilian'
+ (opt.) 3. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_GiveLoadoutCargo
+
+Gives the custom loadout(s) (2) to (1).  Use only for vehicles.  Do not use preset loadouts.
+See Custom Loadout Demonstration for how to use presets indirectly.
+Usage : Call
+Params: 1. Array, object, vehicles to fill
+        2. Array of strings or string, the specific loadout(s) to choose from
+Return: Void
+
+Zen_GiveLoadoutCustom
+
+Gives the custom loadout(s) (2) to (1).  Use only for people.  If (3) is 'additive',
+new equipment will replace previous when necessary.
+Usage : Call
+Params: 1. Array, group, object, or side, units to be armed
+        2. Array of strings or string, the specific loadout(s) to choose from
+        3. String, the method to add the loadout, 'additive' or 'complete', (default: 'complete')
+ (opt.) 4. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_RemoveLoadout
+
+Deletes the data of (1) permanently from the global array.
+Usage : Call
+Params: 1. String, the unique loadout name
+Return: Void
+
+Zen_UpdateLoadout
+
+Overwrites the data of (1) with (2), keeping the name the same.
+Usage : Call
+Params: 1. String, the unique loadout name
+        2. Array, the loadout data
+Return: Void

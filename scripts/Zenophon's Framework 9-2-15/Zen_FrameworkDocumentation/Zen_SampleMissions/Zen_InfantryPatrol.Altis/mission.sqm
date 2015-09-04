@@ -1,0 +1,379 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"A3_Soft_F_HEMTT",
+		"a3_map_altis",
+		"A3_Soft_F_MRAP_01"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"A3_Soft_F_MRAP_01",
+		"a3_map_altis"
+	};
+	randomSeed=8200731;
+	class Intel
+	{
+		briefingName="Co-8 Infantry Patrol";
+		overviewText="Patrol the Altis countryside and eliminate Indfor targets.";
+		resistanceWest=0;
+		startWeather=0;
+		startWind=0.099999994;
+		startWaves=0.099999994;
+		forecastWeather=0;
+		forecastWind=0.099999994;
+		forecastWaves=0.099999994;
+		forecastLightnings=0.099999994;
+		year=2035;
+		month=6;
+		day=24;
+		hour=11;
+		minute=5;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	class Groups
+	{
+		items=2;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=4;
+				class Item0
+				{
+					position[]={13238.211,19.725479,18420.547};
+					azimut=561.69965;
+					special="NONE";
+					id=0;
+					side="WEST";
+					vehicle="B_Soldier_SL_F";
+					player="PLAY CDG";
+					leader=1;
+					rank="SERGEANT";
+					skill=1;
+					text="X21";
+				};
+				class Item1
+				{
+					position[]={13241.788,19.662109,18420.889};
+					azimut=550.77173;
+					special="NONE";
+					id=1;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=1;
+					init="doStop this";
+				};
+				class Item2
+				{
+					position[]={13244.785,19.615017,18420.754};
+					azimut=522.94226;
+					special="NONE";
+					id=2;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this";
+				};
+				class Item3
+				{
+					position[]={13235.803,19.842632,18422.615};
+					azimut=585.76428;
+					special="NONE";
+					id=3;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this";
+				};
+			};
+		};
+		class Item1
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=4;
+				class Item0
+				{
+					position[]={13247.72,19.630108,18402.867};
+					azimut=346.2168;
+					id=4;
+					side="WEST";
+					vehicle="B_Soldier_TL_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rank="SERGEANT";
+					skill=1;
+					text="X11";
+				};
+				class Item1
+				{
+					position[]={13251.76,19.646257,18404.598};
+					azimut=337.59467;
+					special="NONE";
+					id=5;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=1;
+					init="doStop this";
+				};
+				class Item2
+				{
+					position[]={13258.669,19.720367,18405.871};
+					azimut=362.55588;
+					special="NONE";
+					id=6;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this";
+				};
+				class Item3
+				{
+					position[]={13255.429,19.691818,18405.986};
+					azimut=687.55414;
+					special="NONE";
+					id=7;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this";
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=2;
+		class Item0
+		{
+			position[]={13241.615,19.666534,18426.238};
+			azimut=274.47101;
+			id=8;
+			side="EMPTY";
+			vehicle="B_MRAP_01_F";
+			leader=1;
+			skill=1;
+			text="X2_Car";
+		};
+		class Item1
+		{
+			position[]={13254.632,19.627028,18400.102};
+			azimut=255.532;
+			special="NONE";
+			id=9;
+			side="EMPTY";
+			vehicle="B_MRAP_01_F";
+			skill=1;
+			text="X1_Car";
+		};
+	};
+	class Markers
+	{
+		items=10;
+		class Item0
+		{
+			position[]={13251.078,19.74893,18416.521};
+			name="mkStart";
+			text="Start";
+			type="mil_start";
+			colorName="ColorWEST";
+		};
+		class Item1
+		{
+			position[]={15349.169,0.00023771403,15638.995};
+			name="mkAll";
+			markerType="RECTANGLE";
+			type="Empty";
+			fillName="Border";
+			a=13000;
+			b=11000;
+			drawBorder=1;
+		};
+		class Item2
+		{
+			position[]={8465.1855,108.92545,25075.699};
+			name="mkBlack1";
+			markerType="RECTANGLE";
+			type="Empty";
+			a=500;
+			b=500;
+		};
+		class Item3
+		{
+			position[]={2312.8049,67.502213,22326.344};
+			name="mkBlack2";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=500;
+			b=500;
+		};
+		class Item4
+		{
+			position[]={23691.211,3.1900001,18120.619};
+			name="mkBlack3";
+			markerType="RECTANGLE";
+			type="Empty";
+			a=700;
+			b=1000;
+		};
+		class Item5
+		{
+			position[]={22895.006,3.1900001,18354.152};
+			name="mkBlack4";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=300;
+			b=400;
+		};
+		class Item6
+		{
+			position[]={23637.928,3.1900001,19213.35};
+			name="mkBlack6";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=500;
+			b=200;
+		};
+		class Item7
+		{
+			position[]={24464.566,3.1900001,18852.078};
+			name="mkBlack5";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=300;
+			b=400;
+		};
+		class Item8
+		{
+			position[]={21027.926,1.2270972,14751.996};
+			name="mkBlack7";
+			markerType="RECTANGLE";
+			type="Empty";
+			a=500;
+			b=400;
+		};
+		class Item9
+		{
+			position[]={23732.719,5.23,16190.606};
+			name="mkBlack8";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=125;
+			b=250;
+			angle=-31.174801;
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=7281717;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=11880427;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=8685469;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};

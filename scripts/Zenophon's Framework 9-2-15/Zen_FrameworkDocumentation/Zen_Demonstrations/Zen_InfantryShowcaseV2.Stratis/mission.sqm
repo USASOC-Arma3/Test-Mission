@@ -1,0 +1,457 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"a3_map_stratis",
+		"A3_Characters_F_BLUFOR"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_map_stratis"
+	};
+	randomSeed=1260643;
+	class Intel
+	{
+		briefingName="Infantry Show Remake";
+		overviewText="Assault and secure the town of Girna, save Bravo team.";
+		startWeather=0.29999998;
+		startWind=0.099999994;
+		startWaves=0.099999994;
+		forecastWeather=0.29999998;
+		forecastWind=0.099999994;
+		forecastWaves=0.099999994;
+		forecastLightnings=0.099999994;
+		year=2035;
+		month=7;
+		day=6;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+	class Groups
+	{
+		items=1;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=3;
+				class Item0
+				{
+					position[]={3376.9937,149.71284,2695.2063};
+					azimut=-16.07155;
+					special="NONE";
+					id=0;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.60000002;
+					text="X";
+				};
+				class Item1
+				{
+					position[]={3381.0225,149.59959,2694.6118};
+					azimut=-16.07155;
+					special="NONE";
+					id=1;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={3383.1394,149.55302,2695.178};
+					azimut=-16.07155;
+					special="NONE";
+					id=2;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					skill=0.60000002;
+				};
+			};
+		};
+	};
+	class Markers
+	{
+		items=29;
+		class Item0
+		{
+			position[]={2694.5854,112.49406,2491.2832};
+			name="mkInsert";
+			text="Insertion";
+			type="mil_start";
+			colorName="ColorWEST";
+		};
+		class Item1
+		{
+			position[]={2524.9944,39.059559,2714.0898};
+			name="mkBluforPoint";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=30;
+			b=50;
+			angle=488.216;
+		};
+		class Item2
+		{
+			position[]={2620.1985,70.529556,3196.2148};
+			name="mkSit";
+			markerType="RECTANGLE";
+			type="Empty";
+			colorName="ColorBlack";
+			fillName="BDiagonal";
+			a=750;
+			b=100;
+			angle=336.69217;
+		};
+		class Item3
+		{
+			position[]={1993.7159,2.635886,3553.5298};
+			name="mkSit_1";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=150;
+			b=150;
+			angle=148.67799;
+		};
+		class Item4
+		{
+			position[]={3684.4539,108.62908,4270.002};
+			name="mkSit_2";
+			markerType="RECTANGLE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=750;
+			b=100;
+			angle=312.74753;
+		};
+		class Item5
+		{
+			position[]={5237.355,131.19847,4747.188};
+			name="mkSit_3";
+			markerType="RECTANGLE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=1000;
+			b=100;
+			angle=366.207;
+		};
+		class Item6
+		{
+			position[]={3900.459,101.30184,3988.1021};
+			name="mkSit_5";
+			markerType="RECTANGLE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=750;
+			b=100;
+			angle=494.87915;
+		};
+		class Item7
+		{
+			position[]={5146.6851,166.38112,4326.4312};
+			name="mkSit_5_1";
+			markerType="RECTANGLE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=750;
+			b=100;
+			angle=562.25665;
+		};
+		class Item8
+		{
+			position[]={4368.4404,227.34537,3830.9443};
+			name="mkSit_1_1";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=250;
+			b=250;
+			angle=148.67799;
+		};
+		class Item9
+		{
+			position[]={2076.3662,30.895449,2968.2563};
+			name="mkSit_4";
+			text="Opfor Attack";
+			type="mil_ambush";
+			colorName="ColorEAST";
+			fillName="BDiagonal";
+			angle=83.317596;
+		};
+		class Item10
+		{
+			position[]={2147.8589,43.009499,2575.9185};
+			name="mkCharlie";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=75;
+			b=25;
+			angle=145.7664;
+		};
+		class Item11
+		{
+			position[]={2144.4749,42.588009,2572.6563};
+			name="mkSit_7";
+			text="Charlie";
+			type="mil_dot";
+			colorName="ColorWEST";
+		};
+		class Item12
+		{
+			position[]={2028.7362,3.112036,2724.4087};
+			name="mkBravo";
+			text="Bravo";
+			type="mil_unknown";
+			colorName="ColorWEST";
+		};
+		class Item13
+		{
+			position[]={2958.7834,171.86969,1849.6553};
+			name="mkSit_1_1_1";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorWEST";
+			fillName="FDiagonal";
+			a=250;
+			b=250;
+			angle=148.67799;
+		};
+		class Item14
+		{
+			position[]={6373.9331,8.0439157,5377.2168};
+			name="mkSit_1_2";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=250;
+			b=250;
+			angle=148.67799;
+		};
+		class Item15
+		{
+			position[]={3071.0332,3.1466455,5996.5801};
+			name="mkSit_1_2_1";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=250;
+			b=250;
+			angle=148.67799;
+		};
+		class Item16
+		{
+			position[]={2124.5449,6.4146094,5595.9253};
+			name="mkSit_1_2_2";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=500;
+			b=400;
+			angle=375.45566;
+		};
+		class Item17
+		{
+			position[]={2003.4747,3.4634712,2702.6929};
+			name="mkGirnaIcon";
+			type="Empty";
+		};
+		class Item18
+		{
+			position[]={4991.6338,208.21431,5907.6792};
+			name="mkSit_1_2_3";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="Vertical";
+			a=250;
+			b=250;
+			angle=148.67799;
+		};
+		class Item19
+		{
+			position[]={2347.011,25.194275,2854.6152};
+			name="mkAlphaPoint";
+			type="Empty";
+		};
+		class Item20
+		{
+			position[]={2219.1777,18.68083,2849.8384};
+			name="mkValley";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=80;
+			b=30;
+			angle=348.5939;
+		};
+		class Item21
+		{
+			position[]={2014.5057,24.192802,2886.0166};
+			name="mkHill";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=75;
+			b=15;
+			angle=318.91766;
+		};
+		class Item22
+		{
+			position[]={2240.8767,67.29982,2932.9473};
+			name="mkSpotters";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=50;
+			b=30;
+			angle=-15.4045;
+		};
+		class Item23
+		{
+			position[]={2232.7781,48.350952,3030.7192};
+			name="mkAlphaEnd";
+			type="Empty";
+		};
+		class Item24
+		{
+			position[]={2028.1656,3.0300488,2726.4429};
+			name="mkGirna";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=80;
+			b=80;
+		};
+		class Item25
+		{
+			position[]={2058.0415,11.15385,2646.5459};
+			name="mkExtractBravo";
+			type="Empty";
+		};
+		class Item26
+		{
+			position[]={1982.0826,24.505604,2821.7129};
+			name="mkRV";
+			type="Empty";
+		};
+		class Item27
+		{
+			position[]={3262.8879,211.97034,3038.7588};
+			name="mkMaxwell";
+			type="Empty";
+		};
+		class Item28
+		{
+			position[]={2451.3508,143.0627,2475.5952};
+			name="mkH144";
+			type="Empty";
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=13992289;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=1618539;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=6615641;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};

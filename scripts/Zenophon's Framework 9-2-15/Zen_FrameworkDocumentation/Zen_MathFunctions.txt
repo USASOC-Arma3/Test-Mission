@@ -1,0 +1,154 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Math Functions
+
+Designed around dealing with 2D distances, angles, and polygons, the Math Functions are mostly meant to assist more complex operations or be used by other functions that check on objects.
+
+Zen_ExtendPosition
+
+Returns a position a distance (2) and at angle (3) from (1).  Angle may be compass or trig.
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, the distance from the center
+        3. Scalar, the angle from the center
+ (opt.) 4. String, how to interpret the angle, 'Trig' or 'Compass', (default: 'Compass')
+ (opt.) 5. Scalar, height of the point, (default: 0)
+Return: Array
+
+Zen_ExtendRay
+
+Returns a position a distance (3) from (2) at the angle from (1) to (2), such that the point
+is on the line between (1) and (2).  The height of the returned position is 0.
+Usage : Call
+Params: 1. Array, group, object, string, the first point
+        2. Array, group, object, string, the second point
+        3. Scalar, the distance from the second point
+Return: Array
+
+Zen_Find2dDistance
+
+Computes 2d distance by giving 'distance' only 2d arguments, ignoring height.
+Usage : Call
+Params: 1. Array, group, object, string, first position
+        2. Array, group, object, string, second position
+Return: Scalar
+
+Zen_FindDirection
+
+Returns the trig angle from (1) to (2), does not convert negative angles to positive.
+Usage : Call
+Params: 1. Array, group, object, string, starting position
+        2. Array, group, object, string, angle to this position
+Return: Scalar
+
+Zen_FindDistanceToPolyEdge
+
+Returns the distance from (1) inside or outside of a logical rectangle or ellipse to the
+edge of that polygon.  There is a little error (< 2 meters) for performance reasons.
+Usage : Call
+Params: 1. Array, group, object, string, the point
+        2. Scalar, the angle from the point to look for the edge of the polygon
+    AND
+        3. String, a marker
+    OR
+        3. Array, group, object, string, the center of the polygon
+        4. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        5. Scalar, the angle of the polygon as rotated from 0 degrees
+        6. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+Return: Scalar
+
+Zen_FindInRange
+
+Returns a number between and including (1,2), can be decimal or whole.
+Usage : Call
+Params: 1. Scalar, the minimum
+        2. Scalar, the maximum
+ (opt.) 3. Boolean, true to round to a whole number, (default: false)
+Return: Scalar
+
+Zen_FindMaxDistance
+
+Compares all (1) to (2) and returns the element of (1) that is farthest from the center.
+All elements of the array must be of the type denoted below.
+Usage : Call
+Params: 1. Array of arrays, objects, groups, or strings, the positions to compare
+        2. Array, group, object, string, the center
+Return: Array, group, object, string, the element itself, not its position
+
+Zen_FindMinDistance
+
+Compares all (1) to (2) and returns the element of (1) that is nearest from the center.
+All elements of the array must be of the type denoted below.
+Usage : Call
+Params: 1. Array of arrays, objects, groups, or strings, the positions to compare
+        2. Array, group, object, string, the center
+Return: Array, group, object, string, the element itself, not its position
+
+Zen_FindRayIntersection
+
+Determines if the rays starting at (1,2) and pointing at trigonometric angles (3,4),
+respectively, converge to a point.  If so, returns their point of intersection;
+otherwise, returns [0,0,0].
+Usage : Call
+Params: 1. Array, group, object, string, the start of the first ray
+        2. Array, group, object, string, the start of the second ray
+        3. Scalar, the angle of the first ray
+        4. Scalar, the angle of the second ray
+Return: Array
+
+Zen_FindTrigAngle
+
+Converts a compass angle into a trigonometric angle or vice-versa.  Does not convert
+negative angles to positive.
+Usage : Call
+Params: 1. Scalar
+Return: Scalar
+
+Zen_IsAngleInSector
+
+Determines if (1) is between (2).  Accounts for negative angles and the minimum being
+greater than the maximum, and it works for both compass and trig angles.
+Usage : Call
+Params: 1. Scalar, the angle to test
+        2. Array
+            1. Scalar, minimum angle
+            2. Scalar, maximum angle
+Return: Boolean
+
+Zen_IsPointInPoly
+
+Determines if (1) is within (2) or the logical polygon
+Usage : Call
+Params: 1. Array, group, object, string, the point
+    AND
+        2. String, a marker
+    OR
+        2. Array, group, object, string, the center of the polygon
+        3. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        4. Scalar, the angle of the polygon as rotated from 0 degrees
+        5. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+Return: Boolean, true if the point is in the polygon
+
+Zen_IsRayInPoly
+
+Determines if a logical ray crosses (2) or the logical polygon.
+Usage : Call
+Params: 1. Array, group, object, string, the start of the ray
+        2. Scalar, the length of the ray
+        3. Scalar, the angle from the start to generate the ray
+    AND
+        4. String, a marker
+    OR
+        4. Array, group, object, string, the center of the polygon
+        5. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        6. Scalar, the angle of the polygon as rotated from 0 degrees
+        7. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+Return: Boolean, true if any point on the ray is in the polygon

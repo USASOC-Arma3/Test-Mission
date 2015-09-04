@@ -1,0 +1,163 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+
+How To Use the Documentation
+
+Firstly, I recommend that you view the documentation using a text editor with a fixed-width font.  All framework documentation resources are designed to be viewed this way.  This is the only way I can ensure proper formatting for all users.
+
+The input to each function is a series of parameters contained in an array; each element is numbered sequentially as 1, 2, 3, etc; these are referred to as (#) in some descriptions.  Some parameters or returns may be arrays themselves, and their elements are labeled in the same manner and indented below.  In this case (#.Z) denotes the Z'th element of the parameter.  Also, (X, Y) means all parameters between and including X and Y.
+
+The recommended command to use a function is noted above the parameters.  Optional parameters are noted by '(opt.)' in front of the number.  Each parameter has a specific type and short description given.  Optional parameters also note the default value, and some parameters have examples to clarify.
+
+Some functions are overloaded such that they accept two or more series of different parameters, these are noted by 'AND' to show that the parameters split and 'OR' to denote the different possible combinations in that split.  Some functions have parameters that split at the first parameter; these do not say AND.  Another AND is used to show that a split ends and afterwards the parameters are always the same.  Sometimes these words are followed by a condition, and if the condition is true you must enter those parameters.
+
+A few functions can accept an effectively infinite number of parameters, with the last repeating.  These are denoted by an 'N' instead of a number for the parameter and a '...' to indicate a continuance of the parameter with the same data type and description.
+
+Entering parameters of the correct type is crucial; all public functions will print an error and exit (if argument debug is on) if an argument is the wrong type.  The type you must enter is included in the description of each parameter, and many parameters accept more than one type.  For more information on data types, see the BIS wiki.
+
+The value of a data type sometimes has more meaning than its literal value.  For example, marker names are written as strings, so when a parameter description asks for a string, it may mean the name of a marker or any string.  Read each description carefully and examine the context, as some descriptions imply a marker or a position while others only mean a string or an array in general.
+
+To enter any parameters that are optional, you must enter any preceding optional parameters in the correct format, even if they are just the default value.  I have tried to order the optional parameters such that the most useful ones come first.  I have also given optional parameters reasonable default values.  Some optional parameters can be skipped by entering special values; these are noted in the function description.  Most default values can be entered directly, but a few cannot, such as 'random'.  In these cases, you must enter something of your choosing that complies with the documentation.
+
+
+Examples
+
+All of that can be confusing without some examples, so here is a simple one:
+
+Zen_ArrayFindSum
+
+Returns the sum of all numbers in (1).  Not all elements must be numbers.
+Usage : Call
+Params: 1. Array
+Return: Scalar
+
+These are valid usages of Zen_ArrayFindSum:
+
+0 = [[1, 2, 3]] call Zen_ArrayFindSum; // returns 6
+0 = [[1, "hello", 2]] call Zen_ArrayFindSum; // that string will be ignored, returns 3
+0 = [[1]] call Zen_ArrayFindSum; // array can contain 1 value, returns 1
+
+These are invalid usages:
+
+0 = [[1]] spawn Zen_ArrayFindSum; // used spawn
+0 = [1] call Zen_ArrayFindSum; // not an array
+0 = [1, 2, 3] call Zen_ArrayFindSum; // not an array, too many arguments
+
+Placing an array in an array seems unnecessary, but it is done for consistency among all framework functions.  It also makes it easier for me to add additional parameters later, especially if they are optional.
+
+That was fairly simple, but this one is more complex:
+
+Zen_SpawnInfantry
+
+Spawns (4) units of side (2) as a group with skill (3) at (1).  (5,6) are based upon
+config file organization and are subject to change by BIS.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+        2. Side, of the units to spawn
+        3. Skill, see Zen_SetAISkill documentation (2) (Object Functions)
+    AND
+        4. Scalar, how many units to spawn
+    OR
+        4. Array:
+            1. Scalar, the minimum number of units to spawn
+            2. Scalar, the maximum number of units to spawn
+    AND
+ (opt.) 5. String, the type of soldiers to spawn, (default: 'Men'), 'MenDiver' 'MenRecon' 'MenSniper'
+ (opt.) 6. String, the faction of soldiers to spawn, (default: 'All'), 'BLU_F', 'IND_F', 'OPF_F', 'BLU_G_F'
+ (opt.) 7. Array of strings, classnames to blacklist from spawning, (default: [])
+Return: Group
+
+The (#) notation is shorthand to keep the description short.  Substituting the description of each parameter for its number, you can see how the function will behave.  This function is also used with 'call', like most framework functions.
+
+The 'AND' and 'OR' are a concise way of avoiding repeating the entire parameter list in two different ways.  Without these, the documentation looks like:
+
+Params: 1. Array, group, object, string, the spawn point
+        2. Side, of the units to spawn
+        3. Skill, see Zen_SetAISkill documentation (2) (Object Functions)
+        4. Scalar, how many units to spawn
+ (opt.) 5. String, the type of soldiers to spawn, (default: 'Men'), 'MenDiver' 'MenRecon' 'MenSniper'
+ (opt.) 6. String, the faction of soldiers to spawn, (default: 'All'), 'BLU_F', 'IND_F', 'OPF_F', 'BLU_G_F'
+ (opt.) 7. Array of strings, classnames to blacklist from spawning, (default: [])
+
+Params: 1. Array, group, object, string, the spawn point
+        2. Side, of the units to spawn
+        3. Skill, see Zen_SetAISkill documentation (2) (Object Functions)
+        4. Array:
+            1. Scalar, the minimum number of units to spawn
+            2. Scalar, the maximum number of units to spawn
+ (opt.) 5. String, the type of soldiers to spawn, (default: 'Men'), 'MenDiver' 'MenRecon' 'MenSniper'
+ (opt.) 6. String, the faction of soldiers to spawn, (default: 'All'), 'BLU_F', 'IND_F', 'OPF_F', 'BLU_G_F'
+ (opt.) 7. Array of strings, classnames to blacklist from spawning, (default: [])
+
+Either of these combinations is valid.  'AND' and 'OR' just mean that you can substitute any of the listed parameters in your usage.  There are slightly different uses of 'AND' and 'OR' for some functions, but all of them mean that the parameters can be written in multiple separate lists that all work.
+
+This function also has optional parameters.  The notation for optional purposefully takes up no extra space and is easy to see.  If you only have four arguments, the function see this and substitutes the default values.  You can never exclude a parameter that is not optional.  Some things that could be optional, like skill, are not for a reason.  In this case, I want you to think about a good value for the skill of the AI without blindly accepting a default.
+
+In summary, these are valid uses of Zen_SpawnInfantry:
+
+0 = [[0,0,0], west, 1, 2] call Zen_SpawnInfantry; // position doesn't need to make sense
+0 = ["mkSpawn", east, 0.5, [2,3]] call Zen_SpawnInfantry; // no need to convert a marker to a position
+0 = [X, resistance, "infantry", 7] call Zen_SpawnInfantry; // see Zen_SetAISkill documentation for (3)
+
+You can think of many more correct and incorrect uses by changing the type and number of the arguments.
+
+Finally, this shows the use of 'N':
+
+Zen_FindAveragePosition
+
+Returns a point that is composed of the average x and average y position of (1,N).
+The height of the returned position is 0.
+Usage : Call
+Params: 1. Array, group, object, string, the first position
+ (opt.) 2. Array, group, object, string, the second position
+ (opt.) N. ...
+Return: Array
+
+Because N can stand for any number, all of these are valid:
+
+0 = [X] call Zen_FindAveragePosition;
+0 = [X, Y] call Zen_FindAveragePosition;
+0 = [X, Y, "mkTest", [1, 2, 3]] call Zen_FindAveragePosition;
+0 = [X, Y, "mkTest", [1, 2, 3], "marker"] call Zen_FindAveragePosition;
+0 = [X, Y, "mkTest", [1, 2, 3], "marker", group X] call Zen_FindAveragePosition;
+
+
+Data Type Conversion
+
+The documentation lists data types exactly with their formal names.  Thus, 'string' is used instead of 'marker', because marker names are a type of string.  Likewise, positions are a type of array.  The documentation only diverges from this if there is an important difference in the logical values of some type.  For example, some functions will distinguish between a point and area marker.  This notation is not a mistake; it is important which one you are using.
+
+Luckily, many framework functions make use of two data functions to make things easier for you.  Zen_ConvertToObjectArray and Zen_ConvertToPosition allow other data types to be automatically converted for you.
+
+This functionality leads to two commonly repeating lists of types:
+
+1. Array, group, object, string, a position
+2. Array, group, object, side, some objects
+
+The first list is interpreted by Zen_ConvertToPosition, and indicates something that represents a position.  Each type can represent the same position differently.  An array is a literal or variable with [x,y,z] coordinates, such as [12245, 18755, 0].  A group has a leader, who is an object.  An object exists at a position, returned by the 'getPosATL' command.  A string can contain a marker name.  A marker has a center with a position, given by 'getMarkerPos'.
+
+Because any function that wants a position can interpret all of these types, you never need to worry if you are giving a marker or an object.  This allows you to specify the position you want regardless of how you represent it.
+
+The second list is a little more complex.  Zen_ConvertToObjectArray intends to break down anything you give it into only objects.  A group links objects together, so giving a group returns all units in that group.  An object is what the function wants, so no work is done for that.  Every object has a side.  When you give a side, the function searches a list of all units, returning those that have the given side.
+
+The strength of Zen_ConvertToObjectArray is that it parses arguments recursively, meaning that it will search every array and nested array you give it, finding all the objects.  You can nest objects, groups, and sides in an effectively infinite number of nested arrays, and the function will get them all.  It also filters duplicate objects, so you don't need to worry about repeating arguments.
+
+Thus, these are valid entries for any parameter that specifies that list:
+
+[X, Y] // returns just X and Y
+[X, Y, group Z] // returns X, Y, Z, and all other units in Z's group
+[X, Y, [group Z]] // same as above
+[X, Y, [group Z, [east]]] // same as above, now with all east units
+[[X, Y], [group Z], east] // same as above
+
+And so on with any combination of groups, object, and sides.  When a function specifies objects, you can enter anything that describes the objects you want.  These options make every framework function significantly easier to use, as you can organize data in your mission any way you want.
+
+
+Common Sense
+
+Many functions do not say exactly what you should enter, for general neatness.  Object could refer to a person, a vehicle, or a house.  The documentation relies upon your common sense and intuition to fill in the obvious.  You would never give a house to Zen_OrderInfantryPatrol, or call Zen_OrderAircraftPatrol using "colorBlack" for the marker.
+
+Instead of abstracting framework functions into mysterious operations that need some convoluted arguments, think about them as simple requests to the framework.  Every time you want something done in a mission, you 'ask' the appropriate framework function to do it for you.  You 'tell' it what it needs to know to do the action.  Consider if you were the function, what arguments would you want?  What would be the simplest way to supply them?  The arguments of every call affect your mission, your mental design for your mission must make sense before you can ask the framework to implement it.
+
+Sometimes, the exact usage of a function might be unclear.  For example, what does !([...] call Zen_AreNotInArea) mean as a condition?  This is true if a least one object is in the area, and it is not equal to ([...] call Zen_AreInArea).  The tutorials, demonstrations, and sample missions are there to show you how I would use a lot of my functions.  You will probably come up with many new ways to use framework functions that I never considered.

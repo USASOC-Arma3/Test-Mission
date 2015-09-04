@@ -1,0 +1,286 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Position System
+
+For everything to do with evaluating terrain and generating positions for your mission, the Position Functions include Zen_FindGroundPosition, the heart of the framework and critical basis for randomization.  It can be used to create a mission with an effectively infinite number of possible locations and events.  It provides enough options to filter positions to allow you to get only positions that suite your mission exactly.  This functionality is impossible in the editor.
+
+Zen_FindAveragePosition
+
+Returns a point that is composed of the average x and average y position of (1,N).
+The height of the returned position is 0.
+Usage : Call
+Params: 1. Array, group, object, string, the first position
+ (opt.) 2. Array, group, object, string, the second position
+ (opt.) N. ...
+Return: Array
+
+Zen_FindBuildingPositions
+
+Attempts to generate up to (2) 2D random positions ATL inside the building nearest (1)
+on every floor and, if (3), the roof.
+Usage: Call
+Params: 1. Array, group, object, string, a point
+ (opt.) 2. Boolean, true to generate positions on the roof, (default: false)
+ (opt.) 3. Scalar, the number of positions, (default: 1 per 4m^2)
+Return: Array
+
+Zen_FindCenterPosition
+
+Finds the 2D position that minimizes the greatest distance to any of (1).
+Usage : Call
+Params: 1. Array, group, object, string, the positions
+Return: Array
+
+Zen_FindGroundPosition
+
+Returns a random [x,y,z] coordinate based upon the guidelines you give it.  Enter 0 for (1)
+to use the entire map.  Enter a 0 for (3) and (5,12), they will not be considered.  For (13),
+each given filter for which a computed point fails adds 1, a point that has (13) or fewer
+failures will be returned. If a poit with fewer than (13) failures cannot be found, returns
+a point with the next fewest failures.
+Usage : Call
+Params: 1. String, the name of the area marker to generate positions in
+ (opt.) 2. Scalar, the minimum distance from the center of the area marker, (default: 0)
+    OR
+        1. Object, position, group, or icon marker, the center
+ (opt.) 2. Array: (default: [0, 200])
+            1. Scalar, the minimum distance around the center
+            2. Scalar, the maximum distance around the center
+    AND
+ (opt.) 3. Array of strings, blacklist, points cannot be in any of these markers, (default: [])
+    OR
+ (opt.) 3. Array, black and white lists (default: [[], [], []])
+            1. Array of strings, all blacklist, points cannot be in any of these markers
+     (opt.) 2. Array of strings, all whitelist, points must be in all of these markers, (default: [])
+     (opt.) 3. Array of strings, one whitelist, points must be in one or more of these markers, (default: [])
+    AND
+ (opt.) 4. Scalar, 0 = both, 1 = only land, 2 = only water, (default: 1)
+ (opt.) 5. Array, road positions, (default: [0,0])
+            1. Scalar, 0 = ignore, 1 = move to nearby road, 2 = require roads, 3 = avoid roads
+            2. Scalar, radius to scan for or avoid road positions in
+ (opt.) 6. Array, angles, the max can be greater than the min, (default: [0,360])
+            1. Scalar, the minimum angle from the center
+            2. Scalar, the maximum angle from the center
+   (opt.)   3. String, the type of angle, 'compass' or 'trig', (default: 'compass')
+ (opt.) 7. Array, include or exclude positions near houses, (default: [0,0,0])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude 2 = include
+            2. Scalar, max number of houses to allow
+            3. Scalar, radius to search for houses
+ (opt.) 8. Array, include or exclude positions near other points, (default: [0,0,0])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude 2 = include
+            2. Array, object, group, or string, point(s) to consider
+            3. Scalar, the radius around every point
+ (opt.) 9. Array, include or exclude positions near water, (default: [0,0])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude 2 = include
+            2. Scalar, radius to search for water
+ (opt.) 10. Array, include or exclude positions on a slope, (default: [0,0,-1])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude greater than 2 = exclude less than
+            2. Scalar, degrees of the slope to compare to
+            3. Scalar, the radius to find an average slope in, if > 0
+ (opt.) 11. Array, include or exclude positions near ambient clutter, (default: [0,0,0])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude greater than, 2 = exclude less than
+        AND
+            2. Scalar, the number of clutter objects
+        OR
+            2. Array, numbers of ambient clutter objects, use -1 to skip
+                1. Scalar, number of trees
+                2. Scalar, number of rocks
+                3. Scalar, number of shrubs
+        AND
+            3. Scalar, radius to check for ambient clutter
+ (opt.) 12. Array, include or exclude points at altitude ASL, (default: [0,0,0])
+            1. Scalar, switch the feature, 0 = off, 1 = exclude greater than, 2 = exclude less than
+            2. Scalar, the value of altitude ASL
+     (opt.) 3. Scalar, the radius to search for the highest point, (default: 0)
+ (opt.) 13. Scalar, the maximum number of filters that can be unsatisfied, (default: 0)
+Return: Array
+
+Zen_FindNearHeight
+
+Searches random positions for (3)'st altitude within (2) meters of (1).
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, max distance to search
+ (opt.) 3. String, 'high' or 'low', the elevation to find, (default: 'high')
+Return: Array
+
+Zen_FindPositionPoly
+
+Generates a random 2d point at (5) degrees from the center inside a polygon of shape (4)
+with size (2) at (1) facing (3) degrees.  (5) should use Zen_QuantizeAngles when point
+distribution in an uneven shape with limited angles is necessary; otherwise, it may be simpler.
+Usage: Call
+Params: 1. String, area marker
+        2. Array, angles to choose randomly from, the angles and their order are arbitrary
+            ex: [(random 360)]
+            ex: [5,10,15,20,25,30]
+    OR
+        1. Array, group, object, the center
+        2. Array
+            1. Scalar, the X radius of the polygon
+            2. Scalar, the Y radius of the polygon
+        3. Scalar, the direction of the polygon in degrees
+        4. String, the shape of the polygon, 'Rectangle' or 'Ellipse'
+        5. Array, angles to choose randomly from, the angles and their order are arbitrary
+            ex: [(random 360)]
+            ex: [5,10,15,20,25,30]
+Return: Array
+
+Zen_FindRoadDirection
+
+Finds the trigonometric direction of the road within 50m of (1).  At crossroads, it
+will determine the direction statistically by which road has more area closer to (1).
+Usage : Call
+Params: 1. Array, group, object, string, the center
+Return: Scalar
+
+Zen_FindTerrainGradient
+
+Returns the 2D trig angle in the XY plane pointing in the direction of greatest
+elevation increase at (1), or the average within (2) meters, if (2) > 0.
+Usage : Call
+Params: 1. Array, group, object, string, the terrain point
+ (opt.) 2. Scalar, the radius to average gradients, (default: -1)
+Return: Scalar
+
+Zen_FindTerrainSlope
+
+Returns the absolute Z angle from the XY plane parallel to the terrain at (1),
+or the average within (2) meters, if (2) > 0.
+Usage : Call
+Params: 1. Array, group, object, string, the terrain point
+ (opt.) 2. Scalar, the radius to average slopes, (default: -1)
+Return: Scalar
+
+Zen_FindValidDirection
+
+Returns all trig angles that do not pass within (3) meters of any of (2).
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Array, group, object, string, point(s) to avoid
+        3. Scalar, distance around each point to avoid
+Return: Array of scalars
+
+Zen_GetAmbientClutterCount
+
+Counts the number of trees, rocks, and shrubs with (2) meters of (1) by matching key
+strings to their model names.  It may not detect new or modded objects as is.
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, the radius
+Return: Array:
+            1. Scalar, trees count
+            2. Scalar, rocks count
+            3. Scalar, shrubs count
+
+Zen_IsForestArea
+
+Evaluates the extent to which (1) or the logic polygon covers a forest.  Performance will
+degrade as the number of trees in (1) increases.  The return value is an approximation of
+how much the total area is covered by trees, normalized between 0 and 1.
+Usage : Call
+Params: 1. String, a marker
+ (opt.) 2. Array, markers trees cannot be in, (default: [])
+    OR
+        1. Array, group, object, string, the center of the polygon
+        2. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        3. Scalar, the angle of the polygon as rotated from 0 degrees
+        4. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 5. Array, markers trees cannot be in, (default: [])
+Return: Scalar, 0 for no trees, 1 for completely forested
+
+Zen_IsHillArea
+
+Evaluates the extent to which (1) or the logic polygon covers a hill.  The return
+value is an approximation of how much the elevation gradient conforms to a hilltop,
+normalized between 0 and 1.
+Usage : Call
+Params: 1. String, a marker
+ (opt.) 2. Array, markers points cannot be in, (default: [])
+    OR
+        1. Array, group, object, string, the center of the polygon
+        2. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        3. Scalar, the angle of the polygon as rotated from 0 degrees
+        4. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 5. Array, markers points cannot be in, (default: [])
+Return: Scalar, 0 for entirely flat, 1 for a tall hilltop
+
+Zen_IsIsland
+
+Evaluates the extent to which (1) is on an island within (2) meters.  The return
+value is an approximation of how much (1) is surrounded by water between 0 and 1.
+Performance will vary by how much water exists and (2).
+Usage : Call
+Params: 1. Array, group, object, string, the center
+ (opt.) 2. Scalar, the distance to search, (default: 500)
+Return: Scalar
+
+Zen_IsNearTerrain
+
+Returns true if is there (3) terrain within (2) from (1).
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, the distance
+        3. String, terrain type, only 'land', 'water', 'both'
+Return: Boolean
+
+Zen_IsUrbanArea
+
+Evaluates the extent to which (1) or the logic polygon covers a city.  Performance will
+degrade as the size of (1) increases.  The return value is an approximation of how much
+the total area is covered by buildings and roads, normalized between 0 and 1.
+Usage : Call
+Params: 1. String, a marker
+ (opt.) 2. Array, markers buildings cannot be in, (default: [])
+    OR
+        1. Array, group, object, string, the center of the polygon
+        2. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        3. Scalar, the angle of the polygon as rotated from 0 degrees
+        4. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 5. Array, markers buildings cannot be in, (default: [])
+Return: Scalar, 0 for no buildings, 1 for completely urban
+
+Zen_IsWaterArea
+
+Evaluates the extent to which (1) or the logic polygon covers water.  Performance will
+degrade as the size of (1) increases.  The return value is an approximation of how much
+the total area is covered by water, normalized between 0 and 1.
+Usage : Call
+Params: 1. String, a marker
+ (opt.) 2. Array, markers points cannot be in, (default: [])
+    OR
+        1. Array, group, object, string, the center of the polygon
+        2. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        3. Scalar, the angle of the polygon as rotated from 0 degrees
+        4. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 5. Array, markers points cannot be in, (default: [])
+Return: Scalar, 0 for no water, 1 for completely water
+
+Zen_QuantizeAngles
+
+Generates an array of angles from (2) to (3) from the marker or logical polygon such
+that the step between any two angles sweeps out an equal area inside the polygon.
+The variance of the step depends upon how uneven the dimensions are.  (2) can be
+greater than (3), in which case the angles start at (3) and go to (2).
+Params: 1. String, an area marker
+        2. Scalar, the starting angle in degrees
+        3. Scalar, the ending angle in degrees
+    OR
+        1. Array
+            1. Scalar, the X radius of the polygon
+            2. Scalar, the Y radius of the polygon
+        2. Scalar, the starting angle in degrees
+        3. Scalar, the ending angle in degrees
+        4. Scalar, the direction of the polygon in degrees
+        5. String, the shape of the polygon, 'Rectangle' or 'Ellipse'
+Return: Array

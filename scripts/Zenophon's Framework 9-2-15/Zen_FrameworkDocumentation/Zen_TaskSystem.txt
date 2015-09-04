@@ -1,0 +1,134 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Task System
+
+An important part of creating a mission is directing the players to complete objectives and advance through the mission.  ArmA 3 uses a special data type called tasks.  The current implementation of tasks works well in simple, static applications, but requires advanced scripting techniques when used dynamically for many players in a multiplayer mission in which the server manages the tasks.  To simplify the process and create a general and painless solution to the quirks of tasks, I have created a system of functions to manage tasks that is robust in both singleplayer and multiplayer.
+
+Zen_AreTasksComplete
+
+Determines if all (1)'s states match one of (2).
+Usage : Call
+Params: 1. Array or string, the unique name(s) of the tasks to check
+ (opt.) 2. Array or string, the state(s) that are considered complete, (default: ['failed', 'succeeded', 'canceled'])
+Return: Boolean, true if the states match
+
+Zen_AreUnitsTasksComplete
+
+Evaluates if tasks associated with all (1) are completed.  If you enter a 0 for (2), all
+tasks will be considered, except for those in (3).  Task is considered completed if its
+state is 'failed', 'succeeded', or 'canceled'.
+Usage : Call
+Params: 1. Array, group, object, side, unit(s) whose tasks to check
+ (opt.) 2. Array of strings or string, the unique name(s) of any task(s) to include, (default: all)
+ (opt.) 3. Array of strings or string, the unique name(s) of any task(s) to exclude, (default: [])
+Return: Boolean
+
+Zen_GetCurrentTask
+
+Returns the unique name of (1)'s current task.
+Usage : Call
+Params: 1. Object, the unit
+Return: String, '' if there is no current task
+
+Zen_GetTaskDataGlobal
+
+Gets all current properties of (1).
+Usage : Call
+Params: 1. String, the unique name of the task
+Return: Array
+        1. String, the unique name of the task
+        2. Array of objects, the objects that have the task
+        3. String, the current state of the task
+        4. Position, the task destination, this is [0,0,0] if the task has no destination
+        5. String, the task description
+        6. String, the task title
+        7. String, the parent task, empty string if there is no parent
+        8. Array of strings, the child tasks of this task, empty array if there are no children
+
+Zen_GetUnitTasks
+
+Gets all unique task names of tasks given to (1).
+Usage : Call
+Params: 1: Object, the unit to get the tasks for
+Return: Array of strings
+
+Zen_InvokeTask
+
+Creates a task and assigns it to (1).  Entering a 0 for (4) will skip it and the task will
+have no destination.  If you do not enter (7), a random name will be generated.  Do not use
+this function during the briefing.  Only call this function on the server.
+Usage : Call
+Params: 1. Array, group, object, side, units to get the task
+        2. String, long description shown when a player clicks on the task
+        3. String, the title of the task
+ (opt.) 4. Array, group, object, string, the task destination, (default: 0)
+ (opt.) 5. Boolean, true to set this as the current task, (default: false)
+ (opt.) 6. String, the global name of the parent of the task for this task, (default: '')
+ (opt.) 7. String, the the unique name of the task, (default: random)
+Return: String, the unique name of the task
+
+Zen_InvokeTaskBriefing
+
+Creates a task for (1), works during the mission briefing (before sleep).  Entering a 0
+for (4) will skip it and the task will have no destination.  Do not use this function
+after the briefing.  You must call this function on all clients.  This function will
+not work if run only on the server.
+Usage : Call
+Params: 1. Array, group, object, side, units to get the task
+        2. String, long description shown when a player clicks on the task
+        3. String, the title of the task
+        4. String, the the unique name of the task
+ (opt.) 5. Array, group, object, string, the task destination, (default: 0)
+ (opt.) 6. String, the global name of the parent of the task for this task, (default: '')
+Return: Void
+
+Zen_ReassignTask
+
+Removes (1) from (3) and adds it to (2).  All (1)'s properties remain the same.
+Usage : Call
+Params: 1. String, the unique name of the task
+        2. Array, group, object, side, units to add the task to
+ (opt.) 3. Array, group, object, side, units to remove the task from, (default: [])
+Return: Void
+
+Zen_RemoveTask
+
+Removes (1) from (2).  All (1)'s properties remain the same.
+Usage : Call
+Params: 1. String, the unique name of the task
+ (opt.) 2. Array, group, object, side, units to remove the task from, (default: All)
+Return: Void
+
+Zen_SetTaskCurrent
+
+Makes (1) the current one for all (2).
+Usage : Call
+Params: 1. String, the unique name of the task
+ (opt.) 2. Array, group, object, side, units to set current for, (default: All)
+Return: Void
+
+Zen_SetTaskTarget
+
+Sets the target of (1) to (2).  (1)'s destination will now follow (2) on the map.
+Usage : Call
+Params: 1. String, the unique task name
+        2. Object, the object to set as the target
+Return: Void
+
+Zen_UpdateTask
+
+Updates many of the properties of a task.  If you enter 0 as the argument for (2,5),
+that property will be skipped.  If (6), completes all (1)'s child tasks if (1) is
+complete, and completes (1)'s parent if (1) and all other child tasks are complete.
+You can enter [0,0,0] for (3) to remove the destination.
+Usage : Call
+Params: 1. String, the unique name of the task
+ (opt.) 2. String, the state of the task, only 'succeeded', 'failed', 'created', or 'canceled'
+ (opt.) 3. Array, group, object, string, the task destination to be shown on the map
+ (opt.) 4. String, long description shown when a player clicks on the task
+ (opt.) 5. String, the title of the task
+ (opt.) 6. Boolean, to complete parent or child tasks, (default: false)
+ (opt.) 7. Boolean, whether to show a notification for this update, (default: true)
+Return: Void

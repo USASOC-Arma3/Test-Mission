@@ -1,0 +1,23 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+
+onLoadName = "Insertion Tutorial";
+author = "Zenophon's Co-op Framework";
+OnLoadMission = "Destroy the convoy";
+loadScreen = "convoy.jpg";
+
+overviewText = "Destroy the convoy";
+overviewPicture =  "convoy.jpg";
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 4;
+};

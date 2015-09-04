@@ -1,0 +1,41 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+enableDebugConsole = 1;
+enableItemsDropping = 0;
+disabledAI = 1;
+debriefing = 1;
+
+respawn = 2;
+respawnDelay = 60;
+respawnDialog = 1;
+
+onLoadName = "Co-11 Assault Frini";
+author = "Zenophon";
+OnLoadMission = "Assault the town of Frini with support from an IFV.";
+// loadScreen = "AF.jpg";
+
+overviewText = "Assault the town of Frini with support from an IFV.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+// overviewPicture = "AF.jpg";
+
+doneKeys[] = {"BIS_Zen_AssaultFrini.Altis_done"};
+
+class Header {
+    gameType = COOP;
+    minPlayers = 2;
+    maxPlayers = 11;
+};
+
+class CfgDebriefing {
+    class EndWin {
+        title = "Mission Completed";
+        subtitle = "Good Job";
+        description = "Frini is secure and our teams can now move north and search for the Opfor.";
+    };
+};

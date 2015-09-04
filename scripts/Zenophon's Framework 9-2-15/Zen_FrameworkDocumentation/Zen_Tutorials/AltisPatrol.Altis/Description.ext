@@ -1,0 +1,25 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+disabledAI = 0;
+enableItemsDropping = 0;
+respawn = 4;
+
+onLoadName = "Altis Patrol";
+author = "Zenophon's Co-op Framework";
+OnLoadMission = "Patrol the Altis countryside and eliminate Opfor targets.";
+loadScreen = "patrol.jpg";
+
+overviewText = "Patrol the Altis countryside and eliminate Opfor targets.";
+overviewPicture = "patrol.jpg";
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 6;
+};

@@ -1,0 +1,17 @@
+/* extracted from http://bottlecaps.de/rr/ui */
+
+Zen_OrderInfantryPatrol::=
+               '(' (Group|ArrayofGroups|Object|Side) ',' 
+                   (((Object|Position|Group|IconMarkerName) ( ',' MinandMaxRadius )?) 
+                   | ((AreaMarkerName)) ( ',' AreaMarkerExclusions )? )
+                   ( ',' AngleConstraint )?
+                   ( ',' PatrolSpeed )? 
+               ')'
+
+MinandMaxRadius ::= '[' MinimumRadius ',' MaximumRadius ']'
+
+AreaMarkerExclusions ::= ('[' (AreaMarkerName) (',' AreaMarkerName)* ']') 
+
+AngleConstraint ::= '[' MinimumAngle ',' MaximumAngle ']'
+
+PatrolSpeed::= '"limited"'|'"normal"'|'"full"'

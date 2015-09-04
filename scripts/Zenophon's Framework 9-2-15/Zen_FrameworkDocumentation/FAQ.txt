@@ -1,0 +1,117 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+
+FAQ
+
+
+Distribution and Logistics
+
+Q: Where should I look for latest version of Framework?  BI forums?  Armaholic?  Your own website?  Do you have a Facebook page or can I follow you on Twitter?
+    A: The link(s) on the BI forums will always point to the latest framework version.  I have set it up so that the same link points to the latest version, e.g. if you copy the link somewhere else and I release a new version, that link now points to the new version.  I will be maintaining and updating the framework's page on Armaholic through my account there (when that feature becomes available), so that page will be as reliable as the BI forum thread.
+    I currently have no plans for a website, Facebook page, Twitter feed, etc. where you can follow the framework.  There is simply not enough exciting news in the process of coding, debugging, and documenting the framework to warrant the use of social media.
+
+Q: How often will you release updates?  Will updates be quick, minor additions or slow, major upgrades?
+    A: I intend to release new framework versions at a pace of about 1-2 weeks.  I want to avoid difficulty or confusion regarding what is the latest version.  I also want to provide ample time to thoroughly test any new features as well as fix reported bugs, without allowing existing issues to linger too long.  I would prefer not to rush any fixes or features until any side effects can be found.  It may be necessary to release hotfixes due to an oversight.
+
+Q: Will you offer legacy/old versions of the framework for download?
+    A: There will not be a special download list of all old versions.  For those hosting sites that support the feature (primarily Google Drive) I will leave old versions available for those that want them (go to file>revisions on Google Drive).  This is to reduce confusion for new users and ensure they download the latest, best version of the framework.  For long-time users of the framework, feel free to store downloaded versions for future use or reference.  I advise that you do not release missions that use old versions of the framework, as your users will not be receiving the highest-quality product possible.
+
+
+General Usability
+
+Q: Will the framework's documentation be offered in languages other than English, i.e. will there be localization?
+    A: I am only capable of writing documentation in English, as I am not fluent in any other language.  If you possess the language skills necessary to create a localized version of the framework's documentation in another language, please PM or email me with your offer and I will be glad to incorporate your translation work into official framework releases.
+
+Q: Why don't you make the framework an addon/mod, so we don't have to deal with copying files?
+    A: By definition the framework is not an addon or mod.  It adds no assets to the game, does nothing without being told to, and changes nothing that is already in ArmA.  It is a library for mission makers to allow better missions to be created more easily.  The framework is used by mission makers on a per mission basis.  If the framework was an addon, every player in a multiplayer game would have to have the addon loaded so that functions could run on their machine.  Keeping the framework simple folders of scripts means that there is no difference in usability for players.
+
+Q: Does the framework support ArmA 3 devbranch/release candidate versions?
+    A: I have only tested the framework on the stable version of ArmA 3.  This is the only way I can test things consistently and ensure a quality product for all users.  I cannot say what will or will not work when creating or playing missions on devbranch.  You are welcome to test on devbranch, and report bugs from that version, but keep in mind that making functions work on stable branch has priority.
+
+Q: When I try to load a mission, the game crashes to desktop with an error about #include something not found?
+    A: You must always place the Zen_FrameworkFunctions folder in your mission folder before loading your mission in the editor.  The #include commands in the description.ext are looking for files, and those files must be there.  I cannot prevent the game from crashing, this is an engine issue only BIS can fix.
+
+Q: I get an error that say something like: 'Suspending not allowed in this context'.  What does that mean?  How do I fix it?
+    A: This means that you have attempt to execution a 'sleep' or 'waitUntil' command in an unscheduled environment.  Most SQF code (as in the init.sqf) runs on a scheduler that can switch between different threads and stop and start execution.  However, unscheduled execution will interrupt any scheduled execution and run until it finishes without stopping.  All framework functions should be run in a scheduled environment.  The main source of unscheduled environments in a typical mission are eventhandlers.  This for any eventhandler, use this construct:
+    X addEventhandler ["Fired", {
+        // SQF commands
+        0 = _this spawn {
+            // Framework functions
+        };
+    }];
+    Then use framework functions as you normally would; they still have full access to the arguments of the eventhandler.
+
+General Mission Making
+
+Q: Will the framework work with Zeus?  What do I need to do to combine them?
+    A: Of course, Zeus is just another gameplay element added by the mission designer, and is entirely compatible with the framework.  Zeus runs in parallel to anything else in your mission, so you could set up a mission using the framework, then let a Zeus be part of that mission.  The standard framework style that advances the mission through stages could conflict with the Zeus.
+    However, this is not always true, for example, you could create a Zeus on the player side, then have them defeat an AI enemy being generated by the framework.  Regarding a Zeus using the framework, only BIS can extend the Zeus interface to allow on-the-fly coding.  You could build your mission to allow certain actions to trigger code, but the Zeus would need to know what to do.
+
+Q: Why can't I save during a framework mission?
+    A: The save data the engine records fails to include anything about SQF functions that are running.  This means that loading a saved game will stop all SQF threads that were running.  This includes patrol functions, triggers, and your own code that waits for a condition.  You can only save a mission in which no SQF code is actively running, and that would defeat the purpose of the framework completely.  Only BIS can fix this issue.
+    As a workaround for singleplayer missions for which your users really want something like saving, you can implement a respawn/revive system that allows the player to keep playing your mission without losing an hour of progress, while still punishing them for their mistakes.  There are many revive scripts created by other people that are fully compatible with the framework.
+    You could also code something simple yourself, where the player simply teamswitches to a waiting unit and teleports somewhere when his character dies.  For missions with friendly AI, you can make them all playable, giving the player extra lives (this also makes managing AI equipment easier).  From a authenticity standpoint, all of these options are more realistic and immersive than magical saving.
+
+
+API and Function Design
+
+Q: Will you maintain legacy support for previous framework releases, i.e. will old cold always work?
+    A: No, you are not guaranteed that old code will work.  The framework is under constant development and improvement, so all functions are subject to change.  You can be fairly certain that some simple or very common ones will not change drastically, but you should always read the changelog or review the documentation to be sure.
+    I could offer multiple versions of functions or overload them to accept old arguments, but this slowly causes any function library to be bloated, inefficient, and unwieldy for beginners, who would not know which of the several versions of a function to choose.  Updating your work to comply with the latest framework release ensures that you are releasing the the highest quality mission possible to your users, and it allows me to step forward with the framework without being held back by legacy support work.
+
+Q: What is the difference between public and non-public functions? Are they clearly marked in the documentation? Is it safe to use non-public functions in my missions or could they be removed or radically changed in the future?
+    A: Public functions are those that I intend mission makers to use in the init.sqf, their own functions, etc. to built their mission.  All public functions are fully documented and organized in the Index.txt file.  Private functions are hidden functions that help the public functions; they make coding and maintaining public functions easier.  Some private functions are specifically meant for multiplayer, while others encapsulate code that must run many times.
+    No private functions are documented in any way; they are listed in the Index.txt under a special category at the bottom.  There should be no reason to use a private function directly in creating your mission.  The framework's public API already allows you to do what any private function does, because public functions call private functions.  Any private function could be radically changed or removed without notice if a public function is redesigned.  That which is not documented, does not exist.
+
+Q: Can the framework easily spawn addon units?  What is the best or easiest way to spawn only addon soldiers or vehicles?
+    A: In general, all the functions related to directly spawning people and vehicles can spawn addon units, and everything spawned using the framework can be 100% controlled by the mission maker. The framework does not use any preset lists of units that spawn. Whenever it spawns soldiers or vehicles randomly, it dynamically reads the config files looking for certain kinds of objects.
+    For Zen_SpawnGroup, you can simply list the classnames from the addon units as they appear in the editor or the readme of the mod. This is the fastest, simplest option to get addon units into your mission. For example:
+    
+    _group = ["mkSpawn", <Array of Addon Classnames>] call Zen_SpawnGroup;
+
+    This will spawn the soldier objects in order at 'mkSpawn' and return the group. You still might want to set the AI's skill though, using Zen_SetAISkill.  For Zen_SpawnInfantry, getting addon units requires a little more work and some basic knowledge of config files. You need to provide information about certain config file values. However, you then get to use the features of Zen_SpawnInfantry, such as a randomized number and type of units.
+
+    You must open the config files in the editor, then find the addon units classnames under cfgVehicles (BIS really needs to add a search/filter option). The values for parameters 5 and 6 are called 'vehicleClass' and 'faction'. See Zen_SpawnInfantry documentation for parameters 5 and 6. For example:
+
+    _group = ["mkSpawn", east, 0.3, 5, <vehicleClass value (String)>, <faction value (String)>] call Zen_SpawnInfantry;
+
+    This will spawn 5 random soldiers whose side, vehicleClass, and faction match the arguments at 'mkSpawn' with skill 0.3 and return the group.  For vehicle spawning functions, you can give classnames just like Zen_SpawnGroup. However, the crew of the vehicle (for those functions that create it) will be from the vanilla pool of units (they cannot default to anything else). You should first spawn the vehicle empty, using Zen_SpawnVehicle, then spawn the addon crew and put them inside like so:
+
+    _vehicle = ["mkSpawn", <Addon Vehicle Classname (String)>] call Zen_SpawnVehicle;
+    _crew = [_vehicle, <Array of Addon Classnames Here>] call Zen_SpawnGroup;
+    0 = [_crew, _vehicle, "All"] call Zen_MoveInVehicle;
+
+    The vehicle at 'mkSpawn' now has all possible positions filled with addon units from the group. Just be sure to list the right number of classnames for that particular vehicle. You could also use an empty vehicle from the editor instead of spawning one in the code. This lets you put any crew you want into any vehicle.
+    Finally, if you want to directly generate the classname lists the functions are using, the function to use is Zen_ConfigGetVehicleClasses. See the demonstration mission entitled RandomBattle.Altis for a very detailed explanation of that function and what I just said about config values. 
+
+Q: Why are the names of some framework functions in a different style, e.g. Zen_ArrayAppend and Zen_UpdateTask?
+    A: I have attempted to follow the style of verb-object in function names, as that is most conducive to understanding what their effect is just by looking at the code.  While something like Zen_AppendToArray is an option, I want to avoid unnecessary words in the function names (some of them are long enough as it is).  For example, Zen_RemoveValuedSliceFromArray doesn't sound very good.
+    The first word in the function name emphasizes its intended effect.  Words like set, get, is, are, spawn, create, invoke, and add are standardized across functions so that the names indicate their effect consistently.  Using 'array' as the first word emphasizes that you want to operate on an array rather than get a task's data, spawn something, etc.
+    The actual operation is less important than the fact that you are manipulating an array rather than directly creating something in the mission.  Getting the data for a task has a very different result that getting a slice from an array.  The words 'array', 'string', etc. just happen to not be verbs.
+
+Q: Some data functions modify the given array and some don't, why?  How do I get those functions to perform the opposite way in my code?
+    A: Generally, this decision is made based upon optimizing the function.  While many framework functions provide complex features at the cost of speed, for example Zen_FindGroundPosition, the data functions are smaller, simpler operations that could be used hundreds of times in a mission, even if you never directly call them.  If there is simple algorithm for modifying the given array, this is done to save time.  This means that modifying the array usually takes fewer operations than copying the result to a new array.
+
+    If it is not feasible or simply slower to modify to array itself, the function builds the result in another array, which it returns.  This works well for two reasons; first, storing another array in memory is not a big deal, ArmA already uses several Gigabytes of RAM, even thousands of integers or references in an array make little difference.  Second, the operation to put a value at the end of an array is extremely fast, faster than almost all other array operations, including swapping two values.
+
+    You can get different results for either type easily.
+    For those that do not modify the array, simply use:
+    _array = [_array, <other arguments>] call Zen_Array<...>;
+
+    This overwrites the previous value of your array variable with a new one so that the old array is lost. If you need to copy the array from out of scope (from another function or thread where you can't just overwrite the calling function's variables), use Zen_ArrayCopy. For those that do modify an array, you need to create a copy of your array so that you can use both like so:
+
+    _arrayCopy =+ _array;
+    0 = [_arrayCopy, <other arguments>] call Zen_Array<...>;
+
+    Both of these operations, assignment and the copy operator, take a negligible amount of time.  Zen_ArrayCopy takes a little longer, but it is not noticeable unless done hundreds of times.
+
+
+Legal
+
+Q: Can I copy and paste Framework code into the ArmA editor without violating the Creative Commons agreement? If I do use snippets of the Framework is it enough to merely give attribution to you (the Author)?
+    A: The CC license is mainly mean to backup the non-commercial and no derivatives part of the legal agreement as well as provide legal clout in the unlikely event that the terms are every challenged.  The other terms of the Legal.txt file are there to deal with legal concerns that relate directly to ArmA mission making and Steam.  I shall quote it in abridged form: "You are permitted to publish an ArmA 3 mission...on the Steam Workshop or elsewhere that contains this software [the framework] in part or in whole...provided that you clearly and unequivocally credit the author [Zenophon] of this software.".  You can use the framework as a resource in making your mission in any way you want, and you can release your mission in any way you choose.  For a lay-person's outline of the legal terms, see the Legal section of the topmost Readme.txt file.
+
+Q: If I create a mission can I just use those parts I find useful without violating the Creative Commons agreement? For instance, I want to release a mission to Steam workshop with a lighter 'footprint' by using just a subset of Framework functions. Is that okay?
+    A: As addressed in the answer above, you are free to use just part of the framework in your mission, so long as you still credit me, Zenophon.  However, from a coding standpoint, attempting to include only certain functions or categories of the framework in your mission will most likely end in failure.  The framework API is designed to work all together, even though you may not use many functions.  Picking out just the parts you need requires that you look through the entire source code for every function and include any functions it depends on as well.  For someone not familiar with the framework, that is a painfully tedious task and a waste of time.  The entire framework source code is about 560KB; even someone with a 56K dialup connection would download that in about 80 seconds.

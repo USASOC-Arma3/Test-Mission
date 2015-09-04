@@ -1,0 +1,404 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_map_altis",
+		"A3_Characters_F_Civil",
+		"a3_characters_f_gamma",
+		"A3_Soft_F_Quadbike",
+		"A3_Structures_F_Civ_Camping",
+		"a3_characters_f"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_characters_f",
+		"A3_Soft_F_Quadbike",
+		"A3_Structures_F_Civ_Camping",
+		"a3_map_altis"
+	};
+	randomSeed=4506494;
+	class Intel
+	{
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=10;
+		minute=55;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+	class Groups
+	{
+		items=1;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={12610.121,22.873213,15511.311};
+					id=0;
+					side="WEST";
+					vehicle="B_Soldier_SL_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rank="SERGEANT";
+					skill=0.60000002;
+					text="X11";
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=2;
+		class Item0
+		{
+			position[]={12619.201,22.974878,15509.701};
+			id=1;
+			side="EMPTY";
+			vehicle="B_Quadbike_01_F";
+			skill=0.60000002;
+		};
+		class Item1
+		{
+			position[]={12598.807,22.838572,15511.335};
+			id=2;
+			side="EMPTY";
+			vehicle="Land_TentA_F";
+			skill=0.60000002;
+		};
+	};
+	class Markers
+	{
+		items=29;
+		class Item0
+		{
+			position[]={12622.422,10.640104,14310.439};
+			name="Zen_FGP_One";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=500;
+			b=500;
+		};
+		class Item1
+		{
+			position[]={16524.66,10.293068,12811.879};
+			name="Zen_FGP_Two";
+			type="respawn_unknown";
+			colorName="ColorGrey";
+		};
+		class Item2
+		{
+			position[]={10448.751,84.742981,17251.813};
+			name="Zen_FGP_Orino";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=400;
+			b=400;
+		};
+		class Item3
+		{
+			position[]={10466.207,59.7584,16790.852};
+			name="Zen_FGP_Orino_South";
+			type="mil_objective";
+		};
+		class Item4
+		{
+			position[]={10728.723,17.875132,12270.065};
+			name="Zen_FGP_Four";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=400;
+			b=400;
+		};
+		class Item5
+		{
+			position[]={12619.975,33.917915,16418.281};
+			name="Zen_FGP_Factory";
+			type="mil_objective";
+		};
+		class Item6
+		{
+			position[]={12801.205,87.588646,16649.148};
+			name="Zen_FGP_IconExclusion1";
+			text="Icon Exclusion Center";
+			type="mil_objective";
+		};
+		class Item7
+		{
+			position[]={12390.198,21.607199,16182.073};
+			name="Zen_FGP_IconExclusion2";
+			text="Icon Exclusion Center";
+			type="mil_objective";
+		};
+		class Item8
+		{
+			position[]={14099.98,4.2321243,15408.271};
+			name="Zen_FGP_Shoreline";
+			markerType="RECTANGLE";
+			type="Empty";
+			a=500;
+			b=300;
+			angle=310;
+		};
+		class Item9
+		{
+			position[]={16516.393,-0.00438492,12179.823};
+			name="PyrgosLabel";
+			text="Pyrgos";
+			type="mil_arrow";
+		};
+		class Item10
+		{
+			position[]={10480.545,72.726357,16360.849};
+			name="OrinoLabel";
+			text="Orino";
+			type="mil_arrow";
+		};
+		class Item11
+		{
+			position[]={12682.719,8.8820801,13651.105};
+			name="NeochoriLabel";
+			text="Neochori";
+			type="mil_arrow";
+		};
+		class Item12
+		{
+			position[]={10788.486,16.900333,11695.135};
+			name="TherisaLabel";
+			text="Therisa";
+			type="mil_arrow";
+		};
+		class Item13
+		{
+			position[]={12650.483,17.215061,15860.709};
+			name="FactoryLabel";
+			text="Factory";
+			type="mil_arrow";
+		};
+		class Item14
+		{
+			position[]={8582.0889,85.522881,15206.098};
+			name="Zen_FGS_Rugged";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=400;
+			b=400;
+		};
+		class Item15
+		{
+			position[]={11464.677,61.169903,15581.072};
+			name="Zen_FGS_ClutterExclusion";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=400;
+			b=400;
+		};
+		class Item16
+		{
+			position[]={8659.5889,70.458755,14585.396};
+			name="RuggedLabel";
+			text="Rugged Terrain";
+			type="mil_arrow";
+		};
+		class Item17
+		{
+			position[]={12496.994,66.948769,15239.042};
+			name="TentCityLabel";
+			text="Tent City";
+			type="mil_arrow";
+		};
+		class Item18
+		{
+			position[]={12513.592,30.692862,15401.665};
+			name="Zen_FGS_TentCity";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=100;
+			b=100;
+		};
+		class Item19
+		{
+			position[]={11449.514,32.192364,15109.035};
+			name="ClutterLabel";
+			text="Avoid Clutter";
+			type="mil_arrow";
+		};
+		class Item20
+		{
+			position[]={14005.364,-0.029719211,14715.037};
+			name="WaterAvoidanceLabel";
+			text="Water Avoidance";
+			type="mil_arrow";
+		};
+		class Item21
+		{
+			position[]={9196.832,32.464729,13697.945};
+			name="Zen_FGP_Xirolimni_Dam";
+			type="mil_objective";
+		};
+		class Item22
+		{
+			position[]={8960.5654,61.419495,13698.1};
+			name="Zen_XDam_Alpha";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=200;
+			b=200;
+		};
+		class Item23
+		{
+			position[]={9446.2578,40.920906,13693.367};
+			name="Zen_XDam_Beta";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=200;
+			b=200;
+		};
+		class Item24
+		{
+			position[]={11005.979,27.470949,13482.521};
+			name="Zen_FGP_Poliakko";
+			markerType="RECTANGLE";
+			type="Empty";
+			a=500;
+			b=300;
+			angle=310;
+		};
+		class Item25
+		{
+			position[]={11095.338,25.27002,13575.128};
+			name="Zen_Poliakko_Alpha";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=200;
+			b=200;
+		};
+		class Item26
+		{
+			position[]={10990.887,27.127644,13440.247};
+			name="Zen_Poliakko_Beta";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=200;
+			b=200;
+		};
+		class Item27
+		{
+			position[]={9196.5059,23.321547,13405.094};
+			name="Dam_1";
+			text="Xirolimni Dam";
+			type="mil_arrow";
+		};
+		class Item28
+		{
+			position[]={11084.515,18.537149,12997.285};
+			name="Poliakko_1";
+			text="Poliakko";
+			type="mil_arrow";
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=16299458;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=4842403;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=9015882;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};

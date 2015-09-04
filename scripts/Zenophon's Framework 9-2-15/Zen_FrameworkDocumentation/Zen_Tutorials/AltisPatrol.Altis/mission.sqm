@@ -1,0 +1,267 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"a3_characters_f_gamma",
+		"a3_soft_f_gamma_offroad",
+		"a3_map_altis",
+		"A3_Weapons_F_Ammoboxes"
+	};
+	addOnsAuto[]=
+	{
+		"a3_characters_f_gamma",
+		"a3_soft_f_gamma_offroad",
+		"A3_Weapons_F_Ammoboxes",
+		"a3_map_altis"
+	};
+	randomSeed=4354177;
+	class Intel
+	{
+		briefingName="CO-6 Altis Patrol";
+		overviewText="Patrol the Altis countryside and eliminate Opfor targets.";
+		resistanceWest=0;
+		startWeather=0;
+		startWind=0;
+		forecastWeather=0;
+		forecastWind=0;
+		forecastWaves=0;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	class Groups
+	{
+		items=2;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=3;
+				class Item0
+				{
+					position[]={5405.645,20.98885,14849.443};
+					azimut=-41.57592;
+					id=0;
+					side="WEST";
+					vehicle="B_G_Soldier_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.60000002;
+					text="X11";
+				};
+				class Item1
+				{
+					position[]={5410.2632,21.06407,14849.99};
+					azimut=15.709312;
+					id=1;
+					side="WEST";
+					vehicle="B_G_Soldier_AR_F";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={5404.3882,20.91242,14845.609};
+					azimut=243.4241;
+					id=2;
+					side="WEST";
+					vehicle="B_G_Soldier_LAT_F";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item1
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=3;
+				class Item0
+				{
+					position[]={5414.1597,21.855312,14874.402};
+					azimut=140.72678;
+					id=3;
+					side="WEST";
+					vehicle="B_G_Soldier_GL_F";
+					player="PLAY CDG";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.60000002;
+					text="X21";
+				};
+				class Item1
+				{
+					position[]={5410.3677,21.757019,14872.934};
+					azimut=558.93622;
+					id=4;
+					side="WEST";
+					vehicle="B_G_medic_F";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={5415.0142,22.002516,14877.879};
+					azimut=101.11372;
+					id=5;
+					side="WEST";
+					vehicle="B_G_Soldier_M_F";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=0.60000002;
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=3;
+		class Item0
+		{
+			position[]={5397.7856,21.205046,14860.316};
+			azimut=-41.57592;
+			id=6;
+			side="EMPTY";
+			vehicle="B_G_Offroad_01_armed_F";
+			leader=1;
+			skill=0.60000002;
+		};
+		class Item1
+		{
+			position[]={5423.5347,21.637362,14863.627};
+			azimut=135.55408;
+			id=7;
+			side="EMPTY";
+			vehicle="B_G_Offroad_01_armed_F";
+			leader=1;
+			skill=0.60000002;
+		};
+		class Item2
+		{
+			position[]={5410.0103,21.39156,14863.502};
+			id=8;
+			side="EMPTY";
+			vehicle="Box_NATO_AmmoOrd_F";
+			skill=0.60000002;
+		};
+	};
+	class Markers
+	{
+		items=1;
+		class Item0
+		{
+			position[]={5431.7095,21.856552,14867.049};
+			name="mkStart";
+			text="Start";
+			type="mil_start";
+			colorName="ColorBLUFOR";
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=2389375;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=4283212;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=5215131;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogBase=0.001;
+		forecastFogBase=0.001;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+};

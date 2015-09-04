@@ -1,0 +1,305 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_characters_f",
+		"A3_Armor_F_Panther",
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_characters_f",
+		"A3_Armor_F_Panther",
+		"a3_map_altis"
+	};
+	randomSeed=16559139;
+	class Intel
+	{
+		briefingName="Co-11 Assault Frini";
+		overviewText="Assault the town of Frini with support from an IFV.";
+		startWeather=0.89999998;
+		startWind=0.099999994;
+		startWaves=0.099999994;
+		forecastWeather=0.89999998;
+		forecastWind=0.099999994;
+		forecastWaves=0.099999994;
+		forecastLightnings=0.099999994;
+		year=2035;
+		month=6;
+		day=24;
+		hour=10;
+		minute=50;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+	class Groups
+	{
+		items=2;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=8;
+				class Item0
+				{
+					position[]={14443.722,38.411209,18972.459};
+					special="NONE";
+					id=0;
+					side="WEST";
+					vehicle="B_Soldier_SL_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rank="LIEUTENANT";
+					skill=1;
+					text="X";
+				};
+				class Item1
+				{
+					position[]={14432.634,38.260777,18968.084};
+					special="NONE";
+					id=1;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item2
+				{
+					position[]={14434.899,38.260841,18968.131};
+					special="NONE";
+					id=2;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item3
+				{
+					position[]={14437.322,38.260235,18968.176};
+					special="NONE";
+					id=3;
+					side="WEST";
+					vehicle="B_Soldier_GL_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item4
+				{
+					position[]={14439.544,38.314514,18968.092};
+					special="NONE";
+					id=4;
+					side="WEST";
+					vehicle="B_soldier_AR_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item5
+				{
+					position[]={14441.86,38.376282,18968.332};
+					special="NONE";
+					id=5;
+					side="WEST";
+					vehicle="B_Soldier_A_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item6
+				{
+					position[]={14443.942,38.431824,18968.277};
+					special="NONE";
+					id=6;
+					side="WEST";
+					vehicle="B_soldier_M_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item7
+				{
+					position[]={14446.152,38.461182,18968.355};
+					special="NONE";
+					id=7;
+					side="WEST";
+					vehicle="B_medic_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+			};
+		};
+		class Item1
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=3;
+				class Item0
+				{
+					position[]={14426.171,38.275913,18984.031};
+					special="NONE";
+					id=8;
+					side="WEST";
+					vehicle="B_crew_F";
+					player="PLAY CDG";
+					leader=1;
+					rank="SERGEANT";
+					skill=1;
+					text="P";
+					init="doStop this;";
+				};
+				class Item1
+				{
+					position[]={14423.529,38.279434,18982.074};
+					special="NONE";
+					id=9;
+					side="WEST";
+					vehicle="B_crew_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+				class Item2
+				{
+					position[]={14421.007,38.273563,18982.15};
+					special="NONE";
+					id=10;
+					side="WEST";
+					vehicle="B_crew_F";
+					player="PLAY CDG";
+					skill=1;
+					init="doStop this;";
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=1;
+		class Item0
+		{
+			position[]={14477.573,39.007416,18983.865};
+			azimut=71.750999;
+			special="NONE";
+			id=11;
+			side="EMPTY";
+			vehicle="B_APC_Tracked_01_rcws_F";
+			leader=1;
+			skill=1;
+			text="B_IFV";
+		};
+	};
+	class Markers
+	{
+		items=1;
+		class Item0
+		{
+			position[]={14683.183,48.296738,20770.301};
+			name="mkFrini";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=240;
+			b=150;
+			angle=204.67015;
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=9104778;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=8273249;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_altis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_altis"
+	};
+	randomSeed=13052624;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=6;
+		day=24;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+};

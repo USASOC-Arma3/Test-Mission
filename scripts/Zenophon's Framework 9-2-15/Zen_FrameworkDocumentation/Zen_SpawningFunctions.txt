@@ -1,0 +1,223 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Spawning Functions
+
+The spawning functions cover every aspect of populating a mission with AI infantry and vehicles.  With easy and effective randomization options, you can create large combined arms battles very quickly.
+
+Zen_SpawnAircraft
+
+Spawns a plane or UAV of side or type (2) at (1).  Spawns a crew of the correct side.
+UAV's will also have a logical crew.  A height of 0 starts the aircraft on the ground,
+otherwise it starts with its engines running and in flight.  Does not work for helicopters.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+    AND
+        2. Side, the side of the random vehicle to spawn
+    OR
+        2. Array, strings, the classname(s) of vehicle(s) to randomly spawn
+    AND
+ (opt.) 3. Scalar, the height, (default: 200)
+ (opt.) 4. Scalar, the direction that the vehicle is facing, in degrees, (default: 0)
+    AND IF (2) == Side
+ (opt.) 5. Array, string, the faction(s) of the random vehicle to spawn, (default: 'All')
+ (opt.) 6. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Object
+
+Zen_SpawnAmbientVehicles
+
+Spawns (3) empty civilian vehicles in and around all towns and cities
+within (2) meters from (1).  Towns and cities are printed on the game map.
+Usage: Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, the distance
+        3. Scalar, the number of cars, or Array:
+            1. Scalar, the minimum number of cars
+            2. Scalar, the maximum number of cars
+ (opt.) 4. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Array of objects, the spawned cars
+
+Zen_SpawnAmmoBox
+
+Spawns a random ammo box of side (2) at (1).
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+        2. Side
+ (opt.) 3. Boolean, true to put explosives in the box
+Return: Object
+
+Zen_SpawnBoat
+
+Spawns a boat or submarine of side or type (2) at (1).  Spawns a crew of the correct side.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+    AND
+        2. Side, the side of the random vehicle to spawn
+    OR
+        2. Array, strings, the classname(s) of vehicle(s) to randomly spawn
+    AND
+ (opt.) 3. Scalar, the direction that the vehicle is facing, in degrees, (default: 0)
+    AND IF (2) == Side
+ (opt.) 4. Array, string, the faction(s) of the random vehicle to spawn, (default: 'All')
+ (opt.) 5. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Object
+
+Zen_SpawnCamp
+
+Spawns a semi-random camp sized for about a four-man element.  Includes tents, weapons, and
+a campfire.
+Usage : Call
+Params: 1. Array, group, object, string, the center
+Return: Void
+
+Zen_SpawnConvoy
+
+Spawns a convoy of side (2) in a group at (1).  If (2) is a side, randomly spawns 3 MRAP's
+and trucks.  Otherwise, spawns all (2) in an order fashion.  Always places a random number
+of troops into the last vehicle, if possible.
+Usage : Call
+Params: 1. Array, group, object, string, starting position
+        2. Side
+ (opt.) 3. Array, string, the faction(s) of vehicles to spawn, (default: 'All')
+    OR
+        2. Array, string, the vehicles to spawn in order
+Return: Array of objects, the spawned vehicles
+
+Zen_SpawnFortification
+
+Spawns a semi-random ring of defensive structures of radius (2).
+Includes bunkers, sandbags, concrete walls, and a static weapon.
+Usage : Call
+Params: 1. Array, group, object, string, the center
+        2. Scalar, the radius of the encircling fortifications
+ (opt.) 3. String, the classname of the static weapon to spawn, (default: 'B_HMG_01_high_F')
+Return: Object, the static weapon
+
+Zen_SpawnGroundVehicle
+
+Spawns a land vehicle or UGV of side or type (2) at (1).  Spawns a crew of the correct side.
+UGV's will also have a logical crew.  Does not work for UAV's.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+    AND
+        2. Side, the side of the random vehicle to spawn
+    OR
+        2. Array, strings, the classname(s) of vehicle(s) to randomly spawn
+    AND
+ (opt.) 3. Scalar, the direction that the vehicle is facing, in degrees, (default: 0)
+    AND IF (2) == Side
+ (opt.) 4. Array, string, the faction(s) of the random vehicle to spawn, (default: 'All')
+ (opt.) 5. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Object
+
+Zen_SpawnGroup
+
+Spawns each of (2) at (1).  Makes the group the side of the first classname given.
+Do not use a non-human class name, only soldiers or civilians.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn position
+        2. Array of strings or String, classname(s) of the units to spawn in order
+Return: Group
+
+Zen_SpawnHelicopter
+
+Spawns a helicopter of side or type (2) at (1).  Spawns a crew of the correct side.
+A height of 0 starts the helicopter on the ground, otherwise it starts with its
+engines running and in flight. Does not work for UAV's.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+    AND
+        2. Side, the side of the random vehicle to spawn
+    OR
+        2. Array, strings, the classname(s) of vehicle(s) to randomly spawn
+    AND
+ (opt.) 3. Scalar, the height, (default: 40)
+ (opt.) 4. Scalar, the direction that the vehicle is facing, in degrees, (default: 0)
+    AND IF (2) == Side
+ (opt.) 5. Array, string, the faction(s) of the random vehicle to spawn, (default: 'All')
+ (opt.) 6. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Object
+
+Zen_SpawnInfantry
+
+Spawns (4) units of side (2) as a group with skill (3) at (1).  (5,6) are based upon
+config file organization and are subject to change by BIS.
+Usage : Call
+Params: 1. Array, group, object, string, the spawn point
+        2. Side, of the units to spawn
+        3. Skill, see Zen_SetAISkill documentation (2) (Object Functions)
+    AND
+        4. Scalar, how many units to spawn
+    OR
+        4. Array:
+            1. Scalar, the minimum number of units to spawn
+            2. Scalar, the maximum number of units to spawn
+    AND
+ (opt.) 5. String, the type of soldiers to spawn, (default: 'Men'), 'MenDiver' 'MenRecon' 'MenSniper'
+ (opt.) 6. String, the faction of soldiers to spawn, (default: 'All'), 'BLU_F', 'IND_F', 'OPF_F', 'BLU_G_F'
+ (opt.) 7. Array of strings, classnames to blacklist from spawning, (default: [])
+ (opt.) 8. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Group
+
+Zen_SpawnInfantryGarrison
+
+Spawns (4) units of side (2) as a group with skill (3) at (1).  Automatically places the
+spawned units in the nearest building.  (5,6) are based upon config file organization
+and are subject to change by BIS.
+Usage : Call
+Params: 1. Array, group, object, string, the point to choose the house from
+        2. Side, of the units to spawn
+        3. Skill, see Zen_SetAISkill documentation (2) (Object Functions)
+    AND
+        4. Scalar, how many units to spawn
+    OR
+        4. Array:
+            1. Scalar, the minimum number of units to spawn
+            2. Scalar, the maximum number of units to spawn
+    AND
+ (opt.) 5. String, the type of soldiers to spawn, (default: 'Men'), 'MenDiver' 'MenRecon' 'MenSniper'
+ (opt.) 6. String, the faction of soldiers to spawn, (default: 'All'), 'BLU_F', 'IND_F', 'OPF_F', 'BLU_G_F'
+ (opt.) 7. Array of strings, classnames to blacklist from spawning, (default: [])
+ (opt.) 8. Array or string, DLC type(s), 'All' for all DLC, (default: '')
+Return: Group
+
+Zen_SpawnItemsOnTable
+
+Spawns all (1) on top of each of (2) in order.  Stops when there is no matching element.
+Usage : Call
+Params: 1. Array of strings, the classnames of the objects to spawn
+        2. Array of objects, the tables to spawn the objects on
+Return: Array, the spawned objects
+
+Zen_SpawnParachute
+
+Spawn a cargo parachute and attaches it to (1).  Only (1)'s height changes.  The
+parachute is affected by wind.  Detaches the parachute when the object reaches the
+ground, sea level, or a building.  Stops executing when (1) lands.
+Usage : Spawn
+Params: 1. Object, the object to attach the parachute to
+ (opt.) 2. String, the classname of the signal grenade, (default: 'SmokeShell')
+Return: Void
+
+Zen_SpawnVehicle
+
+Spawns a vehicle of (2).  If the height is greater than 0, the vehicle starts in flight.
+Uses ASL over the ocean.  Do not use a human classname, only inanimate objects.
+Usage : Call
+Params: 1. Array, group, object, string, the place to spawn
+        2. String, the classname of the vehicle to spawn
+ (opt.) 3. Scalar, the height above the ground to spawn the vehicle, (default: 0)
+ (opt.) 4. Scalar, the direction the vehicle faces, in degrees, (default: 0)
+ (opt.) 5. Boolean, true to set the vehicle's position exactly at the point, (default: false)
+Return: Object
+
+Zen_SpawnVehicleCrew
+
+Spawns some crew based upon (3,4) in (1) of (1)'s side or side (2).
+Usage : Call
+Params: 1. Object, the vehicle
+ (opt.) 2. Side, of the crew to spawn, (default: side of (1))
+ (opt.) 3. Array, string, turret types to spawn, 'All' 'Commander' 'Gunner' 'CargoFFV', (default: ['All'])
+ (opt.) 4. Boolean, true to spawn a driver, (default: true)
+Return: Group
