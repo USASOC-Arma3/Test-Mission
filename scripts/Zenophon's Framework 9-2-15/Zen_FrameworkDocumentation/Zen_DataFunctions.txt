@@ -1,0 +1,458 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Data Functions
+
+The Data Functions are strong library of functions to manipulate and examine arrays and strings as well as convert between related data types.  Functions do not alter any data by reference unless they say so and return void.
+
+Zen_ArrayAppend
+
+Appends all of (2, N) to (1) by reference.  Does not unpack nested arrays.
+Nested arrays are appended intact.
+Usage : Call
+Params: 1. Array, to append to
+        2. Any, value(s) to append
+ (opt.) N. ...
+Return: Void
+
+Zen_ArrayAppendNested
+
+Appends all of (2, N) to (1) by reference.  Unpacks nested arrays to one level, such
+that nested elements are appended to the array directly.  Lower nested arrays are
+appended intact.
+Usage : Call
+Params: 1. Array, to append to
+        2. Any, value(s) to append
+ (opt.) N. ...
+Return: Void
+
+Zen_ArrayCopy
+
+Overwrites all data of (1) with that of (2) by reference, such that (1) now refers to
+an exact copy of (2).  Trims to size.
+Usage : Call
+Params: 1. Array, to overwrite
+        2. Array, the data
+Return: Void
+
+Zen_ArrayFilterCondition
+
+Removes all elements from (1) that evaluate to true in (2).  You can use a function in or
+as the condition.
+Usage : Call
+Params: 1. Array, to filter
+        2. Code, the condition, use _this as the element (example: {isPlayer _this})
+Return: Array
+
+Zen_ArrayFilterValues
+
+Removes any element of (1) that matches any of (2).
+Usage : Call
+Params: 1. Array, the array to filter
+        2. Array, containing any values
+Return: Array
+
+Zen_ArrayFindAverage
+
+Averages all the of the numbers in (1).  Returns 0 if there are no numbers.
+Ignores all other data types.
+Usage : Call
+Params: 1. Array, with some numbers in it
+Return: Scalar
+
+Zen_ArrayFindExtremum
+
+Returns the element in (1) that maximizes (2).  Only elements for which (2) returns
+a number will be considered.  If no elements hash to a number, returns 0.
+Use -1 * the result of the hashing function to find the minimum.
+If multiple elements hash to the greatest value, the first will be returned.
+Usage : Call
+Params: 1. Array
+        2. Code, a hashing function, use '_this' as the element, ex: {_this}, see Zen_ArraySort
+Return: Any
+
+Zen_ArrayFindSum
+
+Returns the sum of all numbers in (1).  Not all elements must be numbers.
+Usage : Call
+Params: 1. Array
+Return: Scalar
+
+Zen_ArrayGetDelimitedSlice
+
+Uses the value of (2) and (3) to get all elements of (1) that are between those values.
+Gets only the first appearance of each delimiter (or second if they are the same) and
+matches nested arrays.  Returns an empty array if (2) is not found.  Returns all of (1)
+past (2) if (3) is not found.
+Usage : Call
+Params: 1. Array, the array to search in
+        2. Any, the first value
+        3. Any, the second value
+Return: Array, not including the delimiting values
+
+Zen_ArrayGetIndexedSlice
+
+Gets all elements in (1) at and between indexes (2) and (3).  If (3) is greater than the
+size of (1), sets (3) to that maximum.
+Usage : Call
+Params: 1. Array, the array to search in
+        2. Scalar, the first index
+ (opt.) 3. Scalar, the second index, (default: last element)
+Return: Array
+
+Zen_ArrayGetNestedIndex
+
+Gets the indexes of the all nested arrays in (1) that contains (2) at index (3).  Also matches
+nested nested arrays.  Use -1 as an index wildcard, and the function will search every
+value of the nested array.
+Usage : Call
+Params: 1: Array, the array to search for nested arrays in
+        2: Any, value to search for
+        3: Scalar, the element of the nested array that the value matches
+Return: Array, [] if there is no match
+
+Zen_ArrayGetNestedValue
+
+Gets a reference to the first nested array that contains (2) at index (3).  Also
+matches nested nested arrays.  Use -1 as an index wildcard, and the function will
+search every value of the nested array.
+Usage : Call
+Params: 1: Array, the array to search for nested arrays in
+        2: Any, value to search for
+        3: Scalar, the element of the nested array that the value matches
+Return: Array, [] if there is no match
+
+Zen_ArrayGetRandom
+
+Randomly returns a single element from (1).  Returns (1) itself if it is not an array.
+Usage : Call
+Params: 1. Array
+ (opt.) 2. Boolean, true to remove the element from the array, (default: false)
+Return: Any
+
+Zen_ArrayGetRandomSequence
+
+Randomly returns (2) elements of (1).  If (3), removes those elements from (1).
+Usage : Call
+Params: 1. Array
+        2. Scalar, how many elements to return
+ (opt.) 3. Boolean, true to remove elements from (1), (default: false)
+Return: Array
+
+Zen_ArrayGetType
+
+Returns all elements from (1) that are of type (2).  Searches nested arrays recursively,
+unless (2) is 'ARRAY'.
+Usage : Call
+Params: 1. Array
+        2. String or any, the typeName as a string or a literal of the type
+Return: Array
+
+Zen_ArrayInsert
+
+Inserts (3) at index (2) in (1) by reference.  Does not unpack nested arrays.
+Usage : Call
+Params: 1. Array, to insert into
+        2. Scalar, the index to insert at
+        3. Any, the value to insert
+Return: Void
+
+Zen_ArrayInsertSlice
+
+Inserts each of (3) starting at index (2) in (1).  Unpacks (3) to one level,
+so each element of (3) is directly inserted in (1).  Leaves nested nested arrays intact.
+Converts (3) to an array if it is not one.
+Usage : Call
+Params: 1. Array, to insert into
+        2. Scalar, the index to insert at
+        3. Any, the value to insert
+Return: Array
+
+Zen_ArrayRemoveDead
+
+Removes null/dead objects, null groups, groups with no units, empty arrays, and arrays and
+arrays containing entirely the all those from (1).  Leaves all other elements in (1).
+The order of elements does not change.
+Usage : Call
+Params: 1. Array
+Return: Array
+
+Zen_ArrayRemoveDuplicates
+
+Removes all duplicate elements (including nested arrays) from (1) that are, such that all
+elements are unique.
+Usage : Call
+Params: 1. Array
+Return: Array
+
+Zen_ArrayRemoveIndex
+
+Removes the element at (2) from (1) by reference.
+Usage : Call
+Params: 1: Array
+        2: Scalar, the index
+Return: Void
+
+Zen_ArrayRemoveIndexedSlice
+
+Removes all elements at and between (2) and (3) from (1).
+Usage : Call
+Params: 1: Array
+        2: Scalar, the first index
+        3: Scalar, the last index
+Return: Array
+
+Zen_ArrayRemoveNonLocal
+
+Removes anything that is not a local object from (1) and all nested arrays in (1).
+The order of elements does not change.
+Usage : Call
+Params: 1: Array, group, object, or side
+Return: Array
+
+Zen_ArrayRemoveValue
+
+Removes all occurrences of (2) from (1) by reference.
+Usage : Call
+Params: 1: Array
+        2: Any, the value
+Return: Void
+
+Zen_ArrayRemoveValuedSlice
+
+Removes the first complete appearance of (2) in (1) contiguously.
+Usage : Call
+Params: 1. Array, to search in
+        2. Array, to remove
+Return: Array
+
+Zen_ArrayReplaceSlice
+
+Replaces all elements in (1) between and including (2) and (3) with all of (4).
+Usage : Call
+Params: 1. Array, to replace values in
+        2. Scalar, the start index
+        3. Scalar, the end index
+        4. Array, the array to replace with
+Return: Array
+
+Zen_ArrayReplaceValue
+
+Replaces all occurrences of (2) with (3) in (1) by reference.  Matches nested arrays.
+Usage : Call
+Params: 1. Array, to replace values in
+        2. Any, the value to search for
+        3. Any, the value to replace with
+Return: Void
+
+Zen_ArrayReplaceValueNested
+
+Replaces all occurrences of (2) with (3) in (1) by reference.  Searches nested arrays.
+Replaces nested nested arrays.
+Usage : Call
+Params: 1. Array, to replace values in
+        2. Any, the value to search for
+        3. Any, the value to replace with
+Return: Void
+
+Zen_ArrayReverse
+
+Reverses all elements of (1).
+Usage : Call
+Params: 1: Array
+Return: Array
+
+Zen_ArraySearch
+
+Returns the index of all nested arrays of (1) whose elements at all (2) hash (4) to
+within, inclusive, the range (3).  (2,4) are aligned with each other, so the element at
+(2.n) is hashed with (4.n) and checked within (3.n).
+Usage : Call
+Params: 1. Array of arrays
+        2. Array of scalars, indexes of nested arrays to search
+        3. Array, ranges the element must fall within
+            Array:
+                1. Scalar, lower bound
+                2. Scalar, upper bound
+        4. Array, scalar hash functions as code or global function string
+Return: Array, [] if there is no match
+
+Zen_ArrayShuffle
+
+Reorders the elements of (1) by reference into a random permutation.
+Usage : Call
+Params: 1. Array
+Return: Array, reference to (1)
+
+Zen_ArraySort
+
+Reorders the elements of (1) by the relative value when (3) == 'compare' or by the scalar
+value when (3) == 'hash' returned by (2).  If (1) contains multiple types, you must account
+for this in (2). (2) can be of any length or complexity, and it can be the name of a defined 
+function. Performance will vary based upon data and comparator complexity.  The order of
+comparator equivalent elements does not change.  See Zen_FrameworkLibrary.sqf for
+'compare' examples for (2).
+Usage : Call
+Params: 1. Array, to sort
+ (opt.) 2. Code, the comparator, (default: Numbers ascending)
+ (opt.) 3. String, 'compare' or 'hash', the type of comparator given, (default: 'compare')
+Return: Array
+
+Zen_ArraySwapValues
+
+Swaps the data of elements (2) and (3) in (1) by reference.
+Usage : Call
+Params: 1. Array
+        2. Scalar, the first index
+        3. Scalar, the second index
+Return: Void
+
+Zen_ConfigGetLocations
+
+Returns an array of markers that cover every location of (1) in the current world.
+Markers have correct X and Y sizes for each location, according to the config file.
+Do not delete these markers, calls with the same arguments returned a cached array.
+Usage: Call
+Params: 1. Array or string, the location(s) to place markers on
+Return: Array
+
+Zen_ConfigGetVehicleClasses
+
+Searches through CfgVehicles and returns all vehicle classnames that are a real vehicle
+(not a base/fake class) and that meet the criteria.
+Usage : Call
+Params: 1. Array/String, class type(s), 'All' to skip
+ (opt.) 2. Side, (default: 'All')
+ (opt.) 3. Array or string, subtype(s) (default: 'All')
+ (opt.) 4. Array or string, faction(s) (default: 'All')
+ (opt.) 5. Array or string, class parent(s) (default: 'All')
+ (opt.) 6. String, 'unarmed', 'armed', 'both' (default: 'both')
+ (opt.) 7. Array or string, DLC type(s), '' for no DLC, (default: 'All')
+Return: Array of strings
+
+Zen_ConvertToGroupArray
+
+Gets array of groups that are associated with (1).  Removes duplicates and other data types.
+Usage : Call
+Params: 1. Array, group, object, side
+ (opt.) N. ...
+Return: Array
+
+Zen_ConvertToObjectArray
+
+Gets array of objects that are associated with (1).  Removes duplicates and other data types.
+Usage : Call
+Params: 1. Array, group, object, side
+ (opt.) N. ...
+Return: Array
+
+Zen_ConvertToPosition
+
+Gets the [x,y,z] position related to (1).
+Usage : Call
+Params: 1. Array, group, object, string
+Return: Array
+
+Zen_StringCapitalizeLetter
+
+Returns (1) with the character at (2) converted to upper case.  Index is 0 based.
+Usage : Call
+Params: 1. String
+ (opt.) 2. Scalar, the index of the letter to capitalize, (default: 0)
+Return: String
+
+Zen_StringFindReplace
+
+Finds all occurrences of (2) in (1) and replaces them with (3).  Can be case sensitive.
+Usage : Call
+Params: 1. String, the string to search in
+        2. String, the string to find
+        3. String, the string to replace with
+ (opt.) 4. Boolean, true to be case sensitive (default: false)
+Return: String
+
+Zen_StringGenerateRandom
+
+Generates a string of random, printing, non-space characters of length (1).
+Only uses characters from the ASCII character set of type (2).
+Usage : Call
+Params: 1. Scalar, the length of the string
+ (opt.) 2. String, the character type, 'All', 'Alpha', 'Alphanumeric', 'Numeric', (default: 'All')
+Return: String
+
+Zen_StringGetDelimitedPart
+
+Gets all characters in (1) between (2) and (3).  Gets only the characters between the
+first appearance of each delimiting string (or second if they are the same).  Returns an
+empty string if (2) is not found.  Returns all of (1) past (2) if (3) is not found.
+Delimiter search is case sensitive.
+Usage : Call
+Params: 1. String, the string to search in
+        2. String, the starting delimiter, (example: 'AB:')
+        3. String, the ending delimiter, (example: '/AB')
+Return: String, not including delimiters
+
+Zen_StringIsInString
+
+Determines if (1) is a contiguous part (2).  It may be case sensitive or not.  Use '#' as
+a wildcard that will match any character.
+Usage : Call
+Params: 1. String, to search for
+        2. String, to search in
+ (opt.) 3. Boolean, true to be case sensitive (default: false)
+Return: Boolean
+
+Zen_StringRemoveWhiteSpace
+
+Removes all whitespace characters from (1).
+Usage : Call
+Params: 1. String
+Return: String
+
+Zen_ValueFindInArray
+
+Gets the index of the element of (2) that matches (1). Not case sensitive for strings.
+Matches nested arrays.  Converts (2) to an array if it is not one.
+Usage : Call
+Params: 1: Any, the value to test
+        2: Array, the array to look in
+Return: Scalar, -1 if there is no match
+
+Zen_ValueIsInArray
+
+Determines if (1) is in (2).  Searches recursively through all nested arrays.
+Converts (2) to an array if it is not one.  Not case sensitive for strings.
+Usage : Call
+Params: 1. Any, the value to search for
+        2. Any, the array to look in
+Return: Boolean, true if (1) is in (2), at any nesting level
+
+Zen_ValuesAreEqual
+
+Evaluates if (1) and (2) are equal.  Checks type and evaluates arrays and nested arrays.
+Not case sensitive for strings.
+Usage : Call
+Params: 1: Any
+        2: Any
+Return: Boolean
+
+Zen_ValuesAreInArray
+
+Determines if all values of (1) are in (2).  Evaluates nested arrays.  Converts (2) to an
+array if it is not one.  If multiple elements are given for (1), each one is evaluated
+separately.  To evaluate an entire nested array in (1), it must be nested in the arguments.
+Usage : Call
+Params: 1. Any, the value(s) to search for
+        2. Any, the array to look in
+Return: Boolean, true only if all of the given values are in the array
+
+Zen_ValuesAreNotInArray
+
+Determines if all values of (1) are not in (2).  Evaluates nested arrays.  Converts (2) to
+an array if it is not one.  If multiple elements are given for (1), each one is evaluated
+separately.  To evaluate an entire nested array in (1), it must be nested in the arguments.
+Usage : Call
+Params: 1. Any, the value(s) to search for
+        2. Any, the array to look in
+Return: Boolean, true only if none of the given values is in the array

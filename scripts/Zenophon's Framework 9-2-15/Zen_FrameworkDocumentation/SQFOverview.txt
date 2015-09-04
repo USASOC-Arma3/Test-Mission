@@ -1,0 +1,247 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+SQF Overview
+
+Introduction and Organization
+
+If you wish to learn much more about what you can do with SQF, I have included this series of appendices that provide organized, in-depth explanations and examples of the properties and concepts of the SQF language.  None of this is about the framework or required to use it in any way.
+
+This is not a beginner's guide to SQF scripting; there are many of those.  Rather, I attempted to create a technical guide to analyze the structure and design of SQF.  This is intended partly for intermediate users and beginners who have experience with other programming languages.  This is not a guide on how to program, rather it is an explanation of programming concepts commonly used in the SQF language as well as quirks that do not exist in any other language.
+
+You will be able to dive into coding SQF much more quickly if you have experience with other languages, but you can still learn everything eventually even if you know nothing now.  If you have experience with other languages, you can use the references I make to them as a guide; otherwise, just ignore the comparisons.
+
+Before you continue reading I must stress that I have never seen a document that addresses the design of SQF as unambiguously as this document does, and thus there may be errors in explaining these concepts exactly.  Everything written below is taken from either the BIS wiki or my own observations.
+
+This guide does not cover the use of commands, operators, or control structures.  They will be used later in examples.  There are many resources and help to learn these basics on the BIS wiki and the forums.
+
+SQF is organized like so:
+
+the mission folder and its subfolders contain .sqf files
+    .sqf files contain statements and comments
+        statements use commands, operators, and variables
+            some variables represent values stored in memory
+            some variables reference entities in the game
+
+I will use 'script' to refer to an .sqf file, and 'function' to refer to code that is stored in memory.  When an .sqf file is run, it becomes a function.  I will discuss how the engine makes that transition later, but it is important to note that there is a difference.
+
+SQF is not object-oriented; there are no objects, no classes, and no methods.  Method may be used as a synonym for function, but does not mean what it does in C++, C#, Java, or many other languages in which a method is part of an object or class.  Functions do not have properties like static or private, nor do they have a single type that they must return.  Functions do not have a unique signature, and function is not a type.  'Object' is a variable type in SQF, because those variables refer to a physical entity in the game world.  SQF can create and destroy such entities as well as alter their state.
+
+Unambiguous Definition
+
+I will now define SQF in computer science terms; SQF is:
+
+Functional
+Imperative
+Event-driven
+Structured
+High-level
+Free-form
+Dynamically typed
+Strongly typed
+Compiled
+
+If you are not familiar with these concepts, I recommend that you visit:
+
+http://en.wikipedia.org/wiki/Main_Page
+
+Nevertheless, I will briefly explain what each of those terms means for SQF.
+
+Functional means that SQF is organized into functions, or compiled scripts, that can be run independently of each other, similar to C or Python.  The place and manner of their definition is unimportant.  Some functions perform math computations or similar, while others achieve a desired effect in the game world.
+
+Imperative means that SQF uses a series of statements that alter the state of the game world or an entity in the world.  Many SQF scripts are a series of imperative statements that use the commands of the game engine to change the game world.
+
+Event-driven means it is possible, and common, to use event handlers and actions available to the player to execute code. SQF also easily supports triggers that fire when variables or states change.
+
+Structured means that the game engine begins execution at the first statement and continues in the downward direction to the last statement, with this flow being broken only by control structures.  There is no goto command.
+
+High-level means that SQF is written in English with the Latin alphabet, rather than in binary, assembly, or bytecode.
+
+Free-form means that most white space is ignored by the game engine, and spacing exists to help readability.  The only space that matters is that between keywords, variables, and literals and for line comments.  This is handled the same as in C++ and Java.
+
+Dynamically typed means that variables do not have a declared type; they can hold a value of any type, like Python.  Thus the variable 'group_1' may hold the value [232,12,0].  Arrays can be composed of elements of different types.  Any variable can be redefined to any type at any time.  This means that functions do not have a predefined return type, and they can return void.
+
+Strongly typed mean that commands and operators only work on certain types, or act on different types differently.  Operators and commands often do not perform implicit type conversion.  Thus 2 + "2" results in an error, and 2 == "2" is an error as well.  However, 2 + 2 is 4, and "2" + "2" is "22".  Most game engine commands require a certain data type and fail if given the wrong type.
+
+Compiled means that .sqf files are compiled into a special data type called code, which is a primitive type.  Scripts are read by the game engine, which preprocesses the file and stores the code.  Commands to compile files take the text stored in an .sqf file, parse it into a string, then parse that string into data.  This data is assigned to a variable that you use to call the function.  The game engine translates this code into binary that it can execute on your CPU, but we are only concerned with how SQF works.  For example the line:
+
+0 = [] call Some_Function;
+
+Can be replaced with:
+
+0 = [] call {<copy and paste the contents of Some_Function here>};
+
+These commands give the same result, and storing the function as a variable makes it easier and more efficient.  The commands used to create the variable Some_Function tell the game engine to use a preprocessor to parse the contents of a file.  This preprocessor is like C/C++ and supports #include, #define, and others.  Before a function is executed, it is preprocessed.  Compiling scripts into a variable means that the engine preprocesses them only once and stores that code in memory.  This is in contrast to the execVM command, which will preprocess and compile a script again every time it is invoked.  Functions that are just defined as F = {} are also preproccessed once, but not compiled permanently as with compileFinal.  It is vastly more efficient to create functions as opposed to execVM.
+
+It may have become increasingly obvious that SQF does not fit very well into some of the accepted definitions for the terms that I gave.  It is important to highlight that SQF does stand on its own like other languages.  It is entirely dependent upon the game world and acts only inside the game world.  To accommodate the complexity of a simulation such as ArmA in a way that makes some sense, the developers added many, many quirks to SQF that make it unique.  These are better learned in time and with practice than exhaustively listed here.
+
+
+Variables
+
+There are three types of variables, global, local, and public.  Local variables start with an underscore, and global variables do not.  Global variables can be accessed at any time by any function, while local variables are limited to the scope in which they are declared.  Public variables are global variables that are broadcast over the network to all machines, and are then defined as a global variable on all machines with the same value.  There are no static, final, or unchangeable variables.  There are only a few reference types and no pointers.  All other variables store a value, rather than holding the value of a memory location.  For example, I can write:
+
+a = 1;
+b = a;
+a = 2;
+hint str b;
+
+The value of b after this snippet executes is 1. Thus, two variables of primitive types cannot refer to the same memory location.
+
+Some variables refer to an entity in the game engine; these are 'object', 'array', and 'group' types.  This is similar to references to arrays in C or Java.  The variable only has meaning if the object exists in the game engine.  However, creating a new variable to refer to the same object, such as a vehicle, is handled differently than in the above example.  In that example I am changing the value of the variable, but here I change a property of the object.  Here is another example:
+
+a = player;
+b = a;
+b setPos [0,0,0];
+hint str getPos a;
+
+This code snippet prints the value "[0,0,0]" because a and b both refer to the same object (you will also be transported into the ocean).  Creating the variable b copied the reference to a into b, thus the object is not duplicated in memory, only its reference is.  Printing the literal value of object or group type variable will show an understandable reference value.  Printing an array will print the entirety of the array itself, as in Python, not its reference as C++ or Java would.
+
+Local variables are preferred for almost all uses because they eliminate the threat of other scripts unintentionally modifying a value and creating bugs, and they help conserve memory.  Errors resulting from two functions concurrently using the same global variable are very difficult to find and fix.  This does not happen with local variables, unless they are modified by a lower scope, and that can also be avoided.
+
+Global variables exist from their declaration until the end of the mission or until they are given the value nil.  There is no automatic garbage collection of global variables, and if they are not set to nil manually, they persist indefinitely.  This wastes memory space and forces the game engine to keep track of more variables than are necessary.  Local variables are automatically garbage collected once the scope they were defined in stops executing.  A function may have 100 local variables, but they will simply disappear once the function stops executing.  If that function had used global variables, 100 useless values would be stored in memory.  It also means more work for the game engine, due to how variables are managed, which is discussed later.
+
+When one function executes another function, variables of the caller function can be accessed by the called function, which is a lower scope.  It is possible that local variables of the same name will change their value.  This can have an unwanted affect on the higher scope, which can be remedied by the private command.  The 'private' command explicitly limits the scope of variables to the scope where the private statement is executed.  Declaring a variable private means that the current scope cannot change the value of that variable in a higher scope, and any lower scopes can change the value.  It is similar to a variable declaration in a statically typed language, like C++ or Java, in which the variable is defined in that scope and all lower scopes, except that no type is given.
+
+Scope means code at a distinct level or logical location.  Each function has its own scope, and control structures and called functions within that function have a lower scope.  Good code already shows you the scope by indenting; every indent is a lower scope.  Example:
+
+_a = 1;
+if (_a == 1) then {
+    _b = 2;
+};
+hint str a;
+hint str _b;
+
+In this example, '_a' is defined for the entire snippet, but '_b' is defined only in the if block.  Thus 'hint str _b;' prints nothing because '_b' is undefined and will result in an error if we attempted to use this value as an argument elsewhere.  We can fix this by placing a private command at the top of the function:
+
+private "_b";
+
+This allows '_b' to be defined outside the if block because the variable is now defined in the higher scope.  This is almost equivalent to executing '_b = 0;' outside of the if-block.  However, the private command gives a void value, so the variable still cannot be used.  Only local variables can be declared private, an error will occur if you try to declare a global variable private.
+
+Declaring a variable private does not prevent a lower scope from changing that variable, only a private command in the lower scope prevents it from changing the variable.  This applies both to control structures and called functions.  The code snippet below prints 1.
+
+private "_i";
+_i = 0;
+call {_i = 1;};
+hint str _i;
+
+To prevent the called code from changing the value of '_i', place the 'private "_i";' statement inside the called code.
+
+It is important to note that some types can represent something beyond their literal value, even though I have said that they are primitive types.  For example, you may have noticed that markers are written as a string.  This is different from the string: "this is fun".  Rather, a string that contains the name of the marker is a good example of a variable that acts as a reference.  Strings can also hold certain predefined values, such as colors, that are special values.  We can also think of arrays as a category of types.  For example, a position is an [x,y,z] coordinate, but it is technically an array.  This array has a certain meaning to the game engine if I use it like so:
+
+a = [1200,2302,0];
+player setPos a;
+
+The game engine understands that the array, 'a', defines a point in space.  This is why commands and functions often need the elements of the array to have certain types in a certain order.
+
+Variables are abstracted such that they exist in 'namespaces'. They do not just point to a memory location that you can access. What we commonly call 'global variables' are variables existing in the mission namespace. There is a namespace for every object that exists in game and for your profile (that is how VAS saves data persistently).  What I have called local variables belong to the namespace of the scope.  When you create a variable without setVariable, the engine defaults to the mission namespace or the scope namespace. For example:
+
+Test = 3; // this is now global for the mission
+_test = 2; // this is local for the function executing
+
+Then, when you retrieve the value of a variable, the engine makes the same assumptions. For example:
+
+hint str Test; // prints 3 from anywhere
+hint str _test; // prints 2 only from the function
+
+By using setVariable, you can tell the engine which namespace exactly you want. You must then use getVariable to specify the correct namespace to retrieve from.
+
+For setVariable, making the value public (true as the last argument) does not change the namespace where it is stored, but updates that namespace for all other machines on the network.  Thus, another machine can request the same variable from the same namespace and get the same value. If I had put false here, the other machine would read an old value or no value at all.
+
+house setVariable ["bought", 1, true];
+
+For example, the object called house now has a variable with value 1 stored in its namespace that is referenced by 'bought', and this change in its namespace has been broadcast to all other machines.
+
+To get this value, you would use:
+
+house getVariable "bought"; // returns 1
+
+When you delete an object, its namespace is garbage collected.  This also applies to functions; when execution stops, local variables are deleted.
+
+The strength of this system is that you can now keep track of arbitrary values for all objects in an almost object-oriented way. Otherwise, you would have to create a name-value pair data structure to store the 'bought' value for dozens of houses.
+
+The weakness of this system is that it obfuscates your data structure into invisible namespace pools. It is critical to have good documentation and standards to use set/get variable on large scale and have maintainable code.
+
+
+Multi-Threading and Spawn vs. Call
+
+There are two ways to invoke compiled scripts:
+
+The 'call' command is used to run the script and wait for that script to return a value to the script that called it.  Thus the game engine pauses execution of the caller script, and waits for the called script to finish.  Using the sleep command in a called script may cause an error or other problems.
+
+The 'spawn' command runs the script on a new thread.  The caller script continues execution past the spawn call instantly.
+
+Sometimes, code in the caller function continues to execute for a while before the game engine ever starts executing the spawned code.  Be aware that the actions of spawned functions, even those with no sleeps or waits, may not take effect in time for the caller function.  To ensure that the function has fully executed, use call.
+
+Every use of the spawn command opens a new thread.  Threads run independently of each other in every way.  Every thread can be stored as a variable with the data type of 'script handle'.  Threads do not actually run concurrently on separate processors, but each receives CPU time assigned by a scheduler such that they appear to run in parallel.  However, only one thread can ever execute a once, because the engine has only one scheduler thread.
+
+When the spawn command is used, the value of this script handle is assigned to the variable on the left of the '=', just as the returned value from a call command is assigned to this variable.  A value of 0 here indicates that we do not wish to store this variable, thus the game engine garbage collects it.
+
+Executing the same script with the same parameters twice using spawn would cause conflicts in behavior and waste system resources.  'Spawning' or running another thread of a function cannot stop execution of a previous thread, and it cannot pass values to that previous thread.  Nor should it.
+
+There are two solutions to this:
+
+The easy way is to delay spawning a function until we have all the data we need to spawn it once, and then pass all those arguments to the function.
+
+The alternate solution may be applicable in less straight-forward applications. If we know that a thread might have to be stopped and replaced by another thread that uses updated parameters, we can store the value of that thread, its handle, like so:
+
+_scriptHandle = [_exampleValue] spawn Some_Function;
+
+And we can stop execution of Some_Function like so:
+
+terminate _scriptHandle;
+
+And spawn Some_Function again with updated data values, storing its handle again for later use, like so:
+
+_scriptHandle = [_exampleValueNew] spawn Some_Function;
+
+If you do not want the return from a function, you may replace the call command with spawn, thus returning the script handle.  This speeds up the thread that spawns the new thread, but may slow down script performance as a whole if there are too many threads for the game engine to manage.  This decreases the usefulness of many functions but is allowed by the game engine.
+
+
+Array References and Scope
+
+To better understand reference types, arrays can be used to show an interesting feature of references.  This example requires knowledge from the Variables section and Spawn vs Call section.  A variable of type array is a reference to an array.  However, the variable only refers to a series of values, it does not contain them.
+
+I have said that variables are declared in namespaces.  When the namespace is deleted (or the function ends), the variables are deleted.  In the case of objects, groups, and arrays, the actual data referred to is not deleted.  This is obvious for objects and groups, but I will now prove it for arrays.  The real values of reference types exist in the heap, and their references exist in the stack.  Multiple references to the same data are called aliases.
+
+Arrays continue to exist as long as there is at least one reference to them.  The data stored in an array is not stored in any namespace.  Consider the following example, we declare '_array' with one element.  A separate thread prints the array, then changes its value.  The caller thread changes its value immediately after the spawn.  What will happen when we run this?
+
+_array = [1];
+
+0 = _array spawn {
+    hint str _this;
+    _this set [2,3];
+};
+
+_array set [1,2];
+sleep 1;
+hint str _array;
+
+If you said: '_this set [2, 3] is out of bounds, the array has only 1 element', then you would be wrong.
+If you said: 'it prints: [1] then [1,2,3]', you would also be wrong.
+
+The correct answer is (you could have just run it instead of guessing):
+
+[1,2]
+[1,2,3]
+
+Why is this?  First, the caller keeps executing past the 'spawn' statement.  Thus it executes '_array set [1,2]' before the other thread every starts.  Using 'sleep 1', I control exactly when the new thread can begin, by freezing the caller thread.
+
+The spawned thread then gets a reference to the array, which it prints, and then changes the array by reference.  The engine waits about 1 second, then prints out the array using a different reference to the same data.  The references in the two threads are different references for the same array.  The array does not exist in either thread, it is stored entirely outside of them.
+
+You are probably never going to encounter this situation, and this trick with threads and arrays would almost never be used intentionally.  However, it is good to know how any programming language operates fundamentally.  That is point of this document.  If you simply learn what to type in to get results, you will never become an expert with any programming language.
+
+
+Optimization and Good Coding Practices
+
+ArmA is a very resource-intensive application, and it is wise not to further increase the burden on your computer with inefficient scripts.  Optimization, or making functions run very fast or with minimum CPU usage, should be done last after everything works.  I have only four things to say about optimization:
+
+1.  Use the 'sleep' command when several seconds can be spared.  The game engine executes SQF code as fast as it can, while maintaining a 3 ms limit on how long each thread can execute each frame.  This means that most functions can execute many commands in 3ms and do not burden the CPU.  The exception to this is any loop that may check continuously for a condition.  This loop will always take time away from other threads.  In most cases like this, I strongly advise adding a sleep command somewhere in the loop such that it executes once every few seconds.  It is simply not necessary to check for a condition every millisecond or every frame.
+
+2.  Do not open an excessive number of threads with the spawn command, especially those that manage the AI or loop indefinitely.  Every thread that is running is managed by the game engine and receives CPU time to execute statements.  The game engine uses a scheduler to decide when to execute code.  If there are a large number of threads open or several threads that require significant CPU time, the scheduler usually lags behind and assigns CPU time unfairly.  One thread that loops over many objects is better than many threads that do something to one object.  Use call instead of spawn when you can.
+
+3.  Do not mistake a lower framerate in your mission for bad scripting.  Numerous objects existing and interacting, as well as the AI, have a larger impact on performance than threads looping.  Often, it is a good idea to delay executing some of your mission code until it is necessary.  For example, do not spawn 15 AI squads in a town at the start and then wait in the init.  This code looks cleaner, but it has created more work for the game engine.  Instead, create a few enemies near the players' part of town.  As a general rule, objects in your mission that will not interact with the players soon should be deleted.
+
+4.  Read this page and apply its wisdom:
+
+http://community.bistudio.com/wiki/Code_Optimisation

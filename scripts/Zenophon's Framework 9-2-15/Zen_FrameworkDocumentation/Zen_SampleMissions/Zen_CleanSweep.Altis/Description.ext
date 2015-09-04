@@ -1,0 +1,38 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+disabledAI = 0;
+debriefing = 1;
+enableItemsDropping = 0;
+enableDebugConsole = 1;
+
+onLoadName = "Clean Sweep";
+author = "Zenophon";
+OnLoadMission = "As a SF soldier, clear the town swiftly and escape.";
+loadScreen = "CS.jpg";
+
+overviewText = "As a SF soldier, clear the town swiftly and escape.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+overviewPicture = "CS.jpg";
+
+doneKeys[] = {"BIS_Zen_CleanSweep.Altis_done"};
+
+class CfgDebriefing {
+    class endWin {
+        title = "Mission Completed";
+        subtitle = "Good Job";
+        description = "You cleared the town of Katalaki completely and evaded an Opfor counterattack.";
+    };
+};
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 3;
+};

@@ -1,0 +1,35 @@
+﻿
+f_getrandomcityAreaMarker
+
+Returns a reference to the area marker of a randomly chosen town. The area marker is the size and shape defined in the map’s config file.
+
+Usage : Call
+Params: None
+Return: Marker
+
+f_getnearbyPositionsNine
+
+Creates an array of nine positions with center (1) and offset of (2).
+
+Usage : Call
+Params: 1. [int,int]
+        2. Integer
+Return: Array of [int,int]
+
+f_createMarkersfromArray
+
+Converts the array of positions (1) into an array of square area markers with side length (2).
+
+Usage : Call
+Params: 1. Array of [int,int]
+        2. Integer
+Return: Array of objects of type marker
+
+f_filterpositionsbyTerrain
+
+Filters (1). If the position is water, remove it from the array.
+
+Usage : Call
+Params: 1. Array of objects of type marker
+Return: Array of objects of type marker
+

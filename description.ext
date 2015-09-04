@@ -1,0 +1,11 @@
+
+#include "scripts\R3F_LOG\desc_include.h"
+
+// All settings below are not needed for your own mission
+
+Author="Heintz";
+OnLoadName = "test mission";
+OnLoadMission = "USASOC: One Force Without Equal";
+LoadScreen = "USASOC_Banner.jpg";
+
+enableDebugConsole = 1;

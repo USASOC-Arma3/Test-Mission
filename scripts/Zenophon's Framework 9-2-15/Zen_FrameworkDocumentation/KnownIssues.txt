@@ -1,0 +1,14 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Known Issues:
+
+Preprocessor Library
+    In order to use the preprocessor library, the relative #include directive
+    path must point to the library file in the same directory or lower
+    ArmA 3 does not support ..\ to up a directory
+    Please vote: http://feedback.arma3.com/view.php?id=9629
+
+Loadout Functions
+    Give one fewer magazine to clients from a dedicated server

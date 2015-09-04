@@ -1,0 +1,96 @@
+﻿
+f_getrandomcityAreaMarker
+
+Returns a reference to the area marker of a randomly chosen town. The area marker is the size and shape defined in the map’s config file.
+
+Usage : Call
+Params: None
+Return: Area Marker reference
+
+f_getnearbyPositionsNine
+
+Creates an array of nine positions with center (1) and offset of (2).
+
+Usage : Call
+Params: 1. Array of two integers
+        2. Floating Point
+Return: Array of [int,int]
+
+f_getnearbyPositions16
+
+Creates an array of sixteen positions with center (1) and offset of (2).
+
+Usage : Call
+Params: 1. Array of two integers
+        2. Floating Point
+Return: Array of [int,int]
+
+f_getnearbyPositionsbyParm
+
+Creates an array of positions with dimension of (1) and (2), center of (3) and offset of (4).
+
+Usage : Call
+Params:	1. Integer
+		2. Integer
+		3. Array of two integers
+        2. Floating Point
+Return: Array of [int,int]
+
+f_createMarkersfromArray
+
+Converts the array of positions (1) into an array of square area markers with side length (2).
+
+Usage : Call
+Params: 1. Array of [int,int]
+        2. Integer
+Return: Array of area markers
+
+f_filterpositionsbyTerrain
+
+Filters (1). If the position is water, remove it from the array.
+
+Usage : Call
+Params: 1. Array of objects of type marker
+Return: Array of objects of type marker
+
+f_filtermarkersbyParm
+
+Filters (1) using terrain type (2.1) if terrain threshold > (2.2).
+
+Usage : Call
+Params: 1. Array of objects of type marker
+		2. Array of [string,int]
+Return: Array of area markers
+
+f_spawnsquadforMarkerArray
+
+Spawn a single group of type East in an area marker randomly chosen from (1)
+
+Usage : Call
+Params: 1. Array of area markers
+
+Return: Group reference
+
+f_orderRandomPatrol
+
+Order (1) to patrol between area markers chosen randomly from (2)
+
+Usage : Spawn
+Params:	1. Reference to group
+		2. Array of area markers
+	
+Return: none
+
+f_createExtractionPosition
+
+Update global variable extractionPosition with a position suitable as helicopter landing zone.
+Use position (1) as reference point. 
+
+Usage : Spawn
+Params:	1. [int,int]
+	
+Return: none
+
+
+
+

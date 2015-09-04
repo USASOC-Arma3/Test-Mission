@@ -1,0 +1,256 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Orders Functions
+
+The AI are an important part of many missions, and they can fill in roles that players cannot or will not do.  Included here are functions for easy insertions and extractions as well as patrol functions to randomize a mission and keep players on their toes.
+
+Zen_OrderAircraftPatrol
+
+Orders (1) to patrol in the area at random.  You can enter a 0 to skip (4).
+Stops executing when all of (1) are dead.  Works for helicopters, jets, and UAV's.
+(1) will dynamically follow an object or group given as (2).
+Usage : Spawn
+Params: 1. Array of objects or object, the vehicles to patrol
+    AND
+        2. Array, object, group, or icon marker, the center of the patrol area
+ (opt.) 3. Scalar, the maximum distance to patrol around the center, (default: 500)
+    OR
+        2. Area marker, the patrol area
+    AND
+ (opt.) 3. Array of strings, blacklist, points cannot be in any of these markers, (default: [])
+    OR
+ (opt.) 3. Array, black and white lists (default: [[], [], []])
+            1. Array of strings, all blacklist, points cannot be in any of these markers
+     (opt.) 2. Array of strings, all whitelist, points must be in all of these markers, (default: [])
+     (opt.) 3. Array of strings, one whitelist, points must be in one or more of these markers, (default: [])
+    AND
+ (opt.) 4. Array, (default: [0, 360])
+            1. Scalar, the minimum angle around the center to patrol in
+            2. Scalar, the maximum angle around the center to patrol in
+ (opt.) 5. String, the speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 6. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'aware')
+ (opt.) 7. Scalar, the height to fly at, (default: 75)
+ (opt.) 8. Boolean, true to cleanup destroyed vehicles and their crew, (default: false)
+Return: Void
+
+Zen_OrderBoatPatrol
+
+Orders (1) to patrol in the area at random.  You can enter a 0 to skip (4).
+Stops executing when all of (1) are dead.  Works only for ships.
+(1) will dynamically follow an object or group given as (2).
+Usage : Spawn
+Params: 1. Array of objects or object, the vehicles to patrol
+    AND
+        2. Array, object, group, or icon marker, the center of the patrol area
+ (opt.) 3. Scalar, the maximum distance to patrol around the center, (default: 500)
+    OR
+        2. Area marker, the patrol area
+    AND
+ (opt.) 3. Array of strings, blacklist, points cannot be in any of these markers, (default: [])
+    OR
+ (opt.) 3. Array, black and white lists (default: [[], [], []])
+            1. Array of strings, all blacklist, points cannot be in any of these markers
+     (opt.) 2. Array of strings, all whitelist, points must be in all of these markers, (default: [])
+     (opt.) 3. Array of strings, one whitelist, points must be in one or more of these markers, (default: [])
+    AND
+ (opt.) 4. Array, (default: [0, 360])
+            1. Scalar, the minimum angle around the center to patrol in
+            2. Scalar, the maximum angle around the center to patrol in
+ (opt.) 5. String, the speed (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 6. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'aware')
+ (opt.) 7. Boolean, true to cleanup destroyed vehicles and their crew, (default: false)
+Return: Void
+
+Zen_OrderExtraction
+
+Orders (1) to go to each of (2) in order.  It waits for all (3) to be in (1) at (2.1).
+It then goes to (2.2) and waits forever, not ordering the units to exit.  Stops
+executing when (1) stops forever.
+Usage : Spawn
+Params: 1. Object, vehicle
+        2. Array, the positions
+            1. Array, group, object, string, the point to extract from
+            2. Array, group, object, string, where to land next
+        3. Array, group, object, side, the passengers that will get on
+ (opt.) 4. String, speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+    AND IF (1) is a helicopter
+ (opt.) 5. Scalar, the height to fly at, (default: 40)
+Return: Void
+
+Zen_OrderFastRope
+
+Forces all (2) to fastrope from (1) in an orderly fashion.  Deploys and removes rope from (1).
+Stops executing when all (2) are on the ground.
+Usage : Spawn
+Params: 1. Object, the helicopter to fastrope from
+        2. Array, group, object, side, the passengers to fastrope
+Return: Void
+
+Zen_OrderHelicopterLand
+
+Orders (1) to move to (2) and land.  Stops executing when (1) lands.  Makes (1)
+avoid combat when possible.  Works only for helicopters and hovering UAV's.
+Usage : Spawn
+Params: 1. Object, the helicopter
+        2. Array, group, object, string, where to land
+ (opt.) 3. String, the speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 4. Scalar, the height to fly at, (default: 40)
+ (opt.) 5. Boolean, true to hover over the destination, (default: false)
+ (opt.) 6. Boolean, true cleanup the helicopter if it crashes while flying to (2), (default: false)
+Return: Void
+
+Zen_OrderInfantryMove
+
+Orders (1) to move to (2), avoiding combat when possible. Stops executing when (1) is close
+to (2), all of (1) are dead, or (1)'s AI leader has given up. Works only for infantry.
+Usage : Spawn
+Params: 1. Group or object, the group or a unit in the group
+        2. Array, group, object, string, where to go
+ (opt.) 3. String, the speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 4. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'safe')
+ (opt.) 5. String, the combat mode of (1), 'blue', 'green', 'white', 'yellow', 'red', (default: 'green')
+Return: Void
+
+Zen_OrderInfantryPatrol
+
+Orders all (1) to patrol at random.  You can enter a 0 to skip (4).  Stops
+executing when all of (1) are dead.  Works only for infantry.  (1) will
+chase and attack any enemy infantry that they spot.  You can combine groups
+of any side.  (1) will dynamically follow an object or group given as (2).
+Usage : Spawn
+Params: 1. Array, object, group, side, the group(s) or units in groups
+    AND
+        2. Array, object, group, or icon marker, the center of the area to patrol
+ (opt.) 3. Array, (default: [50, 200])
+            1. Scalar, the minimum distance around the center to patrol in
+            2. Scalar, the maximum distance around the center to patrol in
+    OR
+        2. Area marker, the area to patrol in
+     AND
+ (opt.) 3. Array of strings, blacklist, points cannot be in any of these markers, (default: [])
+    OR
+ (opt.) 3. Array, black and white lists (default: [[], [], []])
+            1. Array of strings, all blacklist, points cannot be in any of these markers
+     (opt.) 2. Array of strings, all whitelist, points must be in all of these markers, (default: [])
+     (opt.) 3. Array of strings, one whitelist, points must be in one or more of these markers, (default: [])
+    AND
+ (opt.) 4. Array, (default: [0, 360])
+            1. Scalar, the minimum angle around the center to patrol in
+            2. Scalar, the maximum angle around the center to patrol in
+ (opt.) 5. String, the speed of (1), 'limited' 'normal' 'full', (default: 'limited')
+ (opt.) 6. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'aware')
+ (opt.) 7. Boolean, false to disable AI chasing the enemy, (default: true)
+ (opt.) 8. Boolean, true to join weak groups to nearby groups, (default: false)
+ (opt.) 9. Boolean, true to treat the patrols as underwater divers, (default: false)
+Return: Void
+
+Zen_OrderInfantryPatrolBuilding
+
+Orders all (1) to move inside (5) buildings nearest the building nearest (2). Gives orders
+to individual units instead of entire groups.  Stops executing when all of (1) are dead.
+Usage : Spawn
+Params: 1. Array, group, object, or side, units to patrol
+        2. Array, group, object, string, a position
+ (opt.) 3. Boolean, true to patrol outside the building sometimes, (default: false)
+ (opt.) 4. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'aware')
+ (opt.) 5. Scalar, the number of buildings within 100m meters to include in the patrol, (default: 1)
+Return: Void
+
+Zen_OrderInsertion
+
+Orders (1) to go to each of (2) in order.  It waits for all (3) to get out of (1) at (2.1).
+Then, if (2.2) is given, it goes there and waits forever; otherwise, it stops at (2.1)
+forever.  Stops executing when (3) get out and (1) stops forever.  Works for all vehicles.
+Usage : Spawn
+Params: 1. Object, vehicle
+    AND
+        2. Array, the positions
+            1. Array, group, object, string, the point to insert
+     (opt.) 2. Array, group, object, string, where to land next
+    OR
+        2. Array, group, object, string, the position
+    AND
+        3. Array, object, group, side, the passengers to get off
+ (opt.) 4. String, speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+    AND IF (1) is a helicopter
+ (opt.) 5. Scalar, the height to fly at, (default: 40)
+ (opt.) 6. String, insertion type, 'land', 'fastrope', 'parachute', (default: 'land')
+ (opt.) 7. Boolean, true to delete (1) at the end, (default: false)
+Return: Void
+
+Zen_OrderSlingLoad
+
+Orders (1) to fly to and sling-load (2), then move (2) to (3) and detach (2).
+Stops executing when (1) drops (2) at (3), then (1) hovers there forever.
+Usage: Spawn
+Params: 1. Object, helicopter
+        2. Object, vehicle
+        3. Array, group, object, string, the point to drop
+ (opt.) 4. Boolean, true to use a manual rope if sling-loading cannot be done automatically, (default: false)
+Return: Void
+
+Zen_OrderVehicleDrop
+
+Orders (1) to fly over (2.1) and drop (3).  (1) then lands at (2.2) or stops forever
+at an undefined location.  Stops executing when (1) stops.  Works for all aircraft.
+(3) can be an ammo boxes or any vehicle.  (3) will be teleported to the aircraft.
+Usage : Spawn
+Params: 1. Object, helicopter
+    AND
+        2. Array, the positions
+            1. Array, group, object, string, the point to drop
+     (opt.) 2. Array, group, object, string, the point to land
+    OR
+        2. Array, group, object, string, the point to drop
+    AND
+        3. Object or string, the object or the classname of the object to drop
+ (opt.) 4. String, speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 5. Scalar, the height to fly at, (default: 80)
+ (opt.) 6. Boolean, true to cleanup (1) if it crashes enroute, (default: false)
+Return: Void
+
+Zen_OrderVehicleMove
+
+Orders (1) to move to (2), avoiding combat when possible. Stops executing when (1) is close
+to (2), (1) cannot move or is destroyed, or (1)'s AI driver has given up.  Works for all vehicles.
+Usage : Spawn
+Params: 1. Object, the vehicle
+        2. Array, group, object, string, where to go
+ (opt.) 3. String, the speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+    AND IF (1) is an aircraft
+ (opt.) 4. Scalar, the height to fly at, (default: 50)
+    AND
+ (opt.) 5. Boolean, true to delete (1) when it reaches (2), (default: false)
+ (opt.) 6. Boolean, true to cleanup (1) if (1) is destroyed enroute, (default: false)
+Return: Void
+
+Zen_OrderVehiclePatrol
+
+Orders (1) to patrol in the area at random.  You can enter a 0 to skip (4).
+Stops executing when all of (1) are dead.  Works for ground vehicles and UGV's.
+(1) will dynamically follow an object or group given as (2).
+Usage : Spawn
+Params: 1. Array of objects or object, the vehicles to patrol
+    AND
+        2. Array, object, group, or icon marker, the center of the patrol area
+ (opt.) 3. Scalar, the maximum distance to patrol around the center, (default: 500)
+    OR
+        2. Area marker, the patrol area
+      AND
+ (opt.) 3. Array of strings, blacklist, points cannot be in any of these markers, (default: [])
+    OR
+ (opt.) 3. Array, black and white lists (default: [[], [], []])
+            1. Array of strings, all blacklist, points cannot be in any of these markers
+     (opt.) 2. Array of strings, all whitelist, points must be in all of these markers, (default: [])
+     (opt.) 3. Array of strings, one whitelist, points must be in one or more of these markers, (default: [])
+    AND
+ (opt.) 4. Array, (default: [0, 360])
+            1. Scalar, the minimum angle around the center to patrol in
+            2. Scalar, the maximum angle around the center to patrol in
+ (opt.) 5. String, the speed of (1), 'limited' 'normal' 'full', (default: 'normal')
+ (opt.) 6. String, the behavior of (1), 'safe' 'aware' 'combat' 'stealth', (default: 'aware')
+ (opt.) 7. Boolean, true to cleanup destroyed vehicles and their crew, (default: false)
+ (opt.) 8. Boolean, false to not prefer road positions, (default: true)
+Return: Void

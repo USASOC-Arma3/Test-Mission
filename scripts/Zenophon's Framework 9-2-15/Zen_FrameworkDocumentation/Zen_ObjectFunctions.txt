@@ -1,0 +1,351 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Object Functions
+
+For everything about objects, the object functions category provides numerous options for checking on objects and keeping track of them in a mission.  Many of these functions are handy for triggering events.
+
+Zen_AreInArea
+
+Determines whether all (1) are inside (2) or the logical polygon.
+Usage : Call
+Params: 1. Array, group, object, side, objects to test
+    AND
+        2. String, a marker
+ (opt.) 3. Array, markers units cannot be in, (default: [])
+    OR
+        2. Array, group, object, string, the center of the polygon
+        3. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        4. Scalar, the angle of the polygon as rotated from 0 degrees
+        5. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 6. Array, markers units cannot be in, (default: [])
+Return: Boolean, true if all are inside
+
+Zen_AreIndoors
+
+Determines if all (1) are in a building.
+Usage : Call
+Params: 1. Array, group, object, side, units
+Return: Boolean, false if at least one unit is not in a building
+
+Zen_AreInVehicle
+
+Returns true if all (1) are in (2) and false if one or more are not.  Can test for being
+in a specific vehicle or any vehicle.  Does not consider dead units.
+Usage : Call
+Params: 1. Array, group, object, side, units
+ (opt.) 2. Object, a vehicle, (default: Any vehicle)
+Return: Boolean
+
+Zen_AreLocal
+
+Determines if all (1) are local to the machine that executes this function.
+False if one is not local and true only if all are.
+Usage : Call
+Params: 1. Array, group, object, side, objects
+Return: Boolean
+
+Zen_AreNotInArea
+
+Determines whether none of (1) is inside (2) or the logical polygon.
+Usage : Call
+Params: 1. Array, group, object, side, objects to test
+    AND
+        2. String, a marker
+ (opt.) 3. Array, markers units cannot be in, (default: [])
+    OR
+        2. Array, group, object, string, the center of the polygon
+        3. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        4. Scalar, the angle of the polygon as rotated from 0 degrees
+        5. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 6. Array, markers units cannot be in, (default: [])
+Return: Boolean, true if none is in the given area
+
+Zen_AreNotIndoors
+
+Determines whether none of (1) is inside of a building.
+Usage : Call
+Params: 1. Array, group, object, side, units
+Return: Boolean, true if none is indoors
+
+Zen_AreNotInVehicle
+
+Returns true if all (1) are not in (2) and false if one or more are.  Can test for being
+in a specific vehicle or any vehicle.  Does not consider dead units.
+Usage : Call
+Params: 1. Array, group, object, side, units
+ (opt.) 2. Object, a vehicle, (default: Any vehicle)
+Return: Boolean
+
+Zen_AreNotLocal
+
+Determines if all (1) are local to the machine that executes this function.
+False if one is local and true only if none is.
+Usage : Call
+Params: 1. Array, group, object, side, units
+Return: Boolean
+
+Zen_GetAllInArea
+
+Returns an array of all living units within (1).  Includes units in vehicles,
+but not vehicles themselves.
+Usage : Call
+Params: 1. String, a marker
+ (opt.) 2. Array, markers units cannot be in, (default: [])
+ (opt.) 3. Array, side, the side(s) of units to return, (default: All)
+    OR
+        1. Array, group, object, string, the center of the polygon
+        2. Array, the dimensions of the polygon
+            1. Scalar, the horizontal radius
+            2. Scalar, the vertical radius
+        3. Scalar, the angle of the polygon as rotated from 0 degrees
+        4. String, the shape of the polygon, only 'ellipse' or 'rectangle'
+ (opt.) 5. Array, markers units cannot be in, (default: [])
+ (opt.) 6. Array, side, the side(s) of units to return, (default: All)
+Return: Array of objects
+
+Zen_GetAllInBuilding
+
+Returns an array of all living units in or on the building nearest (1).
+Usage : Call
+Params: 1. Array, group, object, string, the center to find nearest building
+ (opt.) 2. Array, side, the side(s) of units to return, (default: All)
+Return: Array of objects
+
+Zen_GetFreeSeats
+
+Returns the availability of the driver, turret, and cargo seats in (1).
+Usage : Call
+Params: 1. Object, a vehicle
+ (opt.) 2. Array, string, turret types to check, 'All' 'Commander' 'Gunner' 'CargoFFV', (default: ['All'])
+Return: Array
+        1. Boolean, true if the driver seat is free
+        2. Array, the free turret paths
+        3. Array of scalars, the free cargo seat indexes
+
+Zen_GetSide
+
+Returns the side of (1), uses config file side, not scripted setFriend/setCaptive values.
+Usage : Call
+Params: 1. Classname, object
+Return: Side
+
+Zen_GetSideColor
+
+Returns the color of the side of (1), uses config file side, not scripted
+setFriend/setCaptive values.
+Usage : Call
+Params: 1. Classname, object
+Return: String, a marker color
+
+Zen_GetTurretPaths
+
+Reads the config file for (1) and creates an array that contains the paths to all of its
+turrets.  Each element of the array is directly usable in moveInTurret.
+Usage : Call
+Params: 1. Classname, object, the vehicle's class or an object of the class
+ (opt.) 2. Array, string, turret types to return, 'All' 'Commander' 'Gunner' 'CargoFFV', (default: ['All'])
+Return: Array, each turret path as an element
+
+Zen_IsFacing
+
+Determines if (1)'s fov (3) has (2) in it.  Operates in 2d and does not consider terrain
+or obstacles.
+Usage : Call
+Params: 1. Object, the observer
+        2. Object, the unit being looked at
+ (opt.) 3. Scalar, the angle of view that the target can be in, (default: 45)
+Return: Boolean, true if (2) in within the (3) fov of the (1)
+
+Zen_IsReady
+
+Determines if (1) itself and all crew are done with their current order. Do not use for a
+person.  Does not check passengers.
+Usage : Call
+Params: 1. Object, the vehicle
+Return: Boolean, true if all are ready
+
+Zen_IsSeen
+
+Determines if any surrounding units of a different side can see (1).  It accounts for
+object and terrain obstructions and the direction that each unit is looking.  It does not
+account for weather or camouflage.  Does not consider vehicles.
+Usage : Call
+Params: 1. Object, the observed unit
+        2. Scalar, the distance around that unit to scan for enemies
+Return: Boolean, true if any unit can see the given unit
+
+Zen_IsVisible
+
+Determines if (1) is seen by (2), accounts for terrain and object obstructions and the
+direction the observer is facing.  It does not account for weather or camouflage.
+Usage : Call
+Params: 1. Object, the unit that may be seen
+        2. Object, the observer
+ (opt.) 3. Scalar, the angle of view that the target can be in, (default: 45)
+Return: Boolean, true if (1) can be seen by (2)
+
+Zen_MoveAsSet
+
+Moves all (1) with their relative center to (2), keeping their direction and distance
+from the new center the same.
+Usage : Call
+Params: 1. Array, group, object, side, string, objects or markers
+        2. Array, group, object, string, the new center
+Return: Void
+
+Zen_MoveInVehicle
+
+Places all (1) in (2) instantly.  It is fully multiplayer compatible and synch'd.  Extra
+units will be left behind.
+Usage : Spawn
+Params: 1. Array, group, object, side, units
+        2. Object, the vehicle
+ (opt.) 3. String, where to put the units, 'Cargo', 'Driver', 'Turret', 'All', (default: 'Cargo')
+ (opt.) 4. Array, string, turret to put units, 'All' 'Commander' 'Gunner' 'CargoFFV', (default: ['All'])
+Return: Void
+
+Zen_RotateAsSet
+
+Rotates all (1) with their relative center by (2) degrees clockwise, keeping their distance
+from the center the same.  Use a negative angle to rotate counter-clockwise.
+Usage : Call
+Params: 1. Array, group, object, side, string, objects or markers
+        2. Scalar, the angle
+Return: Void
+
+Zen_SetAISkill
+
+Sets the skills of all (1) for all types; it is multiplayer sync'd.  Presets are meant to
+differentiate AI units, not provide perfectly realistic values, and are subject to change.
+Aiming accuracy is always decreased by 1/2 at night.
+Usage : Call
+Params: 1. Array, group, object, side, units
+    AND
+        2. Scalar from 0 to 1, the value for all skills
+    OR
+        2. String, the skills preset 'Militia', 'Infantry', 'Sniper', 'SOF', 'Officer', 'Crew'
+    OR
+        2. Array:
+            1. Scalar, Aiming Accuracy
+        OR
+            1. Array, Aiming Accuracy:
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 2. Scalar, Aiming Shake, (default: Value before)
+        OR
+     (opt.) 2. Array, Aiming Shake, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 3. Scalar, Aiming Speed, (default: Value before)
+        OR
+     (opt.) 3. Array, Aiming Speed, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 4. Scalar, Commanding, (default: Value before)
+        OR
+     (opt.) 4. Array, Commanding, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 5. Scalar, Courage, (default: Value before)
+        OR
+     (opt.) 5. Array, Courage, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 6. Scalar, Endurance, (default: Value before)
+        OR
+     (opt.) 6. Array, Endurance, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 7. Scalar, General, (default: Value before)
+        OR
+     (opt.) 7. Array, General, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 8. Scalar, Reload Speed, (default: Value before)
+        OR
+     (opt.) 8. Array, Reload Speed, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 9. Scalar, Spot Distance, (default: Value before)
+        OR
+     (opt.) 9. Array, Spot Distance, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+        AND
+     (opt.) 10. Scalar, Spot Time, (default: Value before)
+        OR
+     (opt.) 10. Array, Spot Time, (default: Value before):
+                1. Scalar, the minimum value
+                2. Scalar, the maximum value
+Return: Void
+
+Zen_TrackGroups
+
+Places markers on group leaders of (1), showing side and group strength.  Updates
+to the next leader if one dies, removes the marker if the whole group dies.  Updates
+every 10 seconds.  Can limit who sees the markers.  'Name' text is only shown
+for human players.  Can also show group destination.  Use only for infantry, not
+crew in a vehicle or a vehicle itself.
+Usage : Call
+Params: 1. Array, group, object, side, groups or units in groups
+ (opt.) 2. String, type of text on the marker, 'group', 'name', 'number', 'object', 'none', (default: 'group')
+ (opt.) 3. Boolean, show the group's destination, (default: False)
+ (opt.) 4. Array, group, object, side, units that can't see the markers, (default: 0)
+Return: Array:
+            1. Array of strings, the markers
+            2. Script handle, the thread updating the markers
+
+Zen_TrackInfantry
+
+Places markers on individual soldiers, showing side and direction.  Displays an X
+on dead units, updates every 10 seconds.  Can limit who sees the markers.
+'Name' text is only shown for human players.  Use only for infantry or the crew of a
+vehicle, not the vehicle itself.
+Usage : Call
+Params: 1. Array, group, object, side, the units
+ (opt.) 2. String, type of text on the marker, 'group', 'name', 'number', 'object', 'none', (default: 'name')
+ (opt.) 3. Array, group, object, side, units that can't see the markers, (default: 0)
+Return: Array:
+            1. Array of strings, the markers
+            2. Script handle, the thread updating the markers
+
+Zen_TrackVehicles
+
+Places markers on vehicles, showing vehicle type and side.  Removes the marker when the
+vehicle is destroyed, greys out the marker when the vehicle is empty but not destroyed.
+Updates every 10 seconds.  Can limit who sees the markers.  Use only for vehicles themselves
+not the crew or any person.  'Name' text is only shown for human crew.
+Usage : Call
+Params: 1. Array of objects or object, the vehicles
+ (opt.) 2. String, type of text on the marker, 'group', 'name', 'number', 'object', 'none', (default: 'none')
+ (opt.) 3. Array, group, object, side, units that can't see the markers, (default: 0)
+Return: Array:
+            1. Array of strings, the markers
+            2. Script handle, the thread updating the markers
+
+Zen_TransformObject
+
+Alters the position and direction of (1), can set (1) normal to terrain.  Uses a height
+above terrain level, including the ocean floor.  Use 0 to skip (4) with no change.
+Usage : Call
+Params: 1. Object, to transform
+        2. Array, group, object, string, where to move (1)
+ (opt.) 3. Scalar, the height to add to (2), (default: 0)
+ (opt.) 4. Array, the new velocity of (1) in cylindrical coordinates meters/sec, (default: 0)
+ (opt.) 5. Scalar, the new direction of (1), (default: no change)
+ (opt.) 6. Boolean, true to align (1) with the terrain, (default: false)
+Return: Void

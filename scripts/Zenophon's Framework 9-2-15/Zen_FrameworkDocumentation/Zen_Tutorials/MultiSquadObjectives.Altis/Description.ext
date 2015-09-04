@@ -1,0 +1,23 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+
+onLoadName = "Multi-Squad Tutorial";
+author = "Zenophon's Co-op Framework";
+OnLoadMission = "Choose your loadout and complete the objective";
+loadScreen = "objective.jpg";
+
+overviewText = "Choose your loadout and complete the objective";
+overviewPicture = "objective.jpg";
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 8;
+};

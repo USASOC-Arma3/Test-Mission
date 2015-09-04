@@ -1,0 +1,25 @@
+#include "Zen_FrameworkFunctions\Zen_InitHeader.sqf"
+
+// <Your mission name here> by <your name here>
+// Version = <the date here>
+// Tested with ArmA 3 -- <version number>
+
+// This will fade in from black, edit the number to change the length of the fade
+titleText ["Good Luck", "BLACK FADED", 0.3];
+// SQF functions cannot continue running after loading a saved game, do not delete this line
+enableSaving [false, false];
+// All clients stop executing here, do not delete this line
+if (!isServer) exitWith {};
+
+// Execution stops until the mission begins (past briefing), do not delete this line 
+sleep 1.5;
+
+// Enter the mission code here
+
+_ObjectivePos = ["RandomMissionMarker"] call Zen_FindGroundPosition;
+
+_yourObjective = [_ObjectivePos, (group X11), west, "POW", "rescue"] call Zen_CreateObjective;
+
+_enemyGroup = [_ObjectivePos, east, 0.2, [2, 4]] call Zen_SpawnInfantry;
+
+_enemyGroupTwo = [[3400,5700,0], EAST, random 1, [4,4]] call Zen_SpawnInfantry;

@@ -1,0 +1,738 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Preprocessor Library
+
+The preprocessor is one of the most powerful tools for making code simple, elegant, and easy to read.  SQF follows in the style of the C preprocessor by offering constant and function-like macros.  The preprocessor is no more than a copy-paste tool, but its strength is that it can copy-paste anything, including variables and SQF commands.
+
+The macros of the Standard Library comprise common, simple actions that, while not deserving of being made a function in their own right, are now encapsulated as function-like for ease of use.  These are general for the SQF language; none requires the framework.  The macros of the Framework Library represent common code snippets and standard forms involving framework functions.  Some of these macros return a value, but others perform a series of actions that do.
+
+In order to use either set of macros, you must allow the engine the define them for the current file, not function or scope.  The framework's standard #include in the init.sqf already does this for you.  However, in your own files you must use these #includes at the top of the file (before any macros are used) to tell the engine the macro definitions.
+
+#include "Zen_FrameworkFunctions\Zen_FrameworkLibrary.sqf"
+#include "Zen_FrameworkFunctions\Zen_StandardLibrary.sqf"
+
+Thus, all macros referenced in a .sqf file will be replaced with the true code when that file is preprocessed.  This preprocessing is always done, whether execVM or compile preprocessFile is used.  You can use either library or none at all.  This is the correct code to include them:
+
+Those that return void cannot be used anywhere a value could be, in arguments, with an '=', '==' or any other comparison operator.  They must be alone in a script like any other block of code.  Think of these just like functions that return void.
+
+Those that return a value are just the opposite, they represent that value just as a literal or variable would.  You can use them in arguments, as an assigned value, or anywhere else you could use a literal value.  These macros do not include a ';' at the end, so you must add one if it is necessary.  However, you cannot assign a value to them.
+
+Some macros will request a special 'Variable' type argument.  This means that you must enter a variable name, not a literal, an expression, or a function call.  Sometimes, the variable must be of a certain type; that type is listed afterwards, e.g. Variable Scalar.
+
+The only limitation to what you can enter as a macro argument is that commas can only be used to separate arguments.  Thus, you cannot give a literal array with commas between the elements as one of the arguments.  The array must be first defined as a variable so that the macro knows you are giving the array as a single parameter.  You must always provide the '()' for macros that have to parameters.  This is done to standardize all macros.
+
+Finally, in the Notepad++ SQF language autocompletion and function hints file, the preprocessor constants will have different, more compact documentation that lists their return value and parameters all on one line.  This is because the macros cannot take different series of arguments as functions can.
+
+Framework Library
+
+ZEN_FMW_Array_RemoveIndexes
+
+Removes Indexed Elements from Array
+Removes all elements indexed in (2) from (1) by reference.
+Params: 1. Variable Array
+        2. Variable Array, the indexes
+Return: Void
+
+ZEN_FMW_CFG_VehicleWeapons
+
+Config Find Vehicle Weapons
+Afterwards, _Zen_WeaponsArray contains all true weapons on (1).
+Params: 1. String, a vehicle classname
+Return: Void
+
+ZEN_FMW_Code_GiveLoadoutsOrdered
+
+Give Loadouts in Order
+Gives each of (2) to (1) in order.  Cycles back through (2) if there are more units.
+Params: 1. Array, Group, Object, Side, the units
+        2. Variable Array, loadout strings
+        3. Side or String, the side of equipment or 'custom' to use custom loadouts
+Return: Void
+
+ZEN_FMW_Code_Insertion
+
+Generic Vehicle Spawn and Insertion
+Spawns vehicle of type (2) at (3).  Puts (1) in the vehicle.  Orders an insertion at (4),
+then returns the vehicle to (3).  Afterwards _Zen_Vehicle refers to the vehicle spawned.
+Params: 1. Array, Group, Object, Side, the units
+        2. String, the classname of the vehicle
+        3. Array, Group, Object, String, the start point
+        4. Array, Group, Object, String, the insertion point
+Return: Void
+
+ZEN_FMW_Code_InsertionPatrol
+
+Generic Vehicle Spawn, Insertion, and Patrol
+Spawns a vehicle of type (2) at (3) and puts (1) inside.  Orders an insertion within (4).
+Orders (1) to patrol (4) once they get out.  Deletes the vehicle when it returns to (3).
+Params: 1. Array, Group, Object, Side, the units
+        2. String, the classname of the vehicle
+        3. Array, Group, Object, String, the start point
+        4. Array, Group, Object, String, an area marker
+Return: Void
+
+ZEN_FMW_Code_SpawnMarker
+
+Spawn and Patrol Units in Marker
+Spawns (2) groups with 4-6 units of side (3) in (1).  Orders groups to patrol in (1).
+Afterwards _Zen_GrpsArray refers to the array of groups spawned.
+Params: 1. String, marker
+        2. Scalar, number of groups
+        3. Side
+Return: Void
+
+ZEN_FMW_Code_SpawnPoint
+
+Spawn and Patrol Units around Point
+Spawns (3) groups with 4-6 units of side (4) within (2) meters of (1).  Orders groups to
+patrol around (1).  Afterwards _Zen_GrpsArray refers to the array of groups spawned.
+Params: 1. Array, Group, Object, Icon Marker, the center
+        2. Scalar, distance
+        3. Scalar, number of groups
+        4. Side
+Return: Void
+
+ZEN_FMW_Code_SpawnPointBehind
+
+Spawn Behind and Patrol Units around Point
+Spawns (5) groups with 4-6 units of side (6) within (3) to (4) meters of (2) and behind
+the line passing through (2) perpendicular to the line from (1) to (2).  Orders groups to
+patrol around (2) from (3) to (4) meters.  Afterwards _Zen_GrpsArray refers to the array
+of groups spawned.
+Params: 1. Array, Group, Object, Icon Marker, the start
+        2. Array, Group, Object, Icon Marker, the center
+        3. Scalar, minimum distance from (2)
+        4. Scalar, maximum distance from (2)
+        5. Scalar, number of groups
+        6. Side
+Return: Void
+
+ZEN_FMW_Code_WaitDistanceGreater
+
+WaitUntil Distance Is Greater
+Stops execution until the 2D distance between (1) and (2) is more than (3).
+Params: 1. Array, Group, Object, String
+        2. Array, Group, Object, String
+        3. Scalar
+Return: Void
+
+ZEN_FMW_Code_WaitDistanceLess
+
+WaitUntil Distance Is Less
+Stops execution until the 2D distance between (1) and (2) is less than (3).
+Params: 1. Array, Group, Object, String
+        2. Array, Group, Object, String
+        3. Scalar
+Return: Void
+
+ZEN_FMW_Loadout_DefaultPreset
+
+Zen_GiveLoadout Preset Loadout Default List
+Provides value for Zen_GiveLoadout argument 3 and Zen_GiveLoadoutBlufor et al.
+argument 2 for the default preset selection used by Zen_GiveLoadoutBlufor.
+Params: None
+Return: Array
+
+ZEN_FMW_Loadout_StdInfantryPreset
+
+Zen_GiveLoadout Preset Loadout Standard Infantry List
+Provides value for Zen_GiveLoadout argument 3 and Zen_GiveLoadoutBlufor et al.
+argument 2 for standard infantry squad loadouts preset selection.
+Params: None
+Return: Array
+
+ZEN_FMW_MP_REAll
+
+MP Remote Execution on All Machines
+Sends closure request for (1) with arguments (2) to all machines.  Runs the function
+locally using (3).
+Params: 1. String, the name of a function
+        2. Any, the arguments to the function
+        3. SQF command, local execution type, spawn or call
+Return: Void
+
+ZEN_FMW_MP_REClient
+
+MP Remote Execution on a Client
+Sends closure request for (1) with arguments (2) to the owner of (3).  Runs the function
+locally if the the object is local using (4).
+Params: 1. String, the name of a function
+        2. Any, the arguments to the function
+        3. SQF command, local execution type, spawn or call
+        4. Object, an object local to the client
+Return: Void
+
+ZEN_FMW_MP_RENonDedicated
+
+MP Remote Execution on All but Dedicated Server
+Sends closure request for (1) with arguments (2) to all machines.  Does not run the
+function locally on a dedicated server using (3).
+Params: 1. String, the name of a function
+        2. Any, the arguments to the function
+        3. SQF command, local execution type, spawn or call
+Return: Void
+
+ZEN_FMW_MP_REServerOnly
+
+MP Remote Execution on the Server
+Sends closure request for (1) with arguments (2) to the server.  Runs the function locally
+if on the server using (3).
+Params: 1. String, the name of a function
+        2. Any, the arguments to the function
+        3. SQF command, local execution type, spawn or call
+Return: Void
+
+ZEN_FMW_Math_DistGreater2D
+
+Distance Greater than 2D
+Determines if the 2D distance between (1) and (2) is greater than (3).
+Params: 1. Array, Group, Object, String, the first position
+        2. Array, Group, Object, String, the second position
+        3. Scalar, the distance
+Return: Boolean
+
+ZEN_FMW_Math_DistGreater3D
+
+Distance Greater than 3D
+Determines if the 3D distance between (1) and (2) is greater than (3).
+Params: 1. Array, Group, Object, String, the first position
+        2. Array, Group, Object, String, the second position
+        3. Scalar, the distance
+Return: Boolean
+
+ZEN_FMW_Math_DistLess2D
+
+Distance Less than 2D
+Determines if the 2D distance between (1) and (2) is less than (3).
+Params: 1. Array, Group, Object, String, the first position
+        2. Array, Group, Object, String, the second position
+        3. Scalar, the distance
+Return: Boolean
+
+ZEN_FMW_Math_DistLess3D
+
+Distance Less than 3D
+Determines if the 3D distance between (1) and (2) is less than (3).
+Params: 1. Array, Group, Object, String, the first position
+        2. Array, Group, Object, String, the second position
+        3. Scalar, the distance
+Return: Boolean
+
+ZEN_FMW_Math_RandomPoint
+
+Random Position within Radius from Center
+Returns a 2D position between 0 and (2) meters at any direction from (1).
+Params: 1. Array, Group, Object, String, the center
+        2. Scalar, the maximum distance
+Return: Array
+
+ZEN_FMW_Math_RandomPointMin
+
+Random Position within Radius from Center with Minimum
+Returns 2D position between (2) and (3) meters at any direction from (1).
+Params: 1. Array, Group, Object, String, the center
+        2. Scalar, the minimum distance
+        3. Scalar, the maximum distance
+Return: Array
+
+ZEN_FMW_Math_TerrainGradientCart
+
+Terrain Gradient Cartesian Vector
+Assigns the 2D Cartesian gradient at (1) to (2).
+Params: 1. Array, Group, Object, String, a position
+        2. Variable Any
+Return: Void
+
+ZEN_FMW_Math_TerrainParallelCart
+
+Terrain Parallel Cartesian Unit Vector
+Assigns the vector parallel to the terrain and in direction of greatest height increase
+with magnitude 1 at (1) to (2).
+Params: 1. Array, Group, Object, String, a position
+        2. Variable Any
+Return: Void
+
+ZEN_FMW_Code_ErrorExitVoid
+
+Print Error and Exit with Void
+Prints a standard framework error from (1) with text (2).  Removes (1) from the stack.
+Params: 1. String, the function
+        2. String, the description
+Return: Void
+
+ZEN_FMW_Code_ErrorExitValue
+
+Print Error and Exit with Any
+Prints a standard framework error from (1) with text (2).  Removes (1) from the stack and
+returns (3).
+Params: 1. String, the function
+        2. String, the description
+        3. Any
+Return: Any
+
+ZEN_FMW_Code_Error
+
+Print Error and Stack Trace
+Prints a standard framework error from (1) with (2) text.
+Params: 1. String, the function
+        2. String, the description
+Return: Void
+
+ZEN_FMW_OBJ_DeleteDead
+
+Delete Dead Objects
+Deletes all dead soldiers and vehicles that are further than (1) meters from any player.
+Params: 1. Scalar, the minimum distance to delete at
+Return: Void
+
+ZEN_FMW_ZAF_NotString
+
+Zen_ArrayFilterCondition Filter Not String
+Provides value for Zen_ArrayFilterCondition's argument (2) to filter from an array all
+string elements that do not contain (1).  Leaves elements of other types.
+Params: 1. String
+Return: Code
+
+ZEN_FMW_ZAF_String
+
+Zen_ArrayFilterCondition Filter String
+Provides value for Zen_ArrayFilterCondition's argument (2) to filter from an array all
+string elements that contain (1).  Leaves elements of other types.
+Params: 1. String
+Return: Code
+
+ZEN_FMW_ZAF_Type
+
+Zen_ArrayFilterCondition Filter Type
+Provides value for Zen_ArrayFilterCondition's argument (2) to filter from an array all
+elements of type (1).
+Params: 1. String, the data type
+Return: Code
+
+ZEN_FMW_ZAS_ArrayLength
+
+Zen_ArraySort Array Length Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of arrays by length.
+Params: None
+Return: Code
+
+ZEN_FMW_ZAS_AlphaNumeric
+
+Zen_ArraySort AlphaNumeric String Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of strings by their
+characters' ASCII/Unicode values.
+Params: None
+Return: Code
+
+ZEN_FMW_ZAS_DistFarNear
+
+Zen_ArraySort Distance from Center Far to Near Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of positions or objects
+by their distance to (1) in descending order.
+Params: 1. Array, Object, the center
+Return: Code
+
+ZEN_FMW_ZAS_DistNearFar
+
+Zen_ArraySort Distance from Center Near to Far Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of positions or objects
+by their distance to (1) in ascending order.
+Params: 1. Array, Object, the center
+Return: Code
+
+ZEN_FMW_ZAS_IntInArray
+
+Zen_ArraySort Integer Index in Array Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of arrays containing a
+scalar at (1).
+Params: 1. Scalar, the index
+Return: Code
+
+ZEN_FMW_ZAS_StringLength
+
+Zen_ArraySort String Length Sort
+Provides value for Zen_ArraySort's argument (2) to sort an array of strings by length.
+Params: None
+Return: Code
+
+ZEN_FMW_ZFGP_Beach
+
+Zen_FindGroundPosition Beach Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_DeepSea
+
+Zen_FindGroundPosition Deep Sea Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_Flat
+
+Zen_FindGroundPosition Flat Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_Forest
+
+Zen_FindGroundPosition Forest Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_Hill
+
+Zen_FindGroundPosition Hill Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_LandingZone
+
+Zen_FindGroundPosition Landing Zone Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_NotForest
+
+Zen_FindGroundPosition Non-Forest Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+ZEN_FMW_ZFGP_Urban
+
+Zen_FindGroundPosition Urban Position
+Provides value for Zen_FindGroundPosition's arguments (4,12).
+Params: None
+Return: Any
+
+
+Standard Library
+
+ZEN_STD_Array_LastElement
+
+Array Last Element
+Gets the last element in (1).
+Params: 1. Array
+Return: Any
+
+ZEN_STD_Array_RandElement
+
+Array Random Element
+Gets a random element in (1).
+Params: 1. Array
+Return: Any
+
+ZEN_STD_Array_RandIndex
+
+Array Random Index
+Gets a random integer within the size of (1).
+Params: 1. Array
+Return: Scalar
+
+ZEN_STD_Array_UnorderedRemove
+
+Array Unordered Remove
+Removes the element at (2) from (1).  The order of elements in (1) will change.
+Params: 1. Array
+        2. Scalar, the index
+Return: Void
+
+ZEN_STD_Code_WaitScript
+
+WaitUntil Script Done
+Stops execution until (1) has stopped executing.
+Params: 1. Variable Script Handle
+Return: Void
+
+ZEN_STD_Code_SleepFrames
+
+Sleep for Frames
+Stops execution until (1) frames have elapsed.
+Unreliable for long periods of time when framerate changes.
+Params: 1. Scalar
+Return: Void
+
+ZEN_STD_Code_SwapVars
+
+Swap Variables
+Swaps the values of (1) and (2).
+Params: 1. Variable Any
+        2. Variable Any
+Return: Void
+
+ZEN_STD_Math_MarkerArea
+
+Marker Area
+Finds the area of (1) in m^2.
+Params: 1. String, area marker
+Return: Scalar
+
+ZEN_STD_Math_RandNegativePositive
+
+Random Negative or Positive Integer
+Returns 1 or -1 with balanced pseudorandomness.
+Params: None
+Return: Scalar
+
+ZEN_STD_Math_VectCartCyl
+
+Vector Convert Cartesian to Cylindrical
+Returns the 3D vector array of (1) in cylindrical coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectCartPolar
+
+Vector Convert Cartesian to Polar
+Returns the 3D vector array of (1) in polar coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectCylCart
+
+Vector Convert Cylindrical to Cartesian
+Returns the 3D cylindrical vector array in Cartesian coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectCylPolar
+
+Vector Convert Cylindrical to Polar
+Returns the 3D cylindrical vector array in polar coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectPolarCart
+
+Vector Convert Polar to Cartesian
+Returns the 3D polar vector array in Cartesian coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectPolarCyl
+
+Vector Convert Polar to Cylindrical
+Returns the 3D polar vector array in cylindrical coordinates.
+Params: 1. Variable Array
+Return: Array
+
+ZEN_STD_Math_VectRotateX
+
+Vector Rotate X
+Transforms the 3D Cartesian vector (1) by (2) degrees counter-clockwise orthogonal to the
+X axis; (in the ZY plane), (X is east).
+Params: 1. Variable Array
+        2. Scalar, rotation degrees
+Return: Array
+
+ZEN_STD_Math_VectRotateY
+
+Vector Rotate Y
+Transforms the 3D Cartesian vector (1) by (2) degrees counter-clockwise orthogonal to the
+Y axis; (in the XZ plane), (Y is north).
+Params: 1. Variable Array
+        2. Scalar, rotation degrees
+Return: Array
+
+ZEN_STD_Math_VectRotateZ
+
+Vector Rotate Z
+Transforms the 3D Cartesian vector (1) by (2) degrees counter-clockwise orthogonal to the
+Z axis; (in the XY plane), (Z is upward).
+Params: 1. Variable Array
+        2. Scalar, rotation degrees
+Return: Array
+
+ZEN_STD_Math_VectTransform
+
+Transform Vector
+Returns (1) with its values shifted by (2,4).  Does not modify (1).
+Params: 1. Variable Array
+        2. Scalar, the X transformation
+        3. Scalar, the Y transformation
+        4. Scalar, the Z transformation
+Return: Array
+
+ZEN_STD_OBJ_AnimateDoors
+
+Animate Vehicle Doors
+Fully opens or closes all door animation sources on (1).
+Params: 1. Object, vehicle
+        2. Scalar, 1 to open, 0 to close
+Return: Void
+
+ZEN_STD_OBJ_ASLPositionZ
+
+Position Z coordinate above Sea level
+Gets the height of (1) ASL.
+Params: 1. Object
+Return: Scalar
+
+ZEN_STD_OBJ_ATLPositionZ
+
+Position Z coordinate above Terrain
+Gets the height of (1) ATL.
+Params: 1. Object
+Return: Scalar
+
+ZEN_STD_OBJ_BBX
+
+Bounding Box X Size
+Returns the absolute value of the total X size of (1)'s 3D model.
+Params: 1. Object
+Return: Scalar
+
+ZEN_STD_OBJ_BBY
+
+Bounding Box Y Size
+Returns the absolute value of the total Y size of (1)'s 3D model.
+Params: 1. Object
+Return: Scalar
+
+ZEN_STD_OBJ_BBZ
+
+Bounding Box Z Size
+Returns the absolute value of the total Z size of (1)'s 3D model.
+Params: 1. Object
+Return: Scalar
+
+ZEN_STD_OBJ_CountBuildingPos
+
+Count Building Positions
+Assigns the number of building positions in (2) to (1).
+Params: 1. Variable Any
+        2. Object, building
+Return: Void
+
+ZEN_STD_OBJ_CountCargoSeats
+
+Count Vehicle Passenger Seats
+Finds how many total cargo seats (1) has.  Does not include FFV positions.
+Params: 1. Object, vehicle
+Return: Scalar
+
+ZEN_STD_OBJ_DeleteVehCrew
+
+Delete Vehicle and Crew
+Deletes (1) and its crew.
+Params: 1. Object, vehicle
+Return: Void
+
+ZEN_STD_OBJ_MakePOW
+
+Make Unit POW
+Sets (1) captive, disables movement, forces standing, and removes all weapons.
+Params: 1. Object
+Return: Void
+
+ZEN_STD_OBJ_OrderGetOut
+
+Order Units Get Out
+Forces all (1) to exit (2) immediately.
+Params: 1. Variable Array, the units
+        2. Object, the vehicle
+Return: Void
+
+ZEN_STD_OBJ_OrderGetIn
+
+Order Units Get In
+Orders all (1) to enter (2) as passengers immediately.
+Params: 1. Variable Array, the units
+        2. Object, the vehicle
+Return: Void
+
+ZEN_STD_OBJ_OrientAircraft
+
+Set Aircraft Direction and Velocity
+Faces (1) towards (2) and gives velocity of magnitude (3) towards (2).
+Params: 1. Object
+        2. Variable Array, the position
+        3. Scalar, the speed
+Return: Void
+
+ZEN_STD_OBJ_ParachuteInsertion
+
+Simple Parachute Insertion
+Teleports all (1) (3) meters into the air at (2) and provides parachutes.
+Params: 1. Variable Array, the units
+        2. Variable Array, the position
+        3. Scalar, the height
+Return: Void
+
+ZEN_STD_OBJ_TransformATL
+
+Transform Object Position ATL
+Moves (1) to a new position ATL shifted by (2,4).
+Params: 1. Object
+        2. Scalar, the X transformation
+        3. Scalar, the Y transformation
+        4. Scalar, the Z transformation
+Return: Void
+
+ZEN_STD_Parse_GetArgument
+
+Parse Get Optional Argument
+Assigns the value of the argument at (2) to (1) if it exists.
+Params: 1. Variable Any
+        2. Scalar, argument index
+Return: Void
+
+ZEN_STD_Parse_GetArgumentDefault
+
+Parse Get Optional Argument with Default
+Assigns the value of the argument at (2) to (1) if it exists.  Otherwise assigns (3) to (1).
+Params: 1. Variable Any
+        2. Scalar, argument index
+        3. Any, literal, expression, variable
+Return: Void
+
+ZEN_STD_Parse_GetSetArgumentDefault
+
+Parse Get Optional Argument with Default and Set Argument
+Assigns the value of the argument at (2) to (1) if it exists, always sets '_this' at (2)
+to (4).  Otherwise assigns (3) to (1).
+Params: 1. Variable Any
+        2. Scalar, argument index
+        3. Any, the default value
+        4. Any, the new argument value
+Return: Void
+
+ZEN_STD_Parse_GetSetArgumentOptional
+
+Parse Get Optional Argument with Default or Set Argument
+Assigns the value of the argument at (2) to (1) if it exists.  Otherwise assigns (3) to (1)
+and sets '_this' at (2) to (4).  Does not set (4) at (2) in '_this' if an element exists at (2).
+Params: 1. Variable Any
+        2. Scalar, argument index
+        3. Any, the default value
+        4. Any, the new argument value
+Return: Void
+
+ZEN_STD_Parse_ToArray
+
+Parse Value To Array
+Converts (1) to an array if it is not one.
+Params: 1. Variable Any
+Return: Void
+
+ZEN_STD_Parse_ToString
+
+Parse Value To String
+Converts (1) to a string if it is not one.
+Params: 1. Variable Any
+Return: Void
+
+ZEN_STD_Parse_ToStringLower
+
+Parse Value To Lowercase String
+Converts (1) to a string in lowercase if it is not one.
+Params: 1. Variable Any
+Return: Void

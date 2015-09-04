@@ -1,0 +1,138 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+
+How To Debug
+
+Engine Errors
+
+There are three types of errors.  The simplest type occurs at the time of compilation, when the mission starts.  If you forgot a ';', a '}', etc. somewhere, the engine will let you know about it.  Of course, the framework is free of these bugs, so compilation errors will only appear for your own code.  These are also called syntax errors, because the code does not obey the syntax of the language.
+
+The second kind of error is a runtime error.  These involve statements that the compiler cannot check, which includes almost all statements involving variables.  For example, '1 / _count' seem fine, but if '_count' is assigned '0', a runtime error occurs.
+
+Both of these kinds of errors display in a standard format on the screen, and log to the report file (I will explain how to access that later).  It is not possible in SQF to 'catch' or handle these errors in any way.  They can only be prevented preemptively, by checking every value before it is used.  It is obviously impractical to do this for all 215 framework functions, and it would only decrease performance, as 98% of the time everything would be correct.
+
+Runtime errors in framework functions are caused by incorrect usage.  If you fail to comply with the documentation, you will be plagued by these errors.  Please see HowToUseDocumentation.txt for a full explanation of the framework's documentation.
+
+
+Framework Errors
+
+The third and most interesting type of errors is those raised (an error or exception is said to be 'raised' when it prints something out, and 'thrown' when it should be handled by other code) by the framework functions themselves.  All functions use Zen_PrintError to do this, and you can use that function in your own code.
+
+There are two subtypes of framework errors: argument checks and logical errors.  About 65 framework functions can print a logical error, and all functions check arguments.
+
+All functions will check that their arguments are not void, have the correct type(s), and that there are a minimum number of arguments, in accordance with the documentation.  Checking every argument for the correct type in every function is excessive, considering that 98% of the uses of that function will be correct.  However, the checking function has been carefully optimized to have the least impact on performance and it can be disabled, as discussed later.
+
+Instead of cluttering every function with too much error checking, each function makes a simple check of its arguments.  As values are passed to the framework functions, the idea is that your mistakes will be caught, and the framework can print a helpful error message.
+
+Some functions might check that critical values are correct, such as a task existing.  These error messages show logical errors that would not be obvious to a mission maker.  These errors show that a function cannot complete its intended task because its arguments do not make sense, even if they are the right type.
+
+It is also important to know what a function does after it raises this error.  No function will attempt to resolve a bad argument; they will simply exit with an error and a default value.  The return value will always be of the type stated in the documentation, but may be null.
+
+Each error prints out in a standard format, as a hint, as a chat message, and to the log.  Here is an example error:
+
+"-- Zen_GiveLoadoutBlufor Error --"         Function name
+"Invalid loadout identifier given"          Error description
+1.043                                       Time of the error, since mission start
+[X,"guerilla"]                              Arguments of the function
+
+A quick check with the documentation shows that 'guerilla' is actually spelled 'guerrilla'.  This error allowed us to fix the problem in seconds, instead of wondering why X was in his underwear.
+
+The arguments allow you to recognize values that you entered, or any familiar patterns.  The time of the error can also tell you where to look in your code for the error.  In this example, it was right after the mission began.
+
+However, you might see that there is a problem with this system.  Simple error checking built into functions cannot determine how that function was called; there is no simple command to do this.  What if the error names a function that you did not call?  How can you know where the error originates from if you don't recognize the arguments?
+
+If errors only gave information about the function with the error, the framework would become almost unusable as soon a problem occurred.  Fortunately, I have implemented a powerful system from other programming languages into SQF: a stack trace.
+
+
+The Stack
+
+The stack, in computer programming, is a basically a list of every function called.  It starts with the first 'plate' and 'stacks' more 'plates' as you call functions.  However, every thread has its own stack, so when you use 'spawn', a new thread with a separate stack is created.  In SQF, functions in a thread can share local variables.  Using this property, you can create a log of the stack, a trace.
+
+Thus, when an error prints, it first behaves as shown above.  It then prints out the full stack trace (in ascending order) from the point of the error.  Each 'plate' is a function, its arguments, and time it began executing.  This makes it extremely easy to see exactly how an error occurred.  As a user of the framework, you can instantly see the function at the bottom of the stack and know which function you have used wrong.
+
+For the previous example, it would also print out this below the error (I have reformatted it for readability):
+
+                                Begin stack
+[                               Begin first plate
+    "Zen_GiveLoadoutBlufor",    Function name
+    [X,"guerilla"]              Arguments of the function
+    1.006                       Time the function began executing
+]                               End first plate
+"Init"                          Init is the highest scope
+                                End stack
+
+This is not that amazing, as we know that Zen_GiveLoadoutBlufor is called from the init.  However, consider this example:
+
+"-- Zen_SpawnVehicle Error --"
+"Invalid classname given"
+1.232
+[[15220.9,16797.3,0],"I_Heli_light_02_F"]
+
+First, without this error, you would be wondering why nothing spawned when it should.  Even with the error, you know that the classname is wrong, but you don't see Zen_SpawnVehicle in your code.  This is were the stack trace comes in:
+
+["Zen_SpawnVehicle",[[3307.15,5771.32,0],"I_Heli_light_02_F"],1.01]
+["Zen_CreateObjective",["mkHeli",B Alpha 1-1,GUER,"custom","reach","I_Heli_light_02_F"],1.001]
+"Init"
+
+It is now obvious that you should look in your init for Zen_CreateObjective.  Incidentally, the correct classname is 'I_Heli_light_03_F', which you could get from the editor.
+
+Unfortunately, every stack trace can only go back to the bottom of its thread.  It is not possible to see what thread called another in SQF.  The bottom 'plate' of many stacks will be 'init', while others may start with another function.  Only functions noted in the documentation as 'Usage : Spawn' should ever start a stack.  Most of these functions are never used internally in the framework.  Thus, when something like 'Zen_OrderInfantryPatrol' appears at the bottom of the stack, it is called from your code.
+
+If you want to learn how to use this system in your functions (or want to see how I did the trace), see the Stack Trace demonstration.
+
+Finally, the function to check arguments, Zen_CheckArguments, is private, but it handles the printing of errors if something is wrong.  This allows it to print out a very specific error message, and keep other functions free of excess calls to Zen_PrintError.  This means that entering arguments wrong always prints an error from Zen_CheckArguments.  You need to use the stack trace to see what function called Zen_CheckArguments to see where the arguments came from.
+
+Here is an example of an invalid argument error, as it would show in the log:
+
+"-- Zen_CheckArguments Error --"                     Argument errors always come from Zen_CheckArguments
+"Argument 3 is the wrong type"                       This describes the error in detail
+1.006                                                The time of the error
+[X,"mkTown","mkField"]                               The arguments passed to Zen_CheckArguments to check
+["Zen_CheckArguments",[X,"mkTown","mkField"],1.002]  The next plate in the stack, this function called Zen_CheckArguments
+["Zen_AreInArea",[X,"mkTown","mkField"],1.002]       The next plate in the stack
+"Init"                                               The first plate, the Init
+
+This error report makes things easy; you just need to check the third argument to Zen_AreInArea in your Init.sqf.  In this case, the blacklist markers must in an array.  The framework's method of reporting errors is meant to be as helpful and informative as possible, so that you waste as little time as possible trying to figure out what a function want and more time making your mission.
+
+
+The Report File
+
+ArmA logs various things to a special file on your machine.  The engine itself prints things there, and any code can write to the log using the 'diag_log' command.  This is the best place to review errors and trace what went wrong.
+
+All errors, both engine and framework, print to the report file.  Engine errors are ugly, with a strange format, and framework errors are a copy of what you see on the screen.  The advantage to looking in the log is that you see all errors, not just the last ones.  Most often, the first error is the root cause of the others.
+
+The report file is located at (Windows 7) C:\Users\<UserName>\AppData\Local\Arma 3.  Each time the game launches, it creates a new file, so you need to sort by date to find the latest one.
+
+Once you have the log open, you need to find the errors in it.  I suggest that you clear the contents of the file and save it, then preview your mission.  Then, everything in the log will be from the latest run of your mission.  Also, do not include the -noLogs parameter when you launch the game.
+
+
+Testing
+
+While helpful for testing and debugging, it may be preferable to some users to not see these errors on screen during a mission (they only print for the machine running the function, probably the server).  If that is the case, you can disable the printing of errors and stack traces (they will still log in the report file) with this (place directly below the #include the top of the init.sqf):
+
+Zen_Print_All_Errors = false;
+
+In addition, when your mission is finished, you probably don't want the engine doing the extra work to check the arguments of every function call.  You can disable the checking of arguments entirely with this (place it directly below the #include at the top of the init.sqf):
+
+Zen_Debug_Arguments = false;
+
+However, for creating your mission, you definitely want errors enabled.  I cannot tell you exactly how to debug code, but here are some general guidelines that work well when using the framework:
+
+Read the documentation, check your usage of every function.  Know what all the data types are and what they represent.  If a function returns an array, know if that is an array of numbers, a position, etc.
+
+If a framework function sees a bad argument, it stops executing immediately and prints the error.  This is so that errors do not spam the log, and only the first error that would occur when you call a function is shown.
+
+Go line by line.  If you code a 100 line mission, run it, and a dozen errors appear, then you have done too much too quickly.  Run your mission after adding every few lines, so that when an error occurs, you know exactly where to look.  As you gain confidence and familiarity with the framework, you can do more without stopping to test every minute.
+
+If everything looks correct, but still doesn't work, don't give up.  This happens to all programmers.  Take a look at the tutorials and sample missions, they show a lot of common actions you might want to do.
+
+Sometimes, no errors at all appear, but something clearly doesn't work.  Because each framework function is a single, concrete action, you can know what function is being used wrong by seeing the effects in the game.  If you are trying to do something complex, simplify it by commenting out code.  You want to prove that something can work in a simple way before adding on to it.
+
+Finally, check your data.  Variables hide values when you look at your code, and most bugs are solved by printing out their values to see what is wrong.  Framework errors do this for arguments.  In your own code, once you identity were a problem is occurring, print out every variable that you use there.  This works well:
+
+player sideChat str _var;
+diag_log _var;
+
+By default, the chat window is too small to show a lot of data.  From the main menu, navigate to Configure>>Game>>Layout and right-click and drag the gray box at the bottom left of the screen (above the unit names and boxes) up until it reaches at least half way up the screen.  This lets text clutter about a third of your monitor, but is very helpful for debugging.

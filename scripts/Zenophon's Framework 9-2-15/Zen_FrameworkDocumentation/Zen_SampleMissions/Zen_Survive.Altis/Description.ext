@@ -1,0 +1,44 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+
+disabledAI = 0;
+enableItemsDropping = 0;
+debriefing = 1;
+enableDebugConsole = 1;
+
+onLoadName = "Survive";
+author = "Zenophon";
+OnLoadMission = "Survive on the vast island of Altis, surrounded by a raging war.";
+loadScreen = "Srv1.jpg";
+
+overviewText = "Survive on the vast island of Altis, surrounded by a raging war.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+overviewPicture = "Srv1.jpg";
+
+doneKeys[] = {"BIS_Zen_Survive.Altis_done"};
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 2;
+};
+
+class CfgDebriefing {
+    class EndLoss {
+        title = "Mission Failed";
+        subtitle = "";
+        description = "The Opfor took the town.";
+    };
+    class EndWin {
+        title = "Mission Completed";
+        subtitle = "";
+        description = "You took the town, but were forced to retreat by a heavy Opfor counter-attack.";
+    };
+};

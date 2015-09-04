@@ -1,0 +1,133 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Misc Functions
+
+For the functions that do not really fit in anywhere else.
+
+Zen_AddEject
+
+Adds an action to (1) that allows crew to eject at any time from the vehicle.
+Does not affect passengers, as they already have an eject action in aircraft.
+Usage : Call
+Params: 1. Array of objects, or object, the vehicles to add the action to
+ (opt.) 2. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_AddFastRope
+
+Adds an action to (1) allowing passengers to fastrope from those vehicle(s), provided it is
+going slow enough.  AI group members will follow a player when he fastropes.  Other players
+in the helicopter must elect to follow by using the action.  To force all units to fastrope,
+use Zen_OrderFastRope.
+Usage : Call
+Params: 1. Array of objects, or object, the vehicles to add the action to
+ (opt.) 2. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_CheckArguments
+
+Determines if all (1) are not nil and null, are of sufficient number, and are the correct
+type.  Checks nested arrays' types with (3).  Use Zen_Debug_Arguments to enable and disable
+this function globally.  The types are: ARRAY, BOOL, CODE, CONTROL, DISPLAY, GROUP, LOCATION,
+OBJECT, SCALAR, SCRIPT, SIDE, STRING, TASK.  Use VOID to ignore the type.  Use FUNCTION to
+check that a string is a defined function.
+Usage : Call
+Params: 1. Array, the arguments
+        2. Array of arrays, all possible types aligned with their argument
+            ex: [['SCALAR'], ['STRING', 'BOOL'], ['ARRAY']]
+        3. Array of arrays, all possible types for nested arrays, use [] to skip
+            ex: [[], [], ['SCALAR', 'CODE']]
+        4. Scalar, the minimum number of arguments
+Return: Boolean, true if all arguments are valid
+
+Zen_ExecuteCommand
+
+Executes the command sequence matching (1) using each of (2) in order.  For simple engine
+commands this should be the same order of arguments.  For any custom command sequence, the
+order is arbitrary.  If the command uses no arguments, (2) will not be used.
+Usage : Call
+Params: 1. String, command sequence identifier
+        2. Any, the command arguments
+Return: Void
+
+Zen_MultiplyDamage
+
+Adds a handle damage eventhandler to (1) to increase the damage dealt by all bullets to (1)
+by a fixed value.  The global increase variable is Zen_Damage_Increase, its default value
+is 7.  For reference, the hit value for a 5.56 NATO round is 8.  If you change
+Zen_Damage_Increase in multiplayer, you must publicVariable it.  Changes will take affect
+immediately.  Do not use a value less than -5.  Works for all modded and addon weapons
+and ammo.  Does not affect units in vehicles.  Increases the fatigue of the injured unit
+by half of the damage he receives.
+Usage : Call
+Params: 1. Array, group, object, side, the objects to add the eventhandler to
+ (opt.) 2. Boolean, true to remove all other handle damage eventhandlers, (default: false)
+ (opt.) 3. Boolean, true to remote execute the function, (default: true)
+Return: Void
+
+Zen_PrintError
+
+Hints and logs an error with the given arguments.
+Usage : Call
+Params: 1: String, name of function with error
+        2: String, short description of the error
+        3: Any, the argument(s) of the instance
+Return: Void
+
+Zen_SetViewDistance
+
+Sets the terrain, object, and shadow view distance.  Multiplayer sync'd.  Use -1 to
+skip any parameter and have no change.  Currently only (1) has any effect, and it only
+sets a hard limit for both terrain and object distances.
+Usage : Call
+Params: 1. Scalar, the terrain view distance
+ (opt.) 2. Scalar, the object view distance, (default: -1 (no change))
+ (opt.) 3. Scalar, the shadow view distance, (default: -1 (no change))
+Return: Void
+
+Zen_SetWeather
+
+Sets the weather based upon arguments, multiplayer sync'd.  Accepted types are 'fog',
+'overcast', 'wind', 'rain', 'gusts', 'waves', 'date', 'packet'.  You must use 'overcast' before
+'rain', as rain only starts if overcast > 0.7.  This applies to both current and future
+values.  All changes can occur in parallel.  Weather change arguments are optional and
+do not apply to 'wind'.  Use -1 to skip an immediate change.  Rain, wind, gusts, waves,
+and lightning are managed automatically by engine, do not set them unless necessary.
+Minimum time for an overcast change in 30 minutes; change times greater than 30 min
+will not be exact.  Stops executing when the weather is sync'd on the current machine.
+Usage : Spawn
+Params: 1. Array, ex: ['overcast', 0.25 (now, 0 to 1)]
+        2. Array, ex: ['fog', 0.7 , 0.1 (later), 300 (time for change, seconds)]
+        3. Array, ex: ['wind', 5 (strength, 0 to 10), 45 (direction, 0 to 360)]
+        4. Array, ex: ['overcast', -1 (skip), 0.6, 60*45 (45 minutes)]
+        5. Array, ex: ['date', 30 (minute), 18 (hour), 26 (day), 7 (month), 2035 (year)]
+        N. Array, ex: ['packet', false]
+Return: Void
+
+Zen_ShowHideMarkers
+
+Locally shows or hides (1) for client machines if the player is in (2) or (3).  Fully
+multiplayer propagated.  Enter 0 for (2) to skip.
+Usage : Call
+Params: 1. Array of strings, or string, the markers to show or hide
+        2. Array, object, group, side, the units to show the markers to
+ (opt.) 3. Array, object, group, side, the units to hide the markers from, (default: [])
+Return: Void
+
+Zen_SpawnMarker
+
+Simply creates a marker with a random, unique name.  Use 'ellipse' or 'rectangle' for
+(5) to create an area marker.
+Usage : Call
+Params: 1. Array, group, object, string, where to place the marker
+ (opt.) 2. String, the text to display beside the marker, (default: '')
+ (opt.) 3. String, the color of the marker, (default: 'colorBlack')
+ (opt.) 4. Array, (default: [1,1])
+            1. Scalar, the x size of the marker
+            2. Scalar, the y size of the marker
+ (opt.) 5. String, the shape of the marker, (default: 'mil_dot')
+ (opt.) 6. Scalar, the direction of the marker by compass angle, (default: 0)
+ (opt.) 7. Scalar between 0 and 1, the transparency of the marker, (default: 1)
+Return: String

@@ -1,0 +1,25 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 3;
+respawndelay = 5;
+respawnDialog = 0;
+
+onLoadName = "Rescue PoW Tutorial";
+author = "Zenophon's Co-op Framework";
+OnLoadMission = "Rescue the BLUFOR Prisoner";
+loadScreen = "pow.jpg";
+
+overviewText = "Rescue the BLUFOR Prisoner";
+overviewPicture = "pow.jpg";
+
+class Header {
+    gameType = COOP;
+    minPlayers = 1;
+    maxPlayers = 4;
+};

@@ -1,0 +1,245 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+
+Framework Overview
+
+Zenophon's ArmA 3 Co-op Mission Framework is a library of over 220 SQF functions organized into a carefully designed API that is both easy to use and extremely powerful.  The functions cover everything from manipulating arrays to an extensive task system.  Each one has been meticulously designed and tested to provide useful features with minimal bugs and issues.  The framework is designed so that each function is a logical building block that achieves a straightforward effect.  The strength of the framework is that each small part fits together neatly with others, allowing you to quickly implement your mission design intuitively.
+
+The framework works with any map and requires no addons.  It is compatible with any mod because you choose which functions execute.  There is effectively no performance impact to compile the entire framework, and every function has been diligently optimized.  All 180 public functions are also carefully documented in an exacting style, and many resources are provided to help you learn to use the framework.  The framework is created with these goals in mind:
+
+Simple co-op fun for both players and mission makers
+Bottom-up design using flexible pieces that you control
+Truly random and dynamic missions without extra work for mission designers
+Procedural mission design instead of manual placement using the editor
+Eliminating large, static functions with assumptions about what you want in your mission
+Server-oriented execution to create more efficient multiplayer missions
+A simplification of locality and interacting with clients in multiplayer
+A solid, powerful, and bug-free library to use as a foundation for your own code
+
+The framework's many functions are divided into 13 categories with a specific purpose:
+
+Data functions are the foundation of the framework, providing a clear API for manipulating arrays and strings, and supporting both simple and complex operations.  These functions are meant to simplify any data structure and allow you to focus on building the real parts of your mission.
+
+The Fire Support system is a tool for mission makers, not players, to allow you to quickly create any imaginable artillery, mortar, or airstrike that fits your mission.  This is not a system that enforces realistic artillery; the mission designer should decide what fits their mission.
+
+The Loadout functions, including a full custom loadout system, provide every option you need to easily equip both players and AI.  The goal of these functions is to get away from lengthy, disorganized loadout code cluttering your mission, and allow you to specify what you want without worrying about the exact sqf command to use.  There are also many preset loadouts, allowing you to change all the equipment for dozens of units randomly using just one line of code.
+
+The Math functions deal with various 2D operations on positions and polygons.  These are auxiliary functions, used where the framework needs trigonometric operations done.  You might not need them in a typical mission, but they can be useful for getting simple information about angles or distances.
+
+The Misc functions are just that, miscellaneous.  They don't fit in anywhere else but are still useful.
+
+The Object functions deal with objects, and provide numerous ways to check on and interact with players, AI, and static objects in your mission.  Some are designed to cover conditions and checks that would be hard to do in a trigger.
+
+The Objective system is a slight anomaly in the framework, as it does several things for you without asking how to do it.  This system is designed to make side missions extremely simple for mission makers.  With just one line, you can keep players occupied with a secondary objective for 30 minutes.  It also adds depth to a mission when used randomly.
+
+The Orders functions are meant to make interacting with the AI less frustrating.  AI issues, for both friendly and enemy AI, are not fun when making a co-op mission.  Unfortunately, it is not possible to tame the AI entirely, but these functions provide a tested and working way to make AI do things.  Patrol functions also provide simple but powerful randomization for any mission.
+
+The Position functions include Zen_FindGroundPosition, the heart of the framework and your most powerful tool.  It generates random positions in a marker or around a point, then allows you to filter those positions in 10 different ways.  You can use this system to randomly get any kind of position you want.  Filters include water, roads, houses, trees, terrain slope, and many more.  This system can be used to generate an infinite number of possibilities in a single mission.
+
+The Preprocessor library offers both general and framework-specific macros that improve ease of use for many small tasks.  They assist with giving arguments to some functions and help streamline your code by replacing complex lines with a named macro.  Some macros can accept arguments that generalize them like functions.
+
+The Spawning functions allow you to spawn any object, AI or static, that you could possibly need in your mission.  These functions are straightforward while offering simple randomization options.  Contrary to the editor, you can now create a random vehicle or squad of random composition rather than a preset object.
+
+The Task system is the most complex part of the framework.  Using a abstract data structure and thoroughly tested internal functions to surpass locality issues, these functions are meant to separate the mission maker completely from the issues and quirks of tasks.  They also support unprecedented operations on tasks, such as copying tasks from one unit to another.
+
+The Trigger functions are the smallest category, designed to complement the Task system.  They perform operations on tasks when preset conditions are complete.  However, they have been generalized to become deceptively useful.  Almost any mission can be designed based only upon units being dead or near a point (if you don't believe me, think of all missions you have played).
+
+
+Orientation
+
+Obviously, the framework contains myriad resources to create static and dynamic missions of various kinds.  The included documentation explains how to use each part of this large framework in order to create missions.  Some parts of the framework exist as a standalone function, while others are complex subsystems.  You do not need to know the full power of this framework to use it.  The framework can be the only resource used to create your mission, or you may use it in conjunction with the editor and your own scripts.
+
+With this file is included a complete documentation set, organized by the categories of functions, for all of the framework's public functions.  The documentation also includes a changelog to show progress and improvements, an index to show all of the documented functions and how they are organized, a known issues file to prevent frustration, a readme file for a list of documentation contents, an FAQ to share common questions from users, and a legal agreement file.  Finally, the How To files provide a clear, detailed explanation of their respective topics.
+
+With the understanding that not all users of the framework are scripting experts, there is a series of 10 beginner tutorials to help first-time mission makers create simple missions using framework functions.  For more experienced scripters and those wishing to learn more, there is a also a selection of 15 intermediate level demonstration missions to showcase more advanced scripting techniques and more framework functions.  Also, there are diagrams of 4 common framework functions, meant to supplement the text documentation.  Finally, 8 sample missions are included to show the power of the framework in action.  Each of these resources is included in its own folder with more information in a readme file.
+
+If you use Notepad++ to code, you can find an SQF syntax highlighting and an auto-completion file (with function hints) under the Zen_Misc folder.  More information and install instructions are provided in a readme file there.
+
+
+Framework Organization and Installation
+
+The framework is divided into two folders, one containing this file and all other documentation, and one containing all the code.  These folders are separable in every way.  To run the framework, you only need the Zen_FrameworkFunctions folder.  You never need to open that folder and look at or edit any files.  On the other hand, the Zen_FrameworkDocumentation folder is meant to be explored, with easy access to all documentation.  Do not place the Zen_FrameworkDocumentation folder in your mission folder.
+
+To make use of the features of the framework, they must be compiled and initialized.  The sample starting init.sqf distributed with the framework has one #include command that does all of this.  The init also uses other commands, which are described therein.  You must retain in your init at least the #include command to access any framework functions, and you will meet significant problems if leave out the other commands.  It is also very important that the #include command is the FIRST LINE of the init.
+
+The next piece of the framework is a snippet of code that belongs in the description.ext.  In the sample description.ext given, there are three #includes that must be placed in your mission's description.ext.  While only a few functions depend on them, they are still necessary for the full and correct operation of the framework.  The final part required to fully use the framework is a string table required for some functions to read the configs in other languages.  Simply place StringTable.xml into your mission folder, or combine its contents with your pre-existing StringTable.xml.
+
+In addition to the global names of all public functions, there are extra functions and global variables used internally in the framework that are not documented in any way.  These are not meant to be used directly to create a mission and exist only to support the public functions of the framework.  DO NOT overwrite them!  You use them at your own risk.  They are reserved variables for the framework and are named appropriately.  A full list is included at the end of the Index under the heading 'Private Functions and Reserved Variables'.
+
+
+Function Documentation
+
+Every public function is meticulously documented in a custom style developed specifically for ArmA and the framework.  This documentation is intended to be simple, concise, easy to read, and sufficiently informative.  Every possible detail of a function is not noted, but if you follow the documentation, your usage of every framework function will be correct, and you will get the results that you want.
+
+For a complete guide on how to read the documentation format, see HowToUseDocumentation.txt.
+
+
+Initialization File
+
+The brain of the mission is your script, the init.sqf, where you will combine framework functions to create a mission.  Certain commands required by the framework start the init, but you can enter anything you want after those.  The init is the central hub of your mission, and you should do almost everything there.  I strongly recommend that you use local variables, those starting with an underscore.
+
+This is a great benefit to using the framework: all of your work is in one place, where you can improve, debug, and tweak your mission while seeing how all the parts interact directly.  The order that everything is done is clear to you, and changing your mission drastically is as simple as editing a few values.
+
+Although the framework is server-oriented for executing code (see Multiplayer section), it is a simple fact of sqf that some things must be done on the clients, so the init has been structured into three parts to aid you in your mission design.  Look at the template init.sqf and read the comments.  What you should put where may not be clear to you, but everything should be placed below the 'sleep' command, except for a few commands.  The tutorials, demonstrations, and sample missions show most of the things you need to put before 'sleep'.
+
+
+Multiplayer
+
+A large consideration when making multiplayer missions with such a massive framework of scripts is the interaction of client and server and the locality of objects.  The framework was designed with the idea that the server should manage everything that it can, and few to no scripts should be run on clients.  To support this mission-making style, almost all scripts were designed to run only on the server and use a public variable event handler to interface with clients when necessary, rather than running scripts on the clients from the init.  All scripts in the framework can run on the client, but you do this at your own risk.
+
+As 'co-op' would imply, this framework is largely about creating multiplayer missions.  Don't worry if you prefer singleplayer, the framework is just as good for that too, and you will probably find fewer bugs.  However, one of the less prominent design goals of the framework is to make it easy to create a single mission that works in both singleplayer and multiplayer (with any number of players).
+
+The idea is to eliminate the need to think about the locality of sqf commands or how to execute functions on other machines, except in the most advanced mission designs.  If you are a beginner, learning about server-client interaction can be confusing, but the framework handles most of it for you.  Of course, there can be bugs, but once those are reported and fixed (see Bugs section), the framework will perform as advertised.
+
+Framework functions are designed to work in a multiplayer environment (dedicated servers too, of course) without the mission designer even considering how or why.  When you call a function, it will make sure that any clients are properly affected.
+
+For example, tasks are handled locally.  Without the framework's robust task system, you would have make sure that every client was running the correct code (which might be different than the server's code).  You might also run into problems when units switch locality during the mission.  These problems apply not only to creating tasks, but to updating, removing, and checking on them as well.
+
+Luckily, I have already solved all of those problems and more, giving you access to the final product organized into easy to use public functions.  You never need to worry if your mission is singleplayer or multiplayer, or how many players there are, or if it is dedicated server.  When you call Zen_InvokeTask, you are 100% guaranteed that the effect you want will happen everywhere it needs to, and no issues will occur later.  You can also be sure that the entire task system is tied together without any issues, so you can use any of the functions at any time without worrying about what is going on in the mission.
+
+While the task system is the perfect example of multiplayer made easy, there are many smaller functions that also need to interact with the clients.  Fortunately, you never even need to know which ones they are for them to work.  Regardless if a mission is singleplayer or multiplayer (or both as a good design allows), the framework's functions will do what they say they will without you changing anything.
+
+However, what about your own functions?  How can you write functions that obey the same design philosophy?  I have accomplished what is said above in two ways.  First, I have a simple, effective way to interact with other machines in multiplayer.  Second, I repeatedly use the same proven structures to achieve the results.  If you are interested in seeing more, see the demonstration missions about remote execution.  If you understand those demonstrations, you well on your way to creating easier to use functions for any multiplayer mission.
+
+The final and most difficult step to multiplayer scripting success is handling JIP.  Join in progress clients can introduce a slew of problems into your mission.  The more a mission relies upon scripting and interacting with the clients (loadouts, tasks, actions, etc), the more issues JIP presents.  The JIP client can be plagued with missing actions, faulty tasks, and other failures that other clients do not experience.
+
+The framework (or any function) cannot intrinsically deal with JIP and support it without any changes to your mission.  You must account for JIP with special actions that get them synch'd with the rest of the players.  Once the initial actions have completed, they will be fine for the rest of the mission.
+
+Because you cannot reasonably be expected to divine what you need to do to make your usage of the framework JIP compatible, there is a JIP demonstration mission for you.  This demonstration goes over guidelines and best practices for dealing with JIP clients using framework functions.  You are free to take any code from that demonstration and use it in your missions.  However, every mission is different, and you will need to make changes to the basic template to fit your mission.  Some things, such as synch'ing tasks, will always be the same, while others will be different.  There are also multiple ways to do some things, so feel free to come up with your own solutions.
+
+
+The AI
+
+Because this is a co-op framework, enemy and friendly AI make or break any mission.  While the intelligence of the AI is a topic of general concern (and complaint) in the community, I will only address what we can actually do right now.  But first, I will explain briefly how AI skill is handled by the engine.
+
+AI units spawned in a mission have skills in 9 different categories (endurance is disabled as of 1.10).  Your profile has a value for AI skill and precision.  All AI skills, except 2, are multiplied by your profile skill value for the final result.  'AimingAccuracy' and 'AimingShake' are multiplied by your precision value.  All values are then normalized to a range defined in the the config files.  See this page for details (look at the diagram, follow some links, etc):
+
+https://community.bistudio.com/wiki/Category:AI
+
+The difficulty options page allows you to select one of 3 predefined levels or set the numbers yourself.  I suggest setting the values yourself.  You can then fine tune the values to your liking, using the information about how they affect the AI.  The actual values of those levels are here (as of 1.14):
+
+http://forums.bistudio.com/showthread.php?169122-AI-Configuration-feedback&p=2639166&viewfull=1#post2639166
+
+While the editor only provides a single skill slider, the framework accounts for this complexity with a function: Zen_SetAISkill.  This function only sets skill values for the 9 in-game AI skills, it cannot change your profile (no function can).  You can enter your own numbers for each skill, or you can use one of the presets.
+
+The skill presets in Zen_SetAISkill are tested sets of values that make the AI behave realistically (still subjective), depending on your profile settings.  With the knowledge that everyone's profile is different, the presets are designed to differentiate levels of skill for a general group (e.g. 'infantry' vs. 'officer').  The presets' accuracy values have been balanced based the number of shots required for a crouched shooter, with the 'infantry' preset for other skills, to hit a standing target at 200m.  This should be about 12-15 for the average infantryman, with other presets falling around that number.  This may seen rather inaccurate, but it simulates the stress of combat.  It also improves the AI's suppressive fire ability, and allows firefights to last longer so that actual tactics can be used.  The accuracy will be much lower at real engagement ranges, 300+ meters, against moving targets that are using cover and concealment.
+
+I believe that the AI should be as smart and aware as possible, while not being aimbots.  For that reason, things like spotting distance are higher than aiming accuracy.  In my profile (used to test all this), I have AI skill at 1.0, and precision at 0.50.  Contrary to what the wiki says, increasing the precision value in your profile with produce final skill values higher than the set value.  Therefore, 0.5 seemed to be the middle value, where no scaling was done.  It appears that profile overall skill behaves as stated on the wiki, were '1.0' does not scale the raw value.
+
+Some players may prefer more or less of a challenge, and I suggest they raise or lower the precision value in their profile.  Setting precision to 1.0 produces a good challenge if you have many skilled players for co-op.  I do not recommend reducing the overall skill value, as this will make the AI dumb and blind.
+
+For multiplayer, every player cannot determine AI skill, so the server's profile is used to determine the final AI skills.  For a dedicated server, the profile setting appears to have no effect, even when set up correctly.  The profile values are 1.0 for both AI skill and precision.  Only the Zen_SetAISkill preset accuracy values are invalid.  Going from 0.5 precision to 1.0 precision triples the accuracy values.  Therefore, you can copy the presets from Zen_SetAISkill and simply divide the first subarray by 3.
+
+
+Errors
+
+Errors are a normal part of building your mission.  You will invariably miss some small detail or make a mistake somewhere.  Fixing mistakes quickly is a matter of practice and experience.
+
+For a detailed explanation of errors, how the framework helps you with them, and general advice for how to debug your code without frustration, see HowToDebug.txt.  I recommend that you read this file before setting out to make your own missions.
+
+Some errors are not your fault and result from internal bugs in the framework.  Obviously, I will make every reasonable effort to address internal issues and improve usability based upon feedback (see Bugs section).
+
+
+Execution
+
+There are two environments in which the ArmA engine executions SQF code: scheduled and unscheduled.  Scheduled code is more common is scripting, as a scheduled environment is created in the init.sqf and by using the 'spawn' command.  Scheduled code is literally scheduled by the engine (which only executes SQF code using one thread, or virtual machine), which allows pseudo-multithreading and pauses in threads.
+
+Unscheduled code interrupts scheduled execution and runs without pause or delay until it finishes execution.  Thus you cannot use commands such as 'sleep' or 'waitUntil' that would force the engine to stop execution.  This environment is meant to execute small, important functions very quickly (like most fields in the editor).  You typically create an unscheduled environment when using an eventhandler.  This page lists more possible sources of unscheduled execution:
+
+https://community.bistudio.com/wiki/Code_Optimisation#Threads
+
+All framework functions are only tested in a scheduled environment.  Code that works fine in the init.sqf may fail or act strangely if using in an eventhandler.  Therefore, any code in an eventhandler (or those other ways if you're an advanced scripter) must be transferred to a scheduled environment.  You would use a construct like this:
+
+X addEventhandler ["Fired", {
+    // SQF commands
+    0 = _this spawn {
+        // Framework functions
+    };
+}];
+
+This does not impact the usability of framework functions in an eventhandler, rather it is simply an easy workaround due to the quirks of the ArmA engine.  The spawned thread will have access to all of the eventhandler's arguments and will execute will almost no delay.  For more examples, this page compares 4 different cases (in the notes):
+[url]https://community.bistudio.com/wiki/call[/url]
+
+
+Bugs
+
+There will be bugs; this is not a final release, nor will it ever be.  I have made every effort to test and debug all 220 framework functions, most of which call many other framework functions.  I have also tried to ensure that all 180 public functions are correctly documented in a standard format, and that that documentation agrees with the actual code.  Nevertheless, there are a lot of things that can go wrong that I have never considered.  Do not believe that it is easy to test, debug, and document a project of this magnitude.  ArmA itself is erratic in nature, and I have designed the functions to handle any reasonable situation.
+
+There is a difference between bugs in your mission and bugs in the framework.  You can create a mission that functions poorly due to logical errors in how you use framework functions.  A full mission using the framework is an assembly of puzzle pieces; it only takes one piece out of place to break it.  However, once you are familiar with the intuitive flow of the framework (and have the documentation handy), this will quickly become much easier.  The tutorials are there to help with that.
+
+Some bugs are not your fault; they come from some mistake within a framework function.  It is not possible to produce bug-free software of this magnitude without mass public testing.  The worst kind of bugs only appear sporadically, without any obvious pattern.  It is possible that a function works fine 99% of the time, and then fails for a certain set of arguments.  See the Feedback section about reporting bugs.
+
+While all of that sounds rather grim, I assure you that I have every intention of fully supporting the framework for a long time.  Fixing bugs and issues will always be my first priority over adding new features or tweaking things.
+
+
+Feedback
+
+I am not so arrogant as to think that I have considered everything, have a perfect design and implementation, and have judged the needs of ArmA mission makers fairly.  I highly encourage you to submit any suggestion that occurs to you, even if you are not sure about it.  After using the framework for a while, ask yourself: was it effective and useful to you?  Is there something you really like, or something important that is missing?  Were the documentation and tutorials adequate?
+
+For simple feedback like 'I liked it' or 'I hated it', just use the forum thread.  If you have something important to say, PM or email will help me to see it sooner.  Every reasonable question not already addressed by the documentation will be added to a FAQ file (contributors remain anonymous).
+
+Concerning bugs, please PM or email me a report (others will thank you for improving the framework) with every possible detail (your entire mission would be nice, but I respect your IP rights).  There are not many bugs left, and I am confident that they can be eradicated (even if they are only replaced by new ones from new features).
+
+Concerning issues with understanding and using framework functions, please make use of every resource you have available to you before contacting me.  The tutorials, demonstrations, and sample missions cover many functions, and the documentation tells you exactly what you can do with a function.  If you have a technical question about a more obscure function, feel free to look at the source code and experiment with it.  If you really cannot figure something out, PM or email me with the information needed to help you.  I cannot help you if your message is: 'Help! Function X does not work'.  You need to provide details and describe what is going on.
+
+
+Editor Limitations
+
+While the framework can do many things, there is one drawback to its usage.  Because all framework functions are compiled at the start of the init, they are not defined when code in the editor is first executed.  Therefore, you cannot use any framework function in object's init field, a trigger's condition, etc, in the editor.  You can still use framework functions in places in the editor that do not execute instantly upon mission start, such as a trigger's activation field.
+
+I have no plans to change this or compile the functions differently.  This seems like a significant problem, but it is in fact advantageous once you learn how to create and organize your mission using external scripts.  Your mission will be better organized and easier to change and debug with all of its code and function calls in a few SQF files.  There is nothing that can be done in the editor that cannot be done with scripting.  There is a lot that can be done with scripting that cannot be done in the editor.
+
+You might think that the editor is preferable to my complex framework.  I can say with 100% confidence that my framework is quicker to use, more reusable, easier to test and debug, more effective, and more powerful than the editor.  You will achieve better missions more quickly once you learn to use the framework.
+
+Using framework functions appears more difficult, but in fact it is simpler and clearer than placing things in the editor.  Every mission you make using the framework will be easier to improve and becomes a resource to build more complex missions with.  Each function you create in your missions is a building block for more missions, just as framework functions are the building blocks of your functions.
+
+If you do not agree with me after doing all the tutorials, reading all the demonstrations, and seeing the sample missions, please PM or email me and explain why I have not persuaded you.
+
+
+Why Should You Use the Framework?
+
+Perhaps you already like scripts, but you are skeptical about mine.  Your question might go like: 'Why shouldn't I use X's functions or BIS functions or etc; they do the same thing?'.  My framework is better for three reasons.
+
+First, it is better documented; I can guarantee that.  You will have an easier time learning and understanding how to use my framework than with anyone else's functions.  The tutorials, demonstrations, and complete documentation offer something for both total beginners and the most advanced scripters.  If you have never made an ArmA mission, you can make a good one in 15 minutes with the first tutorial, and it only gets better from there.
+
+Second, my API is better designed.  The API (Application Programming Interface) is the way that all framework functions work together to achieve a complete mission.  Every function was created and tested with other functions in mind.  I intend for you to use the functions in a logical series to create your mission.  Each function assumes almost nothing about what you want and is extremely generalized to adapt to any situation.  Each one is a concrete effect that you control, giving you the optimal building blocks to create your mission.  You do not need to worry about the details of many sqf commands, their implementation is dealt with for you.
+
+How do I know this?  I use only the framework to create missions (with a few markers in the editor).  Every mission I make is a test of the framework's usability and versatility, and if it's not perfect, I make improvements.
+
+Third, there are fewer bugs.  If you report a bug, I will fix it in a TIMELY fashion.  The entire framework has been examined and tested for hundreds of hours in test missions and actual missions to ensure the greatest possible quality.
+
+Not convinced?  Let me give you an example of why my pledge of support for this framework is so important.  BIS_fnc_spawnGroup claims that it can accept a number of units to spawn.  This is false; the function generates an error.  Why?  It calls BIS_fnc_returnGroupComposition, which returns unit classnames from ArmA 2 (two)!  This issue has been known since Alpha (March 5, 2013), and BIS has done nothing, even though it would take 15 minutes to fix this and make using their function easier.
+
+Your issues, bugs, and feedback are important to me (see Feedback section).  This framework is important to me, and I am not going to 'get bored' or 'have real life issues' a month after release, leaving you with bugs.  I have invested a lot into this framework, and I will continue to do so.
+
+
+What the Framework is Not
+
+You might have some ideas about what could be added to the framework to improve it.  As discussed in the Feedback section, I am eager to hear your opinions.  However, remember that I have created the framework with a design.  It is meant to fill a certain purpose, and that purpose will not change, even if the details of implementation and usability do.  Thus, when giving feedback or judging the framework, keep the following in mind.
+
+First, the framework is not a magic black box that generates lots of features for you with a few inputs.  This is not a system of mission templates that lets you create a 2-hour combined arms mission in 5 minutes.  This is not a random mission generator, it is not a resource for players.  It is a tool for mission makers.  The framework is meant to put you in control of your mission, even if that means that some things are hard to do (better than not being able to do them).  The benefit is that you can now do what you want, more easily than the editor or dealing with specific sqf commands, because your tools fit the job.  You must still know how to use those tools.
+
+Second, the framework does not implement abstract systems.  This means things that do not achieve a direct effect in the game world or perform a concrete operation.  I will never add a wounding system, weapon resting, team killing protection, points and scoring, respawn, or anything else that is superfluous to the mission itself.  The framework is not meant to enhance gameplay for the players, or provide the features from some mod.  You are of course encouraged to make use of the framework if you are creating such a system, but every framework function contributes either directly to creating your mission or performing a math or data operation.
+
+Third, the framework does not control the mission, your implementation does.  The framework does not run any functions unless you call something (most functions also call other framework functions).  There are no hidden functions observing the mission and guessing what you want next.  Almost every action must be done by you manually, and others are optional.  This is done so that you can see everything that will happen in your mission immediately.  You do not need to guess if functions will do something for you or behave differently in different circumstances.  This also puts the burden on you to advance the mission properly and control everything that is going on.
+
+Finally, the framework is not a collection or compilation of various people's work.  Everything in the framework is designed and coded by me without using any external libraries and other people's code (except for a few BIS functions for GUI stuff).  Making a script a framework function is not just a matter of coding and documenting it.  I must be able to guarantee the quality and functionality of every line of code (over 14000 lines) if I claim to be the author of the framework.  Otherwise, I am just a user of someone else's function library.  I created every framework function from nothing, even if an equivalent function from BIS or someone already existed.  I have purposefully reinvented the wheel numerous times to allow this framework to provide the best experience possible.
+
+
+Legal
+
+In addition to the terms of the Legal.txt file (please read), the framework is also released under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license.
+
+
+Conclusion
+
+I am well aware that all of this is very daunting and you might be lost or confused.  A lot of what is said here is for reference and completeness, and it doesn't make sense until you have used the framework.  Read through 'What to do first' in the topmost readme file (back one folder from this file) if you haven't already.
+
+You might also not be very impressed yet, but I assure you that you will be.  I have spent well over a year and over 1000 hours creating this framework, and some functions and parts are even older.  Believe me when I say that this framework is worth your time.
+
+
+Contact the author:
+
+ZenophonArmAFramework@gmail.com

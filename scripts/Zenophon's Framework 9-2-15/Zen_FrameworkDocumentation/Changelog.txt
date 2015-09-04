@@ -1,0 +1,2367 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Changelog
+
+9/2/15
+ 1. Fixed: Zen_FindGroundPosition allowed a selected road to be outside the area, decreasing performance
+ 2. Fixed: Zen_FindRoadDirection prints out a full stack trace when no road is found
+ 3. Fixed: Zen_OrderInfantryPatrol AI pathfinding for avoiding the minimum area
+ 4. Added: Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderInfantryPatrol, and Zen_OrderVehiclePatrol parameters for multiple patrol areas
+ 5. Added: Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, and Zen_OrderVehiclePatrol parameter for AI behavior
+ 6. Added: Zen_OrderVehiclePatrol parameter for road positions
+ 7. Improved: Zen_ArrayGetIndexedSlice now accepts ending indexes greater than the array size
+ 8. Improved: Zen_FindRoadDirection only prints an error if there is no road nearby when Zen_Debug_Arguments is true
+ 9. Improved: Zen_OrderVehicleMove completion condition adapts to the type of vehicle
+10. Improved: Framework JIP check
+11. Documentation: Improved for Zen_OrderInfantryMove
+12. Documentation: Updated for Zen_ArrayGetIndexedSlice, Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderInfantryPatrol, Zen_OrderVehicleMove, and Zen_OrderVehiclePatrol
+13. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.50 stable commands
+
+8/5/15
+ 1. New Function: Zen_GetUnitFireSupportActions
+ 2. Fixed: Zen_AddFireSupportAction uses the server to execute the support if there is no guiding object
+ 3. Fixed: Zen_OrderVehicleMove did not detect if some vehicles had completed their order and stop executing
+ 4. Improved: Zen_AddFireSupportAction now offers a cancel action to stop a called fire support
+ 5. Improved: Zen_FindGroundPosition uses worldSize
+ 6. Improved: Zen_MultiplyDamage now add fatigue based upon damage
+ 7. Improved: Zen_StringGetDelimitedPart can search for delimiters of any length
+ 8. Documentation: Fixed Zen_SpawnInfantry and Zen_SpawnInfantryGarrison Notepad++ function hint arguments
+ 9. Documentation: Fixed Zen_JIP demonstration did not check if a fire support had been used
+10. Documentation: Fixed for Zen_GetFireSupportData
+11. Documentation: Added for Zen_GetUnitFireSupportActions
+12. Documentation: Updated for Zen_MultiplyDamage, Zen_StringGetDelimitedPart
+13. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.48 stable commands
+
+7/10/15
+ 1. New Function: Zen_GetCurrentTask
+ 2. New Function: Zen_GetFireSupportActionData
+ 3. New Function: Zen_GetFreeSeats
+ 4. Added: Zen_ArrayGetRandom parameter to remove the chosen element from the array
+ 5. Added: Zen_UpdateFireSupportAction parameters for various data
+ 6. Removed: Zen_AddFireSupportAction parameter to remote execute
+ 7. Removed: Zen_RemoveFireSupportAction parameter to remote execute
+ 8. Improved: Zen_FindValidDirection is more accurate at shorter distances
+ 9. Improved: Zen_GetFireSupportData returns the full data of the template
+10. Improved: Zen_MoveInVehicle optimized
+11. Documentation: Fixed for ZEN_FMW_MP_REClient
+12. Documentation: Added for Zen_GetCurrentTask, Zen_GetFireSupportActionData, Zen_GetFreeSeats
+13. Documentation: Updated for Zen_AddFireSupportAction, Zen_ArrayGetRandom, Zen_GetFireSupportData, Zen_RemoveFireSupportAction, Zen_UpdateFireSupportAction
+14. Documentation: Updated Zen_JIP demonstration for the new fire support action features
+
+6/17/15
+ 1. New Function: Zen_UpdateFireSupportAction
+ 2. Fixed: Zen_AddFireSupportAction did not update the usage count on all other clients
+ 3. Fixed: Zen_InvokeFireSupport caused an error on guided rounds
+ 4. Fixed: Zen_RemoveFireSupportAction caused an error on a dedicated server
+ 5. Added: Zen_OrderSlingLoad parameter to create a rope manually
+ 6. Added: Zen_AddFireSupportAction parameter to remote execute
+ 7. Added: Framework macro ZEN_FMW_Math_TerrainParallelCart
+ 8. Added: Zen_RemoveFireSupportAction parameter to remove from specific units
+ 9. Added: ZEN_FMW_MP_REAll, ZEN_FMW_MP_REClient, ZEN_FMW_MP_RENonDedicated, and ZEN_FMW_MP_REServerOnly call or spawn locally argument
+10. Improved: Zen_AddFireSupportAction allows a special value to make the guiding object the invoking player
+11. Improved: Zen_InvokeFireSupport supports more round types
+12. Improved: ZEN_FMW_Math_TerrainGradientCart is now a 2D gradient with correct length
+13. Improved: ZEN_FMW_Misc_ErrorExitVoid renamed to ZEN_FMW_Code_ErrorExitVoid
+14. Improved: ZEN_FMW_Misc_ErrorExitValue renamed to ZEN_FMW_Code_ErrorExitValue
+15. Improved: ZEN_FMW_Misc_Error renamed to ZEN_FMW_Code_Error
+16. Documentation: Added for Zen_UpdateFireSupportAction and ZEN_FMW_Math_TerrainParallelCart
+17. Documentation: Improved Zen_JIP.sqf demonstration with fire support and for general readability
+18. Documentation: Updated for Zen_AddFireSupportAction, ZEN_FMW_MP_REAll, ZEN_FMW_MP_REClient, ZEN_FMW_MP_RENonDedicated, ZEN_FMW_MP_REServerOnly, ZEN_FMW_Code_ErrorExitVoid, ZEN_FMW_Code_ErrorExitValue, ZEN_FMW_Code_Error, ZEN_FMW_Math_TerrainParallelCart, Zen_OrderHelicopterLand, Zen_OrderSlingLoad, and Zen_RemoveFireSupportAction
+19. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.46 stable commands
+
+6/3/15
+ 1. Fixed: Zen_ArrayRemoveIndex caused an error if the array was empty
+ 2. Fixed: Zen_OrderVehicleMove delete vehicle at end parameter deleted the vehicle too far from its destination
+ 3. Fixed: Zen_RotateAsSet does not levitate objects
+ 4. Added: Framework macro ZEN_FMW_Math_TerrainGradientCart
+ 5. Improved: Zen_AddFireSupportAction now uses the action menu
+ 6. Improved: Zen_AddFireSupportAction counts uses by support template and works with playable AI
+ 7. Improved: Zen_AddFireSupportAction's action prompts the player for a target position
+ 8. Improved: Zen_ArrayGetNestedIndex and Zen_ArraySearch return all matching indexes
+ 9. Improved: Zen_OrderBoatPatrol now avoids shallow water
+10. Improved: Zen_RemoveFireSupportAction removes only the first action for that template for all clients
+11. Documentation: Added tutorial MissionBriefingCoop
+12. Documentation: Added for ZEN_FMW_Math_TerrainGradientCart
+13. Documentation: Updated for Zen_AddFireSupportAction, Zen_ArrayGetNestedIndex, Zen_ArraySearch, Zen_RemoveFireSupportAction
+
+5/6/15
+ 1. New Function: Zen_ArrayGetRandomSequence
+ 2. New Function: Zen_FindCenterPosition
+ 3. Added: Framework macros ZEN_FMW_Array_RemoveIndexes, ZEN_FMW_Code_InsertionPatrol, ZEN_FMW_OBJ_DeleteDead
+ 4. Added: Standard macros ZEN_STD_Math_MarkerArea, ZEN_STD_OBJ_MakePOW, ZEN_STD_OBJ_OrientAircraft, ZEN_STD_OBJ_ParachuteInsertion
+ 5. Documentation: Added for Zen_ArrayGetRandomSequence, Zen_FindCenterPosition, ZEN_FMW_Array_RemoveIndexes,  ZEN_FMW_Code_InsertionPatrol, ZEN_FMW_OBJ_DeleteDead, ZEN_STD_Math_MarkerArea, ZEN_STD_OBJ_MakePOW, ZEN_STD_OBJ_OrientAircraft, ZEN_STD_OBJ_ParachuteInsertion
+ 6. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.44 stable commands
+
+4/22/15
+ 1. New Function: Zen_ArraySearch
+ 2. Fixed: Zen_FindValidDirection did not accept a single position as the second argument
+ 3. Fixed: Zen_GiveLoadoutIndfor did not give the correct magazine for the autorifleman
+ 4. Fixed: Zen_GiveLoadoutOpfor did not give the correct magazine for the marksman
+ 5. Added: Zen_OrderInfantryMove parameter for the group's combat mode
+ 6. Removed: Zen_ArraysAreEqual
+ 7. Improved: Zen_ArrayShuffle returns a reference to the array
+ 8. Improved: Zen_GetUnitLoadout now detects DLC designators and adds laser batteries
+ 9. Improved: Zen_GiveLoadoutBlufor 'sniper' kit now uses LRPS sight
+10. Improved: Zen_GiveLoadoutCustom now removes default attachments from weapons
+11. Improved: Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderInfantryPatrolBuilding, Zen_OrderVehiclePatrol handle null objects
+12. Improved: Zen_OrderInfantryPatrolBuilding optimized
+13. Tweaked: Zen_SetAISkill differentiated 'militia' and 'infantry' presets accuracy more
+14. Documentation: Added for Zen_ArraySearch
+15. Documentation: Updated for Zen_ArrayShuffle, Zen_OrderInfantryMove
+16. Documentation: Removed for Zen_ArraysAreEqual
+
+4/8/15
+ 1. Fixed: ZEN_FMW_Code_SpawnPointBehind now gives loadouts of the correct side
+ 2. Fixed: Zen_OrderInsertion did not order troops to disembark from boats and ground vehicles
+ 3. Fixed: Zen_OrderExtraction and Zen_OrderInsertion do not change the mass of the helicopter to keep it in place
+ 4. Added: Framework macro ZEN_FMW_Loadout_StdInfantryPreset
+ 5. Improved: Zen_AddFireSupportAction, Zen_GiveLoadout, Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutOpfor, Zen_MoveInVehicle remote execution significantly optimized
+ 6. Improved: Zen_ArraySortRandom renamed Zen_ArrayShuffle
+ 7. Improved: Zen_ArrayShuffle now shuffles the array by reference
+ 8. Improved: ZEN_FMW_Code_SpawnMarker, ZEN_FMW_Code_SpawnPoint, ZEN_FMW_Code_SpawnPointBehind optimized
+ 9. Improved: Zen_OrderExtraction and Zen_OrderInsertion now make the helicopter gain altitude before flying away
+10. Improved: Zen_RemoveTask now handles void local task data
+11. Improved: Zen_TransformObject parameter 4 is now a velocity vector
+12. Improved: Zen_TransformObject remote execution sync is now faster
+13. Documentation: Added for ZEN_FMW_Loadout_StdInfantryPreset
+14. Documentation: Updated for Zen_ArrayShuffle, Zen_TransformObject
+15. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.42 stable commands
+16. Documentation: Improved for Zen_AddFireSupportAction, Zen_FindInRange
+
+3/25/15
+ 1. Fixed: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutOpfor turned on NVG's for guerrilla and civilian loadouts
+ 2. Fixed: Zen_GiveLoadoutCustom turned on NVG's when none were specified in the loadout
+ 3. Fixed: Zen_OrderFastRope did not adjust rope length for helicopter movement
+ 4. Fixed: Zen_OrderInfantryPatrolBuilding did not keep stopped units moving if the AI was not ready
+ 5. Fixed: Zen_OrderInsertion now remote executes disembark orders for remote AI
+ 6. Fixed: Zen_RotateAsSet reversed the height of objects
+ 7. Added: Framework macro ZEN_FMW_Loadout_DefaultPreset
+ 8. Added: Zen_OrderInfantryPatrolBuilding parameter for patrolling multiple buildings
+ 9. Added: Zen_OrderInsertion parameter for delete the vehicle at the end
+10. Improved: Zen_CheckArguments now checks that the arguments are an array
+11. Improved: Zen_CheckArguments now checks for null controls, displays, scripts, and tasks
+12. Improved: Zen_CheckArguments now accepts 'FUNCTION' to check for function string names being nil
+13. Improved: Zen_FindBuildingPositions parameters 2 and 3 swapped
+14. Improved: Zen_OrderFastRope now keeps AI helicopters at an ideal fastroping altitude better
+15. Improved: Zen_OrderHelicopterLand removed unnecessary sleep at the end
+16. Improved: Zen_OrderHelicopterLand now waits for a helicopter to hover low over the water before exiting
+17. Improved: Zen_OrderInsertion offers parachute insertion as a third option
+18. Improved: Zen_OrderInsertion turns off the helicopter's engines if only one destination is given
+19. Improved: Zen_OrderInsertion now forces units to jump out of a helicopter over the water without crashing the helicopter
+20. Improved: ZEN_STD_Math_VectTransformATL renamed ZEN_STD_Math_VectTransform
+21. Documentation: Added for Zen_CheckArguments, ZEN_FMW_Loadout_DefaultPreset
+22. Documentation: Updated for Zen_FindBuildingPositions, Zen_OrderInfantryPatrolBuilding, Zen_OrderInsertion, ZEN_STD_Math_VectTransform
+
+3/11/15
+ 1. Fixed: ZEN_FMW_Code_GiveLoadoutsOrdered did not convert the first argument to an array of units
+ 2. Fixed: Zen_GetTurretPaths did not detect some commander turrets
+ 3. Fixed: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutIndfor, and Zen_GiveLoadoutOpfor now put NVG's back on at night
+ 4. Fixed: Zen_OrderFastRope did not force AI to eject
+ 5. Fixed: Zen_OrderVehiclePatrol required the waypoint to be too far from the vehicle
+ 6. Fixed: Zen_SpawnVehicle always avoids object collisions when spawning vehicles on the ground
+ 7. Added: Standard macros ZEN_STD_Math_VectCylCart, ZEN_STD_Math_VectCylPolar, ZEN_STD_Math_VectPolarCart, ZEN_STD_Math_VectPolarCyl, ZEN_STD_Math_VectRotateX, ZEN_STD_Math_VectRotateY
+ 8. Improved: Zen_AddGiveMagazine now gives a magazine for the current weapon of the other player
+ 9. Improved: Zen_ConfigGetVehicleClasses first parameter now has a skip value
+10. Improved: Zen_GetTurretPaths now defaults unidentified turret types to cargo
+11. Improved: Zen_RotateAsSet optimized
+12. Improved: Zen_SpawnVehicle does not override the fifth argument, if given, when the height is greater than 2 meters
+13. Documentation: Corrected for Zen_InvokeFireSupport, Zen_OrderExtraction, Zen_OrderInsertion, Zen_OrderVehicleMove, ZEN_STD_Math_VectRotateZ
+14. Documentation: Added headless client demonstration, Zen_HC
+15. Documentation: Added for ZEN_STD_Math_VectCylCart, ZEN_STD_Math_VectCylPolar, ZEN_STD_Math_VectPolarCart, ZEN_STD_Math_VectPolarCyl, ZEN_STD_Math_VectRotateX, ZEN_STD_Math_VectRotateY
+16. Documentation: Improved tutorial MissionPOWRandom.Stratis
+17. Documentation: Updated for Zen_AddGiveMagazine, Zen_ConfigGetVehicleClasses
+18. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.40 stable commands
+
+2/25/15
+ 1. Fixed: Zen_GetAllInArea returned animals
+ 2. Fixed: Zen_OrderVehicleMove did not search for road positions in a large enough radius
+ 3. Added: Standard macro ZEN_STD_Math_VectRotateZ
+ 4. Added: Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, and Zen_OrderVehiclePatrol have a parameter to cleanup destroyed vehicles and their crew
+ 5. Added: Zen_OrderInfantryPatrol parameter to join weak groups to nearby ones
+ 6. Added: Zen_OrderVehicleDrop and Zen_OrderVehicleMove have a parameter to cleanup the vehicle if it is destroyed enroute
+ 7. Improved: ZEN_STD_Math_TransformATL renamed ZEN_STD_Math_VectTransform
+ 8. Improved: Zen_ArrayRemoveValue optimized
+ 9. Improved: Zen_FindRayIntersection optimized
+10. Improved: Zen_IsWaterArea significantly optimized
+11. Documentation: Fixed JIP demonstration had two small code errors
+12. Documentation: Added for ZEN_STD_Math_VectRotateZ
+13. Documentation: Updated for Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderInfantryPatrol, Zen_OrderVehicleDrop, Zen_OrderVehicleMove, Zen_OrderVehiclePatrol, ZEN_STD_Math_VectTransform
+14. Documentation: Updated Zen_FindGroundPosition diagram
+
+2/11/15
+ 1. New Function: Zen_FindRayIntersection
+ 2. Fixed: Zen_ConvertToGroupArray, Zen_ConvertToObjectArray did not work when given multiple sides
+ 3. Fixed: Zen_FindBuildingPositions failed for buildings with a dirt floor
+ 4. Fixed: Zen_FindRoadDirection error typo
+ 5. Added: Zen_OrderHelicopterLand has parameter to cleanup the helicopter if it crashes enroute
+ 6. Added: Zen_OrderVehicleMove has parameter to delete the vehicle when it reaches its destination
+ 7. Improved: Zen_FindBuildingPositions optimized
+ 8. Improved: Zen_FindBuildingPositions searches for higher positions in tall buildings
+ 9. Documentation: Added for Zen_FindRayIntersection
+10. Documentation: Updated for Zen_OrderHelicopterLand, Zen_OrderVehicleMove
+11. Documentation: Updated Zen_RandomPositions and Zen_JIP demonstration
+12. Documentation: Updated Zen_InfantryPatrol and Zen_RespawnPatrol sample missions JIP logic
+
+1/28/15
+ 1. New Function: Zen_IsIsland
+ 2. Fixed: Zen_ExecuteCommand did not print the stack on an invalid command error
+ 3. Fixed: Zen_GetUnitLoadout did not record laser designator batteries
+ 4. Fixed: Zen_InvokeFireSupport guidance feature
+ 5. Fixed: Zen_MoveInVehicle now reliably and instantly checks for remote execution synch
+ 6. Fixed: Zen_OrderExtraction and Zen_OrderInsertion did not keep an AFM helicopter on the ground
+ 7. Added: Zen_ExecuteCommand new commands
+ 8. Added: Framework macro ZEN_FMW_Code_GiveLoadoutsOrdered
+ 9. Added: Zen_SpawnAircraft, Zen_SpawnAmbientVehicles, Zen_SpawnBoat, Zen_SpawnGroundVehicle, Zen_SpawnHelicopter, Zen_SpawnInfantry, and Zen_SpawnInfantryGarrison parameter for DLC vehicles
+10. Improved: Zen_CreateObjective convoy end disembark logic simplified
+11. Improved: Zen_FindGroundPosition parameter 1 is optional and defaults to the entire map
+12. Improved: Zen_FindGroundPosition blacklist whitelist parameter redesigned
+13. Improved: Zen_InvokeFireSupport allows rounds to realistically fall from above
+14. Improved: Zen_SpawnConvoy allows troops to disembark when under fire
+15. Documentation: Corrected for Zen_ConfigGetVehicleClasses and Zen_MoveInVehicle
+16. Documentation: Added for ZEN_FMW_Code_GiveLoadoutsOrdered and Zen_IsIsland
+17. Documentation: Improved for many macros
+18. Documentation: Improved Notepad++ SQF autocompletion macro hints' text
+19. Documentation: Updated FAQ.txt, FrameworkIntroduction.txt, and KnownIssues.txt
+20. Documentation: Updated for Zen_FindGroundPosition, Zen_SpawnAircraft, Zen_SpawnAmbientVehicles, Zen_SpawnBoat, Zen_SpawnGroundVehicle, Zen_SpawnHelicopter, Zen_SpawnInfantry, and Zen_SpawnInfantryGarrison
+21. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.38 stable commands
+
+1/14/15
+ 1. New Function: Zen_ExecuteCommand
+ 2. New Function: Zen_FindTerrainGradient
+ 3. Fixed: Zen_GiveLoadoutCargo did not give items
+ 4. Fixed: Zen_SpawnConvoy did not order all vehicles to follow the lead vehicle
+ 5. Fixed: Zen_SpawnConvoy, Zen_SpawnVehicleCrew, and ZEN_FMW_Code_Insertion used Zen_MoveInVehicle wrong
+ 6. Improved: Zen_ArrayGetNestedIndex and Zen_ArrayGetNestedValue ignore elements that are not nested arrays
+ 7. Improved: Zen_FindGroundPosition uses reliable hard-coded values to detect off-map positions
+ 8. Improved: Zen_FindGroundPosition offers a white list option for its black list parameter
+ 9. Improved: Zen_OrderFastRope uses physics ropes for more realistic fastroping
+10. Improved: Zen_OrderFastRope and Zen_SpawnParachute optimized building detection
+11. Documentation: Corrected for Zen_FindTerrainSlope
+12. Documentation: Added for Zen_ExecuteCommand, Zen_FindTerrainGradient
+13. Documentation: Updated for Zen_FindGroundPosition
+14. Documentation: Improved for Zen_ArrayFindExtremum, Zen_MoveInVehicle
+
+12/31/14
+ 1. New Function: Zen_ArrayFindExtremum
+ 2. Fixed: Zen_AddEject, Zen_AddFastRope, Zen_AddGiveMagazine, Zen_AddLoadoutDialog, Zen_AddRepackMagazines, Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutOpfor, Zen_GiveLoadoutIndfor, Zen_MultiplyDamage, and Zen_RemoveFireSupportAction created an infinite remote execution loop when given 'true' for remote execution argument
+ 3. Fixed: Zen_ArrayFilterCondition,  Zen_ArrayFilterValues, Zen_ArrayRemoveDead, Zen_ArrayRemoveDuplicates, and Zen_ArrayRemoveNonLocal used their arguments to return a default value on argument error
+ 4. Fixed: Zen_FindGroundPosition terrain height filter caused an error
+ 5. Fixed: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutOpfor, and Zen_GiveLoadoutIndfor reset units' animation when they were in a vehicle
+ 6. Fixed: Zen_MoveInVehicle now waits for client synch before checking for units being in a vehicle
+ 7. Fixed: Zen_MultiplyDamage default for remote execution parameter was wrong
+ 8. Added: Framework macro ZEN_FMW_Code_SpawnPointBehind
+ 9. Added: Standard macros ZEN_STD_Parse_GetSetArgumentDefault and ZEN_STD_Parse_GetSetArgumentOptional
+10. Removed: Zen_ArrayFindMax and Zen_ArrayFindMin
+11. Improved: Zen_ArrayGetNestedIndex optimized
+12. Documentation: Added for Zen_ArrayFindExtremum
+13. Documentation: Added for ZEN_FMW_Code_SpawnPointBehind, ZEN_STD_Parse_GetSetArgumentDefault, and ZEN_STD_Parse_GetSetArgumentOptional
+14. Documentation: Removed for Zen_ArrayFindMax and Zen_ArrayFindMin
+15. Documentation: Updated for ZEN_FMW_Code_SpawnPoint
+
+12/24/14
+ 1. Fixed: Zen_ConfigGetVehicleClasses did not parse all arguments strictly
+ 2. Fixed: Zen_GiveLoadout did not set the default correctly for preset loadout kits
+ 3. Fixed: Zen_GiveLoadoutBlufor and Zen_GiveLoadoutIndfor caused engine errors to print in the report log
+ 4. Fixed: Zen_InvokeFireSupport allowed rounds to drift out of the defined target area
+ 5. Fixed: Zen_OrderExtraction and Zen_OrderInsertion caused odd behavior for boats
+ 6. Added: Zen_ConfigGetVehicleClasses parameter for parent classes
+ 7. Added: Zen_SpawnConvoy parameter for vehicle classnames
+ 8. Added: Framework macro ZEN_FMW_Math_RandomPointMin
+ 9. Added: Standard macro ZEN_STD_Array_LastElement
+10. Improved: Zen_FindBuildingPositions roof detection logic and general accuracy
+11. Improved: Zen_FindPositionPoly and Zen_QuantizeAngles accept a marker name
+12. Improved: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom now accept a number paired with an item
+13. Improved: Zen_InvokeFireSupport optimized
+14. Improved: Zen_QuantizeAngles order of parameters
+15. Improved: Zen_SpawnConvoy always puts the first vehicle in the lead
+16. Improved: Zen_SpawnConvoy orders the drivers to stop after spawning
+17. Documentation: Added a new series of tutorials focusing on randomization
+18. Documentation: Added for ZEN_FMW_Math_RandomPointMin, ZEN_STD_Array_LastElement
+19. Documentation: Updated for Zen_ConfigGetVehicleClasses, Zen_FindPositionPoly, Zen_QuantizeAngles, Zen_SpawnConvoy
+20. Documentation: Updated Zen_CustomLoadout, Zen_RandomBattle demonstrations
+
+12/10/14
+ 1. Fixed: Zen_CreateObjective did not rotate individual convoy vehicles to face along the road
+ 2. Fixed: Zen_FindBuildingPositions checked argument 3 wrong
+ 3. Fixed: Zen_FindGroundPosition did not always print an error message when no valid point was found
+ 4. Fixed: Zen_GiveLoadout did not send the right arguments to preset loadout functions
+ 5. Fixed: Zen_GiveLoadoutCustom did not send remote execution arguments correctly
+ 6. Fixed: Zen_MoveInVehicle did not set the default turret types correctly
+ 7. Fixed: Zen_MoveInVehicle did not count FFV positions when checking if the vehicle had room for all passengers
+ 8. Fixed: Zen_SpawnAircraft did not give the aircraft a reasonable starting velocity
+ 9. Fixed: Zen_SpawnConvoy did not account for the troop vehicle having no passenger seats
+10. Fixed: Zen_SpawnInfantryGarrison did not verify that it had valid positions in the building
+11. Fixed: ZEN_STD_OBJ_AnimateDoors used the entire path of the door config instead of just the classname
+12. Added: Zen_FindGroundPosition parameter for the maximum number of filters to satisfy
+13. Added: Zen_FindTerrainSlope parameter for the average slope in a radius
+14. Added: Zen_OrderInfantryPatrol parameter for patrols of divers
+15. Added: Zen_TransformObject parameter for object speed
+16. Improved: Zen_FindBuildingPositions checking algorithm is much more reliable
+17. Improved: Zen_FindBuildingPositions includes positions on all possible floors of a building at the same 2D location
+18. Improved: Zen_FindBuildingPositions sets a minimum number of positions to find
+19. Improved: Zen_FindGroundPosition terrain slope parameter has an option for average in radius
+20. Improved: Zen_FindGroundPosition house avoid parameter includes more structures that are not technically houses
+21. Improved: Zen_FindGroundPosition ambient clutter rock avoid parameter includes more rocks
+22. Improved: Zen_GetAmbientClutterCount detects more rocks, especially large ones
+23. Improved: Zen_GetTurretPaths filters for true weapons when deciding gunner or commander/copilot turrets
+24. Improved: Zen_MoveInVehicle places troops in FFV positions when given 'cargo'
+25. Improved: Zen_OrderExtraction and Zen_OrderInsertion keep the helicopter's engines on when on a slope
+26. Improved: Zen_OrderVehicleDrop now gives the dropped object the velocity of the aircraft
+27. Improved: Zen_SpawnConvoy places troops in FFV positions in the troop vehicle
+28. Improved: Zen_SpawnVehicle now automatically gives jet aircraft some starting speed
+29. Documentation: Corrected code syntax error in Zen_SpawningDemonstration
+30. Documentation: Corrected for Zen_FindBuildingPositions, Zen_StringGetDelimitedPart, ZEN_STD_Math_VectTransform
+31. Documentation: Updated for Zen_FindGroundPosition, Zen_OrderInfantryPatrol, Zen_TransformObject
+32. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.36 stable commands
+
+11/26/14
+ 1. New Function: Zen_IsWaterArea
+ 2. Fixed: Zen_SpawnConvoy used Zen_FindRoadDirection when the given position was not near a road
+ 3. Added: Standard macros ZEN_STD_OBJ_AnimateDoors, ZEN_STD_Parse_ToStringLower
+ 4. Added: Zen_GetTurretPaths now has a parameter for turret type
+ 5. Added: Zen_GiveLoadout now has parameters for additive giving and remote execution
+ 6. Added: Zen_GiveLoadoutCustom now has a parameter for additive giving
+ 7. Added: Zen_MoveInVehicle now has a parameter for what turret positions to fill
+ 8. Added: Zen_SpawnVehicleCrew now has parameters for what turret positions to fill and whether to spawn a driver
+ 9. Improved: Zen_FindRoadDirection is now a Position Function
+10. Improved: Zen_QuantizeAngles now uses a more accurate slice of area
+11. Improved: Zen_OrderExtraction and Zen_OrderInsertion keep the helicopter on the ground when on a slope
+12. Improved: Zen_OrderFastRope, Zen_OrderHelicopterLand, and Zen_OrderVehicleDrop now open and close all vehicle doors at the proper times
+13. Documentation: Fixed numerous typos, errors, inconsistencies, and out-dated information in various documentation texts and demonstrations
+14. Documentation: Fixed ZEN_STD_Parse_ToArray and ZEN_STD_Parse_ToString had their descriptions switched
+15. Documentation: Added for ZEN_STD_OBJ_AnimateDoors, ZEN_STD_Parse_ToStringLower, Zen_IsWaterArea
+16. Documentation: Updated for Zen_GetTurretPaths, Zen_GiveLoadout, Zen_GiveLoadoutCustom, Zen_MoveInVehicle, Zen_SpawnVehicleCrew
+17. Documentation: Updated Zen_CustomLoadouts demonstration
+18. Documentation: Improved for Zen_GetSide, Zen_GetSideColor
+
+11/12/14
+ 1. New Function: Zen_FindPositionPoly
+ 2. New Function: Zen_OrderSlingLoad
+ 3. New Function: Zen_QuantizeAngles
+ 4. Fixed: Zen_FindGroundPosition point distribution is now perfectly even for all marker shapes
+ 5. Fixed: Zen_OrderInfantryPatrol used the wrong type to check parameter 7
+ 6. Fixed: Zen_SpawnAircraft and Zen_SpawnHelicopter reversed parameters 2 and 3
+ 7. Added: Standard macro ZEN_STD_Code_SwapVars
+ 8. Improved: Standard macro ZEN_STD_Misc_SleepFrames renamed to ZEN_STD_Code_SleepFrames
+ 9. Improved: Standard macro ZEN_STD_Misc_WaitScript renamed to ZEN_STD_Code_WaitScript
+10. Improved: Zen_SpawnItemsOnTable randomly places the object using a rectangular shape algorithm
+11. Improved: Zen_OrderFastRope has correct rope positions for the two new helicopters
+12. Improved: Zen_OrderFastRope and Zen_OrderHelicopterLand open the doors on more helicopters
+13. Improved: Zen_OrderExtraction and Zen_OrderInsertion force the helicopter to keep its engines running
+14. Improved: Zen_OrderHelicopterLand no longer deletes the invisible helper helipad used to guide the AI
+15. Improved: Zen_SpawnVehicleCrew no longer spawns crew for fire-from-vehicle positions
+16. Documentation: Added for Zen_FindPositionPoly, Zen_OrderSlingLoad, Zen_QuantizeAngles, ZEN_STD_Code_SwapVars
+17. Documentation: Updated for ZEN_STD_Code_SleepFrames and ZEN_STD_Code_WaitScript
+18. Documentation: Updated Notepad++ SQF language and autocompletion file with ArmA 1.34 stable commands
+
+10/29/14
+ 1. Fixed: Zen_AddFireSupportAction did not check its remote execution flag argument
+ 2. Fixed: Zen_RotateAsSet tried to get the height of markers as though they were objects
+ 3. Fixed: Zen_ReassignTask and Zen_RemoveTask deleted the task's internal data, making future changes impossible
+ 4. Added: Framework macros for Zen_FindGroundPosition arguments
+ 5. Added: Framework macros ZEN_FMW_Code_WaitDistanceGreater and ZEN_FMW_Code_WaitDistanceLess, for Zen_FindGroundPosition
+ 6. Added: Framework macro ZEN_FMW_CFG_VehicleWeapons, to parse a vehicle's true weapons
+ 7. Added: Standard macros ZEN_STD_Parse_ToArray and ZEN_STD_Parse_ToString
+ 8. Added: Zen_StringGenerateRandom now has a parameter for character type
+ 9. Improved: Renamed almost every framework and standard macro
+10. Improved: Zen_OrderExtraction and Zen_OrderInsertion now make the helicopter land at the correct spot and stay there
+11. Improved: Zen_RotateAsSet significantly optimized
+12. Improved: Zen_SpawnItemsOnTable now randomly puts the object anywhere on the table
+13. Removed: Standard macro ZEN_STD_OBJ_VehIsArmed
+14. Documentation: Added for ZEN_FMW_Code_WaitDistanceGreater, ZEN_FMW_Code_WaitDistanceLess, ZEN_FMW_ZFGP_Beach, ZEN_FMW_ZFGP_DeepSea, ZEN_FMW_ZFGP_Flat, ZEN_FMW_ZFGP_Forest, ZEN_FMW_ZFGP_Hill, ZEN_FMW_ZFGP_LandingZone, ZEN_FMW_ZFGP_NotForest, ZEN_FMW_ZFGP_Urban, ZEN_STD_Parse_ToArray, ZEN_STD_Parse_ToString
+15. Documentation: Improved for Zen_AddEject, Zen_AddFastRope, Zen_AddFireSupportAction, Zen_AddGiveMagazine, Zen_AddLoadoutDialog, Zen_AddRepackMagazines, Zen_GiveLoadoutOpfor, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutBlufor, Zen_MultiplyDamage, Zen_SetWeather, Zen_RemoveFireSupportAction
+16. Documentation: Updated for Zen_StringGenerateRandom and every macro
+
+10/15/14
+ 1. Fixed: Zen_ArrayFilterCondition now exits with an error properly if the condition function returns void
+ 2. Fixed: Zen_CreateObjective gave extra arguments to Zen_SpawnConvoy
+ 3. Fixed: ZEN_FMW_ZAF_Type and ZEN_FMW_ZAF_String did not place the argument as a nested string correctly
+ 4. Fixed: ZEN_FMW_ZAF_String reversed the searched and key strings
+ 5. Fixed: Zen_SpawnAmbientVehicles did not sort for nearby locations correctly
+ 6. Fixed: Zen_SpawnAmbientVehicles deleted location markers that should be persistent, due to Zen_ConfigGetLocations caching
+ 7. Fixed: Zen_SpawnFortification did not check argument 2
+ 8. Fixed: ZEN_STD_Math_VectCartCyl now uses vectorMagnitude in 3D to comply with 1.32 changes
+ 9. Added: Framework macro ZEN_FMW_ZAF_NotString, for Zen_ArrayFilterCondition
+10. Added: Zen_SpawnAircraft, Zen_SpawnBoat, Zen_SpawnConvoy, Zen_SpawnHelicopter, and Zen_SpawnGroundVehicle now have a faction parameter
+11. Added: Zen_SpawnFortification now has a parameter for the static weapon class
+12. Added: Standard macros ZEN_STD_OBJ_OrderGetOut, ZEN_STD_OBJ_OrderGetIn, for ordering AI in and out of vehicles
+13. Improved: Zen_ConfigGetVehicleClasses detects armed vehicles with significantly better reliability
+14. Improved: Zen_ConfigGetVehicleClasses now detects armed and unarmed men
+15. Improved: Zen_PrintError now uses systemChat, affects all errors
+16. Improved: Zen_OrderExtraction and Zen_OrderInsertion no longer keep the helicopter's engines on, too many issues
+17. Improved: Zen_SpawnAircraft and Zen_SpawnHelicopter no longer print an error when selecting a random civilian vehicle
+18. Improved: Zen_SpawnConvoy now dynamically searches for vehicle classnames
+19. Documentation: Fixed JIP demonstration and Assault Frini sample mission now do not remote execute loadout functions
+20. Documentation: Added 1.32 scripting commands to Notepad++ SQF language and autocompletion file
+21. Documentation: Added for ZEN_FMW_ZAF_NotString, ZEN_STD_OBJ_OrderGetOut, ZEN_STD_OBJ_OrderGetIn
+22. Documentation: Updated for Zen_SpawnAircraft, Zen_SpawnBoat, Zen_SpawnConvoy, Zen_SpawnFortification, Zen_SpawnGroundVehicle, Zen_SpawnHelicopter
+23. Documentation: Improved for Zen_ConfigGetLocations
+
+10/1/14
+ 1. Fixed: Zen_FindBuildingPositions does not allow ground level positions outside the building when roof positions are allowed
+ 2. Added: Standard macros ZEN_FMW_ZAF_Type, ZEN_FMW_ZAF_String, for Zen_ArrayFilterCondition
+ 3. Improved: Zen_ArrayFilterCondition now uses a code condition, which allows functions
+ 4. Improved: Zen_ArrayRemoveDead now removes empty nested arrays and nested arrays containing dead objects or groups
+ 5. Improved: Zen_ArrayRemoveDead and Zen_ArrayRemoveNonLocal now remove objects from nested arrays
+ 6. Improved: Zen_ArraySort slightly optimized when using a hashing function
+ 7. Improved: Zen_ArraySort slightly optimized by choosing an appropriate algorithm based upon array size
+ 8. Improved: Zen_FindBuildingPositions now allows balcony positions when no roof positions are allowed
+ 9. Documentation: Fixed Notepad++ autocompletion file is now up to date.
+10. Documentation: Added for ZEN_FMW_ZAF_Type, ZEN_FMW_ZAF_String
+11. Documentation: Updated for Zen_ArrayFilterCondition, Zen_ArrayRemoveDead, Zen_ArrayRemoveNonLocal
+12. Documentation: Updated for FrameworkIntroduction.txt to include information on the Preprocessor library
+13. Documentation: Improved for Zen_ArraySort
+
+9/24/14
+ 1. New Function: Zen_FindBuildingPositions
+ 2. Added: Framework macro ZEN_FMW_Code_Insertion, code snippet for insertions
+ 3. Added: Framework macros ZEN_FMW_Code_SpawnMarker, ZEN_FMW_Code_SpawnPoint, code snippets for spawning infantry
+ 4. Added: Standard macro ZEN_STD_Code_SleepFrames, Sleep for Frames
+ 5. Added: Standard macro ZEN_STD_Code_WaitScript, waitUntil Script Done
+ 6. Added: Standard macro ZEN_STD_Math_VectTransform, Transform Array Position ATL
+ 7. Improved: ZEN_FMW_MP_REAll, ZEN_FMW_MP_REClient, ZEN_FMW_MP_RENonDedicated, ZEN_FMW_MP_REServerOnly, now use isMultiplayer
+ 8. Improved: Zen_ArraySort now accepts both true comparators and hashing comparators for sorting
+ 9. Improved: Zen_OrderInfantryPatrolBuilding and Zen_SpawnInfantryGarrison now use Zen_FindBuildingPositions
+10. Documentation: Fixed for ZEN_STD_OBJ_TransformATL
+11. Documentation: Added for Zen_FindBuildingPositions
+12. Documentation: Added for ZEN_FMW_Code_Insertion, ZEN_FMW_Code_SpawnMarker, ZEN_FMW_Code_SpawnPoint, ZEN_STD_Code_SleepFrames, ZEN_STD_Code_WaitScript
+13. Documentation: Updated for Zen_ArraySort
+
+9/17/14
+ 1. Fixed: ZEN_FMW_MP_REAll, ZEN_FMW_MP_REClient, ZEN_FMW_MP_RENonDedicated, ZEN_FMW_MP_REServerOnly, did not execute the function locally when they should
+ 2. Fixed: Zen_OrderInfantryPatrol did not recognize parameter 7, for chasing the enemy
+ 3. Fixed: Zen_RotateAsSet now keeps the heights of objects the same
+ 4. Fixed: Zen_SpawnGroup now interprets the height of the given position as ATL or ASL correctly
+ 5. Added: Standard macro ZEN_STD_Math_RandNegativePositive, Random Negative or Positive
+ 6. Added: Standard macro ZEN_STD_Math_VectCartCyl, ZEN_STD_Math_VectCartPolar, for vector transformations
+ 7. Added: Standard macro ZEN_STD_OBJ_TransformATL, Transform Position ATL
+ 8. Added: Zen_SpawnParachute now has a parameter for the signal grenade attached to the object
+ 9. Improved: Zen_ConfigGetLocations massively optimized for repeating argument calls
+10. Improved: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom can now give multiple matching weapons
+11. Improved: Zen_FindTerrainSlope slightly optimized
+12. Improved: Zen_OrderFastRope now checks to correct fastrope stop height from the rope's exact position
+13. Improved: Zen_OrderHelicopterLand now makes the helicopter reach a fastrope position more accurately
+14. Improved: Zen_OrderInfantryPatrol now applies chasing the enemy for civilians, they now chase everyone
+15. Improved: Zen_SpawnAmbientVehicles optimized
+16. Improved: Zen_SpawnGroup now places all units at the exact given position
+17. Improved: Zen_SpawnItemsOnTable now exits when it runs out of paired tables
+18. Improved: Zen_SpawnItemsOnTable now orients to object to the table better
+19. Improved: Zen_TriggerAreRescued now only triggers when the units' Z positions are within 2 meters
+20. Documentation: Fixed Notepad++ SQF language readme file function hint instructions
+21. Documentation: Added for ZEN_STD_Math_RandNegativePositive, ZEN_STD_Math_VectCartCyl, ZEN_STD_Math_VectCartPolar, ZEN_STD_OBJ_TransformATL
+22. Documentation: Improved for Zen_OrderInfantryPatrolBuilding
+23. Documentation: Updated for Zen_SpawnItemsOnTable, Zen_SpawnParachute
+24. Documentation: Updated Zen_CustomLoadouts Demonstration
+25. Documentation: Tweaked Legal.txt terms for derivative frameworks
+
+9/10/14
+ 1. Fixed: Zen_FindValidDirection and Zen_FindTerrainSlope did not remove themselves from the stack
+ 2. Fixed: Zen_TrackGroups attempted to process dead units and null groups
+ 3. Added: Framework macros ZEN_FMW_ZAS_ArrayLength, ZEN_FMW_ZAS_AlphaNumeric, ZEN_FMW_ZAS_DistFarNear, ZEN_FMW_ZAS_DistNearFar, ZEN_FMW_ZAS_IntInArray, ZEN_FMW_ZAS_StringLength, for Zen_ArraySort
+ 4. Added: Standard macros ZEN_STD_OBJ_ATLPositionZ, ZEN_STD_OBJ_ASLPositionZ, for object heights
+ 5. Added: Standard macro ZEN_STD_Parse_GetArgumentDefault, Parser Get optional Argument with Default value
+ 6. Improved: Many functions now use preprocessor macros
+ 7. Improved: Zen_ArraySort now uses a true comparator
+ 8. Improved: Zen_FindGroundPosition now returns the given center position when no valid position is found
+ 9. Improved: Zen_OrderExtraction and Zen_OrderInsertion let the helicopter move freely when off the ground
+10. Improved: Zen_OrderVehicleMove now handles helicopters better, similar to Zen_OrderHelicopterLand
+11. Documentation: Corrected for numerous macros
+12. Documentation: Added for ZEN_FMW_ZAS_ArrayLength, ZEN_FMW_ZAS_AlphaNumeric, ZEN_FMW_ZAS_DistFarNear, ZEN_FMW_ZAS_DistNearFar, ZEN_FMW_ZAS_IntInArray, ZEN_FMW_ZAS_StringLength, ZEN_STD_OBJ_ATLPositionZ, ZEN_STD_OBJ_ASLPositionZ, ZEN_STD_Parse_GetArgumentDefault
+13. Documentation: Updated for Zen_ArraySort, Known Issues
+14. Documentation: Improved for Zen_AddFastRope
+
+9/3/14
+ 1. Fixed: Zen_GetUnitLoadout now removes all excess empty strings and arrays, preventing all engine config errors
+ 2. Fixed: Zen_SpawnVehicleCrew did not put a crew in the Mi-48
+ 3. Fixed: StringTable.xml now has 'gunship' translations for all languages
+ 4. Added: Framework and Standard Preprocessor Libraries
+ 5. Added: Framework macros ZEN_FMW_MP_REAll, ZEN_FMW_MP_REClient, ZEN_FMW_MP_RENonDedicated, ZEN_FMW_MP_REServerOnly, for MP remote execution of various types
+ 6. Added: Framework macros ZEN_FMW_Math_DistGreater2D, ZEN_FMW_Math_DistGreater3D, ZEN_FMW_Math_DistLess2D, ZEN_FMW_Math_DistLess3D, for distance comparisons of various types
+ 7. Added: Framework macro ZEN_FMW_Math_RandomPoint, Random Position within radius from Center
+ 8. Added: Framework macros ZEN_FMW_Code_ErrorExitVoid, ZEN_FMW_Code_ErrorExitValue, ZEN_FMW_Code_Error, for error printing of various types
+ 9. Added: Standard macro ZEN_STD_Array_RandElement, Array Random Element
+10. Added: Standard macro ZEN_STD_Array_RandIndex, Array Random Index
+11. Added: Standard macro ZEN_STD_Array_UnorderedRemove, Array Unordered Remove
+12. Added: Standard macros ZEN_STD_OBJ_BBX, ZEN_STD_OBJ_BBY, ZEN_STD_OBJ_BBZ, for object model measurements of 3 dimensions
+13. Added: Standard macro ZEN_STD_OBJ_CountBuildingPos, Count Building Positions
+14. Added: Standard macro ZEN_STD_OBJ_CountCargoSeats, Count Vehicle passenger Seats
+15. Added: Standard macro ZEN_STD_OBJ_DeleteVehCrew, Delete Vehicle and Crew
+16. Added: Standard macro ZEN_STD_OBJ_VehIsArmed, Vehicle Is Armed
+17. Added: Standard macro ZEN_STD_Parse_GetArgument, Parse Get Optional Argument
+18. Improved: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutIndfor, and Zen_GiveLoadoutOpfor do not allow the unit to play an animation
+19. Improved: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom can now give multiple random matching magazines
+20. Improved: Zen_IsHillArea now uses a better method to determine how much of the area slopes downward from the center
+21. Improved: Zen_SpawnHelicopter can now spawn the Mi-48 at random
+22. Documentation: Added for Preprocessor Libraries
+23. Documentation: Improved Zen_JIP demonstration now has tracking marker reset example
+24. Documentation: Updated Zen_CustomLoadouts demonstration
+25. Documentation: Updated for Zen_ArrayFilterCondition, Zen_GetUnitLoadout
+26. Documentation: Tweaked Zen_EventQueue demonstration
+27. Documentation: Tweaked Notepad++ autocompletion file now uses '(' to open function hints
+
+8/27/14
+ 1. Fixed: Zen_GetUnitLoadout put binoculars and similar into the wrong category, causing errors
+ 2. Fixed: Zen_SpawnVehicleCrew did not return a group when given an autonomous vehicle
+ 3. Fixed: Zen_TransformObject did not always set the object's direction
+ 4. Improved: Zen_ArrayAppend, Zen_ArrayAppendNested, and 45 other functions optimized using pushBack
+ 5. Improved: Zen_AveragePositions renamed Zen_FindAveragePosition, moved to Position Functions category
+ 6. Improved: Zen_AvoidPosition renamed Zen_FindValidDirection
+ 7. Improved: Zen_FindValidDirection moved to Position Functions category
+ 8. Improved: Zen_FindValidDirection rewritten and massively optimized, some parameters have been removed
+ 9. Improved: Zen_FindGroundPosition terrain slope parameter changed to reflect Zen_FindTerrainSlope change
+10. Improved: Zen_FindTerrainSlope optimized, and one parameter removed
+11. Improved: Zen_OrderInfantryPatrol now prefers roads within a small radius
+12. Improved: Zen_SpawnVehicleCrew can now correctly fill a vehicle that was previously partially filled
+13. Documentation: Fixed Zen_FindNearHeight was not updated correctly for last release's improvements
+14. Documentation: Fixed Zen_FindTerrainSlope was out of alphabetic order
+15. Documentation: Added 1.26 scripting commands to Notepad++ SQF language
+16. Documentation: Updated for Zen_FindAveragePosition, Zen_FindGroundPosition, Zen_FindTerrainSlope, Zen_FindValidDirection
+17. Documentation: Updated Zen_AssaultFrini sample mission using the new JIP code
+
+8/20/14
+ 1. New Function: Zen_IsHillArea
+ 2. Fixed: Zen_GetUnitLoadout did not put magazines loaded into weapons in the correct format
+ 3. Fixed: Zen_IsUrbanArea printed some debug to the chat
+ 4. Fixed: Zen_OrderExtraction and Zen_OrderInsertion sometimes did not allow the units to get out normally
+ 5. Fixed: Zen_OrderExtraction and Zen_OrderInsertion helicopter landing forced stop no longer applies to ground vehicles
+ 6. Fixed: Zen_SpawnVehicle logic for placing any vehicle over the ocean at the given height ASL with and without exact placement
+ 7. Fixed: Zen_TransformObject now rotates a remote object properly when called on the server
+ 8. Added: Zen_FindNearHeight now has a parameter for getting the lowest point
+ 9. Added: Zen_SpawnFortification now has a parameter for fortification circle radius
+10. Improved: Zen_CreateObjective 'convoy' objective now makes troops disembark better when the convoy is under attack
+11. Improved: Zen_FindGroundPosition now detects a position off the map better
+12. Improved: Zen_FindMaxTerrainSlope renamed Zen_FindTerrainSlope
+13. Improved: Zen_FindNearHeight search pattern parameters removed
+14. Improved: Zen_FindNearHeight greatly optimized, especially for large areas
+15. Improved: Zen_InvokeFireSupport, Zen_MoveInVehicle, and Zen_OrderFastRope remote execution requests optimized
+16. Improved: Zen_InvokeFireSupport round guidance now detects lasers of vehicles and UAV's/UGV's
+17. Improved: Zen_OrderExtraction and Zen_OrderInsertion stop the helicopter from turning on the ground
+18. Improved: Zen_OrderInsertion makes the helicopter pause before taking off
+19. Improved: Zen_OrderHelicopterLand now allows door gunners to fire
+20. Improved: Zen_ReassignTask now removes duplicate units from the task system's internal data
+21. Improved: Zen_SpawnConvoy no longer spawns an unarmed vehicle as the lead vehicle
+22. Improved: Zen_SpawnVehicleCrew now returns the group of the spawned crew
+23. Documentation: Fixed the demonstrations, sample missions, or tutorials did not include StringTable.xml
+24. Documentation: Fixed Zen_SpawningDemonstration used Zen_SpawnFortification wrong
+25. Documentation: Added for Zen_IsHillArea
+26. Documentation: Improved JIP demonstration greatly, it now supports disabled AI
+27. Documentation: Updated for Zen_AddFireSupportAction, Zen_FindTerrainSlope, Zen_FindNearHeight, Zen_InvokeFireSupport, Zen_SpawnFortification, Zen_SpawnVehicleCrew
+
+8/13/14
+1. New Function: Zen_IsUrbanArea
+2. Fixed: Zen_ConfigGetVehicleClasses did not allow 'All' string for side through argument checking
+3. Fixed: Zen_GiveLoadout did not pass the given loadouts properly to specific loadout functions
+4. Fixed: Zen_InvokeFireSupport did not fire a few types of rounds correctly
+5. Fixed: Zen_SpawnAircraft, Zen_SpawnHelicopter, and Zen_SpawnVehicleCrew did not always work when the game language was not English
+6. Fixed: Zen_SpawnVehicle did not put vehicles at the correct given height above sea level
+7. Fixed: Zen_SpawnVehicle could put some large vehicles partly inside the ground
+8. Added: Framework StringTable.xml file for localization purposes
+9. Improved: Framework Description.ext code changed
+10. Improved: Zen_AddLoadoutDialog now localizes the 'OK' and 'Cancel' buttons to all languages
+11. Improved: Zen_OrderExtraction and Zen_OrderInsertion now force helicopters to leave their engines on but not move
+12. Improved: Zen_OrderVehicleDrop now requires that helicopter be closer to the drop point
+13. Improved: Zen_SpawnAircraft, Zen_SpawnBoat, Zen_SpawnGroundVehicle, and Zen_SpawnHelicopter now print an error when given an empty string
+14. Documentation: Added for Zen_IsUrbanArea
+15. Documentation: Updated Zen_RandomBattle demonstration and topmost Readme.txt
+16. Documentation: Tweaked Zen_RespawnPatrol sample mission
+
+8/6/14
+1. New Function: Zen_GetAllInBuilding
+2. Fixed: Zen_ArrayRemoveDead did not filter out groups of dead units properly
+3. Fixed: Zen_FindGroundPosition near roads screening check failed for object positions
+4. Fixed: Zen_FindGroundPosition near water screening check failed for land positions
+5. Fixed: Zen_FindGroundPosition off the map check did not work in VR
+6. Fixed: Zen_SpawnVehicle allowed boats to spawn on top of each other
+7. Added: Zen_IsNearTerrain now has a parameter for land, water, or both
+8. Improved: Position System category is now the Position Functions category, several functions have been moved there
+9. Improved: Zen_CreateObjective now prevents the convoy from spawning damaged
+10. Improved: Zen_FindTerrainSlope optimized when using a small radius
+11. Improved: Zen_IsNearWater renamed to Zen_IsNearTerrain
+12. Improved: Zen_RotateAsSet now lifts objects off the ground to prevent vehicles damaging their tires
+13. Improved: Zen_SpawnMarker greatly optimized
+14. Documentation: Fixed code typo in Steal the Car sample mission
+15. Documentation: Fixed Spawning Demonstration joining convoy group to vehicle did not work
+16. Documentation: Added for Zen_GetAllInBuilding
+17. Documentation: Improved for Zen_FindTerrainSlope, Zen_IsForestArea, Zen_MultiplyDamage
+18. Documentation: Updated for Zen_IsNearTerrain
+19. Documentation: Updated Index and category documentation
+
+7/30/14
+1. New Function: Zen_IsForestArea
+2. Fixed: Zen_AreUnitsTasksComplete did not allow a 0 for parameter 2 through argument checking
+3. Fixed: Zen_FindGroundPosition distribution of points around an object was uneven if the minimum distance was small
+4. Fixed: Zen_FindGroundPosition position around a point or object could be within the minimum area if on a road
+5. Fixed: Zen_FindRoadDirection printed a debug message
+6. Fixed: Zen_MoveInVehicle 'All' argument resulted in confusion for the AI and odd behavior
+7. Fixed: Zen_MoveInVehicle now assigns units to their turret properly
+8. Fixed: Zen_OrderInsertion now makes units get out of the vehicle in all circumstances
+9. Fixed: Zen_SpawnInfantry spawned an unarmed FIA soldier
+10. Added: Zen_ConfigGetLocations now has a parameter for location type
+11. Added: Zen_ConfigGetVehicleClasses now has a parameter for filtering by DLC
+12. Improved: Zen_ConfigGetTowns renamed to Zen_ConfigGetLocations
+13. Improved: Zen_FindGroundPosition failure logic massively optimized when water or road preference is not possible
+14. Improved: Zen_FindGroundPosition now prints an error when the return position is off the map
+15. Improved: Zen_FindGroundPosition optimized significantly in difficult situations by scaling the number of attempts
+16. Improved: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutOpfor now detect day/night more accurately for unassigning NVGs
+17. Improved: Zen_GiveLoadoutCustom now removes NVG's during the day, but leaves them in inventory
+18. Improved: Zen_IsPointInPoly optimized significantly when the point is near the center
+19. Improved: Zen_SetAISkill now reduces the accuracy value at night
+20. Improved: Zen_OrderInsertion and Zen_OrderExtraction now allow the crew to move freely after insertion/extraction
+21. Improved: Zen_OrderVehicleMove logic for stopping the thread and vehicle, including a check for beached boats
+22. Documentation: Fixed Assault Frini sample mission did not give repack magazines action correctly to JIP clients
+23. Documentation: Fixed SQF Overview file explanation of threads and optimization
+24. Documentation: Added for Zen_IsForestArea
+25. Documentation: Improved for Zen_AreInArea, Zen_AreNotInArea, Zen_FindValidDirection, Zen_GetAllInArea
+26. Documentation: Updated for Zen_ConfigGetVehicleClasses, Zen_SetAISkill
+27. Documentation: Updated Random Battle demonstration explanation of Zen_ConfigGetVehicleClasses
+
+7/23/14
+1. New Function: Zen_FindRoadDirection
+2. Fixed: Zen_AreUnitsTasksComplete was case sensitive for task names and states
+3. Fixed: Zen_ArraySort duplicated some elements and removed others
+4. Fixed: Zen_OrderVehicleMove did not use the move command properly if the given vehicle was grouped with others
+5. Fixed: Zen_OrderExtraction no longer allows the helicopter to run away when under enemy fire
+6. Fixed: Zen_SpawnParachute did not detach the object when the parachute reached a building's roof
+7. Fixed: Zen_UpdateTask displayed a duplicate 'Task Created' notification when a property other than the state of the task was updated
+8. Added: Zen_OrderInfantryPatrolBuilding now has a parameter for AI behavior
+9. Improved: Zen_AddEject, Zen_AddFastRope, Zen_AddGiveMagazine, Zen_AddLoadoutDialog, and Zen_AddRepackMagazines now use a custom color for their action text
+10. Improved: Zen_AddFireSupportAction, Zen_ShowHideMarkers, and various private functions now check for headless clients (HC)
+11. Improved: Zen_AddGiveMagazine, Zen_AddLoadoutDialog, Zen_AddRepackMagazines optimized by not giving actions to a dedicated server or HC
+12. Improved: Zen_CreateObjective 'convoy' objective now rotates the convoy on the road to best face their destination
+13. Improved: Zen_GiveLoadoutBlufor and Zen_GiveLoadoutIndfor now randomly give facewear to some loadouts
+14. Improved: Zen_OrderVehicleMove logic for stopping the thread and vehicle
+15. Improved: Zen_SpawnAmbientVehicles now attempts to spawn vehicles at the side of the road, instead of the middle
+16. Improved: Zen_SpawnConvoy now spawns vehicles in an orderly line on the road and orders them to keep in formation
+17. Improved: Zen_SpawnParachute aesthetic quality of the parachute spawning and opening
+18. Improved: Zen_SpawnVehicle now forces flying objects (height > 2) to spawn at the exact given position
+19. Documentation: Fixed tutorial Altis Patrol group reinforcement function spawned unnecessary helicopters
+20. Documentation: Fixed tutorial Mission Briefing solution mission.sqm did not include some markers
+21. Documentation: Fixed tutorial Multi-Squad Objectives target vehicle did not get a crew
+22. Documentation: Added for Zen_FindRoadDirection
+23. Documentation: Added proper table of contents to Sample Missions readme.txt
+24. Documentation: Improved all Sample Missions with comments
+25. Documentation: Updated for Zen_OrderInfantryPatrolBuilding
+
+7/16/14
+1. Fixed: Zen_SpawnInfantry did not allow nested skill range arrays for parameter 3
+2. Added: Zen_OrderInfantryMove and Zen_OrderInfantryPatrol now have a parameter for AI behavior state
+3. Added: Zen_OrderInfantryPatrol now has a parameter to disable infantry following targets
+4. Improved: Zen_ConfigGetVehicleClasses optimized
+5. Improved: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutOpfor 'guerrilla' loadouts now use new headgear and facewear
+6. Improved: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom can now select randomly from nested arrays in sections that add all elements
+7. Improved: Zen_SetAISkill now gives group leaders a slight boost to all skills, except aiming accuracy
+8. Improved: Zen_SpawnParachute landing aesthetic quality greatly improved
+9. Documentation: Added and improved various FAQ.txt answers
+10. Documentation: Added 1.24 scripting commands to Notepad++ language and autocompletion file
+11. Documentation: Updated for Zen_OrderInfantryMove and Zen_OrderInfantryPatrol
+12. Documentation: Updated Custom Loadouts demonstration
+13. Documentation: Tweaked various files
+
+--- First Public Release ---
+
+Below is most of the history of the framework, since the author decided to start a changelog.  It is left here mostly for the author's nostalgia.
+
+7/10/14
+1. Fixed: Zen_GiveLoadoutCustom had weird behavior on dedicated servers
+2. Documentation: Tweaked and corrected various files
+
+7/9/14
+1. Documentation: Updated FAQ.txt
+2. Documentation: Tweaked Legal.txt and Readme.txt
+
+7/8/14
+1. Fixed: Zen_AddGiveMagazine always stated that the giver did not have the correct magazines
+2. New Function: Zen_ValuesAreNotInArray
+3. Documentation: Added for Zen_ValuesAreNotInArray
+4. Documentation: Expanded and organized FAQ.txt
+5. Documentation: Tweaked for Zen_ValuesAreInArray
+
+7/7/14
+1. Fixed: Loadout present 'AT Rifleman' did not fully fill backpack with launcher ammo
+2. Documentation: Added a new sample mission, Zen_AssaultFrini
+3. Documentation: Improved Readme.txt and FrameworkIntroduction.txt
+4. Documentation: Updated JIP demonstration
+
+7/2/14
+1. Fixed: Zen_SpawnInfantry allowed two unarmed Blufor soldiers to spawn
+
+6/23/14
+1. Fixed: Zen_AddEject action did not do anything when selected
+2. Fixed: Zen_ExtendPosition did not set the height of the returned position to the given argument correctly
+3. Fixed: Zen_SpawnVehicle now uses the height given as a height above terrain level when on land, and sea level when on water
+4. Fixed: Zen_TransformObject no longer sets the object's direction to 0 when no direction argument is given
+5. Improved: Zen_AddEject now sets the ejecting person's velocity to be the same as the vehicle's
+6. Improved: Zen_SpawnVehicle no longer spawns objects underground, this affects all vehicle spawning functions
+7. Improved: Zen_TransformObject no longer moves objects underground, including the sea floor
+8. Documentation: Updated for Zen_TransformObject
+
+6/21/14
+1. Fixed: Zen_ArrayGetDelimitedSlice and Zen_StringGetDelimitedPart returned the data to search if the first delimiter was not found, instead of an empty array or string
+2. Fixed: Zen_FindGroundPosition printed an error when using the point avoidance filter
+3. Fixed: Zen_SpawnInfantry allowed two unarmed Opfor and Indfor soldiers to spawn
+4. Fixed: Zen_TrackVehicles caused an error when the text type was 'group'
+5. Fixed: Zen_TrackVehicles did not create the markers correctly when given civilian vehicles
+6. Improved: Zen_OrderExtraction, Zen_OrderFastRope, Zen_OrderHelicopterLand, Zen_OrderInfantryMove, Zen_OrderInsertion, Zen_OrderVehicleMove, Zen_OrderVehicleDrop now react properly by exiting when the given units or vehicles are destroyed
+7. Improved: Zen_TrackVehicles 'number' text now starts at 1 not 0, and makes the numbers persistent instead of renumbering all the vehicles when one is destroyed
+8. Documentation: Updated for Zen_ArrayGetDelimitedSlice and Zen_StringGetDelimitedPart
+
+6/18/14
+1. Fixed: Zen_AddLoadoutDialog caused an error when the dialog was used more than once
+2. Fixed: Zen_AddLoadoutDialog caused minor log spam due to some missing sounds
+3. Fixed: Zen_ConvertToPosition, Zen_CreateFireSupport, Zen_FindGroundPosition, Zen_SpawnMarker, and Zen_UpdateFireSupport failed when given a marker name using incorrect capitalization
+4. Fixed: Zen_OrderInfantryPatrolBuilding counted one extra building position that was invalid
+5. Fixed: Zen_RotateAsSet failed when the first argument was not an array
+6. Fixed: Various variable declarations and scope errors in numerous functions
+7. Improved: Zen_AddLoadoutDialog now has sounds when clicking OK or Cancel
+8. Improved: Zen_GiveLoadout, Zen_GiveLoadoutBlufor, Zen_GiveLoadoutCustom, Zen_GiveLoadoutIndfor, and Zen_GiveLoadoutOpfor now force the uniform to be equipped regardless of the side of the unit
+9. Improved: Slightly optimized Zen_FindGroundPosition
+10. Improved: Zen_SpawnInfantry now prints an error if its search for classnames fails
+11. Improved: Many spawning now handle invalid sides by exiting with a void value, instead of continuing as though the side was valid
+12. Improved: Zen_ValueIsInArray is now not case sensitive for strings
+13. Documentation: Added more 1.22 scripting commands to Notepad++ SQF language
+14. Documentation: Improved HowToDebug.txt, FAQ.txt
+15. Documentation: Updated for Zen_ValueIsInArray
+
+6/17/14
+1. Fixed: Zen_AddLoadoutDialog tracked usages by object, not by action, causing problems for multiple actions on one object
+2. Fixed: Zen_AreInArea and Zen_AreNotInArea argument checking did not allow a valid argument for parameter 3
+3. Fixed: Zen_ArrayGetDelimitedSlice and Zen_StringGetDelimitedPart did not detect the end delimiter when it was the same as the start delimiter
+4. Fixed: Zen_ArrayRemoveIndexedSlice did not remove the element at the second index
+5. Fixed: Zen_ArrayReplaceValueNested did not replace values in nested arrays correctly
+6. Fixed: Zen_GetLoadoutData printed the wrong function name on an error
+7. Fixed: Various variable declarations and scope errors in numerous functions
+8. Improved: Zen_AddGiveMagazine can now print an error if the action shows when it should not and is selected
+9. Improved: Zen_ArrayGetDelimitedSlice now prints an error if the array is too short
+10. Improved: Optimized Zen_FindAveragePosition, Zen_ConvertToGroupArray, Zen_ConvertToObjectArray, Zen_OrderFastRope, Zen_StringCapitalizeLetter
+11. Improved: Zen_ConvertToPosition now checks that a given array contains numbers
+12. Improved: Zen_CreateObjective now prevents unnecessary errors when given an invalid side, improved handling of invalid sides
+13. Improved: Zen_GiveLoadout parameters reordered
+14. Improved: Zen_StringCapitalizeLetter now returns the given string on an error
+15. Documentation: Updated for Zen_GiveLoadout
+
+6/15/14
+1. Documentation: Added FAQ.txt question
+2. Documentation: Corrected Misc Demonstration
+3. Documentation: Updated Legal.txt, Readme.txt, HowToUseDocumentation.txt, HowToDebug.txt
+
+6/13/14
+1. Documentation: Added two new sample missions
+2. Documentation: Corrected various typos
+
+6/11/14
+1. Fixed: Zen_ArrayRemoveDead now checks for an array argument, rather than allowing any type
+2. Fixed: Zen_AddFastRope forced AI group members of a player group leader to fastrope from the pilot, copilot, or gunner seats
+3. Fixed: Zen_AreInVehicle and Zen_AreNotInVehicle did not filter out dead units correctly
+4. Improved: Zen_AddFastRope now enforces a minimum height required to fastrope
+5. Tweaked: Zen_SetAISkill SOF preset
+6. Documentation: Tweaked Readme.txt, FAQ.txt
+
+6/9/14
+1. Improved: Significantly increased the accuracy of and optimized Zen_IsNearWater
+2. Improved: Zen_StringRemoveWhiteSpace now removes tabs and other whitespace printing characters
+3. Documentation: Updated Notepad++ autocomplete file
+
+6/8/14
+1. Documentation: Tweaked for Zen_AddEject, Zen_AddFireSupportAction, Zen_AddGiveMagazine, Zen_AddRepackMagazines, Zen_ArrayFilterCondition, Zen_ArrayFilterValues, Zen_ArrayFindAverage, Zen_ArrayGetNestedValue, Zen_ArrayInsert, Zen_ArrayRemoveDead, Zen_ArraysAreEqual, Zen_ArraySort, Zen_FindAveragePosition, Zen_ConvertToObjectArray, Zen_ConvertToPosition, Zen_FindGroundPosition, Zen_FindTerrainSlope, Zen_FindTrigAngle, Zen_GetAllInArea, Zen_GetAmbientClutterCount, Zen_GetFireSupportData, Zen_GetTaskDataGlobal, Zen_GetTurretPaths, Zen_GetUnitLoadout, Zen_GetUnitTasks, Zen_GiveLoadoutBlufor, Zen_GiveLoadoutOpfor, Zen_GiveLoadoutIndfor, Zen_InvokeTask, Zen_InvokeTaskBriefing, Zen_IsPointInPoly, Zen_IsRayInPoly, Zen_IsSeen, Zen_MultiplyDamage, Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderExtraction, Zen_OrderHelicopterLand, Zen_OrderInfantryMove, Zen_OrderInfantryPatrol, Zen_OrderInfantryPatrolBuilding, Zen_OrderInsertion, Zen_OrderVehicleDrop, Zen_OrderVehicleMove, Zen_OrderVehiclePatrol, Zen_ReassignTask, Zen_RemoveFireSupport, Zen_RemoveTask, Zen_RotateAsSet, Zen_SetAISkill, Zen_SetTaskCurrent, Zen_SetTaskTarget, Zen_SpawnAircraft, Zen_SpawnAmbientVehicles, Zen_SpawnAmmoBox, Zen_SpawnBoat, Zen_SpawnCamp, Zen_SpawnConvoy, Zen_SpawnFortification, Zen_SpawnGroundVehicle, Zen_SpawnHelicopter, Zen_SpawnMarker, Zen_SpawnParachute, Zen_StringCapitalizeLetter, Zen_StringFindReplace, Zen_StringGenerateRandom, Zen_StringRemoveWhiteSpace, Zen_TrackGroups, Zen_UpdateTask, Zen_ValuesAreEqual
+
+6/6/14
+1. Improved: Zen_SetWeather now uses a much greater random range of possible minimum fog height and decay rate at altitude
+2. Improved: Added defensive code in some loadout functions in anticipation of a scripting command change coming in version 1.22
+3. Documentation: Added 1.20 and 1.22 scripting commands to Notepad++ SQF language
+
+6/1/14
+1. Fixed: Zen_MoveInVehicle 'Turret' type did not properly put remote units in the turrets of a partially occupied vehicle
+2. Fixed: Zen_TrackVehicles considered dead units in the vehicle when deciding marker color
+3. Improved: Optimized and simplified Zen_MoveInVehicle, especially 'All' condition
+4. Documentation: Added 1.18 scripting commands to Notepad++ SQF language
+
+5/25/14
+1. Fixed: Zen_GetAllInArea did not search for ships
+2. Fixed: Zen_SpawnInfantryGarrison did not always put all of the units into the building
+3. Fixed: Zen_TriggerAreRescued did not set the rescued units to be not captive
+4. Improved: Slightly optimized Zen_GetAllInArea and several Trigger functions
+5. Improved: Zen_SpawnInfantryGarrison forced units to stand up forever
+6. Improved: Zen_TriggerAreRescued completion and failure logic optimized and simplified
+7. Tweaked: Zen_SetAISkill presets
+8. Documentation: Updated for Zen_TriggerAreRescued and several demonstration missions
+
+5/24/14
+1. Fixed: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom caused an error when no weapons were listed
+2. Fixed: Zen_MultiplyDamage did not default to sending a packet for remote execution correctly
+3. Fixed: Zen_OrderFastRope did not make units let go of the rope when fastroping into the ocean
+4. Fixed: Zen_OrderHelicopterLand did not clean up an invisible object that guides the AI, causing conflicts with later landings
+5. Improved: Rebalanced Zen_SetAISkill presets using a standardized and tested scale
+6. Improved: Zen_OrderHelicopterLand now detects if the landing zone is over the ocean, the helicopter now hovers low instead of suiciding
+7. Documentation: Fixed Event Queue demonstration code errors
+8. Documentation: Updated Introduction AI section, Misc Notepad++ readme
+
+5/17/14
+1. Documentation: Improved Event Queue demonstration
+
+5/16/14
+1. Documentation: Added full Event Queue demonstration
+2. Documentation: Improved Misc demonstration
+
+5/14/14
+1. Fixed: Zen_SpawnInfantry allowed another type of unarmed Blufor soldier to spawn
+2. Improved: Optimized several data functions by returning a new array instead overwriting the given array
+3. Improved: Zen_SpawnInfantryGarrison now places the group near the building they should garrison
+4. Improved: Optimized Zen_SpawnInfantryGarrison by delegating argument parsing to Zen_SpawnInfantry
+5. Improved: Zen_SpawnParachute now prevents falls at the end of the drop from damaging ammo boxes
+6. Documentation: Updated for Zen_ArrayInsertSlice, Zen_ArrayRemoveIndexedSlice, Zen_ArrayReplaceSlice, Zen_ArrayReverse, Zen_ArraySort
+
+5/13/14
+1. Fixed: Zen_ConfigGetVehicleClasses assumed that strings were compared case insensitive in called functions
+2. Fixed: Zen_CreateFireSupport did not parse array arguments correctly
+3. Fixed: Zen_GiveLoadoutCargo printed the wrong function name in the stack trace
+
+5/12/14
+1. Fixed: Zen_GiveLoadoutCargo did not add randomized matching magazines and weapons correctly
+2. Improved: Many Array functions no longer check if the array is empty, this is not really an error, just a special case
+3. Improved: Zen_ArrayGetNestedIndex now returns -1 if no match is found
+4. Improved: Zen_ValueIsInArray now searches all nested arrays recursively
+5. Improved: Zen_ValueFindInArray printed the wrong function name in the stack trace
+6. Improved: Zen_FindGroundPosition random distribution for unequal markers at a limited angle slightly improved
+7. Documentation: Updated for Zen_ArrayGetNestedIndex, Zen_ValueIsInArray
+8. Documentation: Added a new demonstration mission, MiscDemo, and revised demonstration readme table of contents
+9. Documentation: Partially added a new demonstration, listed in readme table of contents
+
+5/11/14
+1. Found Issue: Zen_FindGroundPosition point distribution in some markers
+2. Fixed: Zen_IsPointInPoly swapped the X and Y dimensions of a marker
+3. Fixed: Zen_OrderInfantryMove used the wrong logic to check for the infantry arriving
+4. Fixed: Zen_SpawnInfantry spawned unarmed soldier classes
+5. Improved: Zen_CreateFireSupport now ensures all arguments are not less than 1
+6. Improved: Optimized Zen_FindGroundPosition marker calculations
+7. Improved: Zen_FindGroundPosition now gives an equal distribution of points in any marker when the angle is not limited
+8. Improved: Zen_FindGroundPosition now gives a better distribution of points in markers with unequal dimensions at a limited angle
+
+5/9/14
+1. Fixed: Zen_FindGroundPosition calculated positions in rotated markers opposite of their correct orientation
+2. Fixed: Zen_IsPointInPoly used the wrong angle offset for markers
+3. Improved: Optimized Zen_ArraySort, Zen_IsPointInPoly, Zen_FindGroundPosition
+
+5/4/14
+1. New Function: Zen_OrderInfantryMove
+2. Fixed: Zen_RotateAsSet rotated the direction of the objects themselves, as well as their relative direction to the center
+3. Improved: Zen_OrderInfantryPatrol allowed an incorrect type in argument checking
+4. Improved: Add more robust argument checking for patrol area center for all patrol functions
+5. Documentation: Added for Zen_OrderInfantryMove
+6. Documentation: Corrected for numerous Orders functions and Zen_TransformObject
+
+5/3/14
+1. Fixed: Zen_SpawnVehicleCrew did not put a copilot in some helicopters
+
+5/2/14
+1. Fixed: Zen_FindGroundPosition did not return [0,0,0] when it failed to find a position
+2. Fixed: Zen_FindGroundPosition did not generate an even distribution of points when given a marker with very unequal dimensions
+3. Fixed: Zen_SpawnParachute now works correctly for all vehicles, finally
+4. Improved: Zen_CreateFireSupport and Zen_UpdateFireSupport now print an error if the fire support shape marker does not exist
+5. Improved: Zen_SetWeather paused long than necessary when setting an immediate overcast change
+6. Improved: Optimized Zen_FindGroundPosition marker area calculation for unrestricted angles
+7. Documentation: Added table of contents to demonstration readme
+
+5/1/14
+1. Fixed: Zen_FindGroundPosition checked arguments on the second element of the eighth parameter wrong
+2. Fixed: Zen_OrderVehicleMove allowed helicopters to stop about 75m short of the destination
+3. Fixed: Zen_OrderVehicleMove did not check argument type for aircraft height
+4. Fixed: Zen_UpdateFireSupport checked for skipped values incorrectly
+5. Fixed: Zen_UpdateFireSupport did not update randomized values correctly
+6. Improved: Optimized Zen_ArraySort, Zen_FindNearHeight
+7. Improved: Zen_CreateFireSupport now supports a fire support shape defined by a marker
+8. Documentation: Updated for Zen_ArraySort, Zen_CreateFireSupport, Zen_UpdateFireSupport
+9. Documentation: Updated JIP demonstration
+
+4/30/14
+1. New Function: Zen_ArraySwapValues
+2. New Function: Zen_ExtendRay
+3. Function Removed: Zen_ArraySortMax, use Zen_ArraySort and Zen_ArrayReverse instead
+4. Function Removed: Zen_ArraySortDistance, use Zen_ArraySort with comparator
+5. Improved: Renamed Zen_ArraySortMin to Zen_ArraySort
+6. Improved: Zen_ArraySort now accepts a comparator function
+7. Improved: Massively optimized Zen_ArraySort, about 500x faster for 100 integers, 10000 integers in 3.7s
+8. Improved: Optimized Zen_ArrayShuffle, Zen_ExtendPosition
+9. Improved: Optimized Zen_OrderAircraftPatrol, Zen_OrderHelicopterLand, Zen_OrderVehicleDrop with Zen_ExtendRay
+10. Improved: Zen_OrderVehicleMove now supports aircraft
+11. Documentation: Added for Zen_ArraySwapValues, Zen_ExtendRay
+12. Documentation: Removed for Zen_ArraySortMax, Zen_ArraySortDistance
+13. Documentation: Updated for Zen_ArraySort, Zen_ExtendPosition, Zen_OrderVehicleMove
+
+4/28/14
+1. Fixed: Zen_SetWeather now ensures correct immediate overcast change in all circumstances
+2. Improved: Optimized Zen_MultiplyDamage by removing processing from dead units
+3. Improved: Optimized Zen_SetWeather by removing unnecessary sleep commands
+
+4/27/14
+1. New Function: Zen_ArrayReplaceSlice
+2. Fixed: Some array Data Functions incorrectly returned a value on argument error instead of void
+3. Fixed: Zen_OrderInsertion allowed the helicopter to take off without letting all AI passengers get out safely
+4. Improved: Optimized numerous functions by removing internal uses of Zen_ArrayAppend
+5. Improved: Changed handling of damage increase in Zen_MultiplyDamage, to balance more powerful weapons
+6. Improved: Optimized Zen_SetWeather date and time handling
+7. Documentation: Added for Zen_ArrayReplaceSlice
+8. Documentation: Updated for Zen_MultiplyDamage
+9. Documentation: Corrected for Zen_PrintError
+
+4/22/14
+1. Improved: Zen_SetWeather can now skip an immediate change
+2. Improved: Zen_SetWeather no longer freezes the game for a second when making a long term change
+3. Improved: Zen_SpawnGroundVehicle now allows AI crew to stay in an immobilized vehicle and continue fighting, shooting out tires will no longer causes the AI to bail out
+4. Documentation: Added Random Combined Arms Battle demonstration
+5. Documentation: Updated for Zen_SetWeather
+
+4/20/14
+1. Fixed: Zen_TrackVehicles, Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, and Zen_OrderVehiclePatrol incorrectly rejected arguments containing nested vehicle arrays
+2. Fixed: Zen_SpawnAircraft got classnames for jets wrong
+3. Improved: Zen_SpawnAircraft now gives jets a starting speed so they do not crash when spawned at low altitude
+4. Documentation: Continued to incrementally update and improve documentation
+
+4/19/14
+1. Fixed: Zen_InvokeFireSupportAction printed the support request chat to players of other sides
+2. Improved: Optimized Zen_RemoveTask
+3. Documentation: Fixed Notepad++ Framework function autocomplete case
+4. Documentation: Added complete JIP demonstration
+
+4/18/14
+1. Fixed: Zen_ArraysAreEqual returned a default value of the wrong type on an argument error
+2. Improved: Optimized Zen_ArrayInsertSlice, Zen_ArrayRemoveIndexedSlice
+3. Improved: Optimized Zen_ArraysAreEqual and Zen_ValuesAreEqual with a new scripting command
+4. Improved: Zen_SetWeather now synchs immediate overcast changes more effectively
+5. Documentation: Added for Zen_ArrayCopy, Zen_ArrayInsertSlice, Zen_ArrayRemoveIndex, Zen_ArrayRemoveIndexedSlice, Zen_ArrayRemoveValue, Zen_ArrayReverse
+6. Documentation: Updated for Zen_ArrayGetDelimitedSlice, Zen_ArrayGetIndexedSlice, Zen_ArrayRemoveValuedSlice, Zen_ArraysAreEqual, Zen_ArrayInsert
+7. Documentation: Added 1.16 scripting commands to Notepad++ file
+
+4/17/14
+1. New Function: Zen_ArrayCopy
+2. New Function: Zen_ArrayInsertSlice
+3. New Function: Zen_ArrayRemoveIndex
+4. New Function: Zen_ArrayRemoveIndexedSlice
+5. New Function: Zen_ArrayRemoveValue
+6. New Function: Zen_ArrayReverse
+7. Improved: Optimized Zen_ArrayAppend, Zen_ArrayAppendNested, Zen_ArrayReplaceValue, Zen_ArrayShuffle
+8. Improved: Renamed Zen_ArrayGetDelimitedPart to Zen_ArrayGetDelimitedSlice
+9. Improved: Renamed Zen_ArrayGetIndexedPart to Zen_ArrayGetIndexedSlice
+10. Improved: Renamed Zen_ArrayRemovePart to Zen_ArrayRemoveValuedSlice
+11. Improved: Renamed Zen_ArraysMatch to Zen_ArraysAreEqual
+12. Improved: Zen_ArrayInsert and Zen_ArrayRemoveValuedSlice now modify the array by reference, to agree with the style of new array functions
+
+4/15/14
+1. Fixed: Zen_AddGiveMagazine did not print out the hint text properly for the receiving client
+2. Improved: Zen_GetFireSupportData, Zen_GetLoadoutData, and Zen_GetTaskDataGlobal now return a copy of the data, not a reference to the internal data itself
+
+4/14/14
+1. Fixed: Zen_ArrayInsert failed when inserting at the 0'th element
+2. Improved: Zen_AddLoadoutDialog action distance now dynamically adjusts for object size, to make it easier to get to for large vehicles
+3. Documentation: JIP Demonstration partially added
+
+4/10/14
+1. Improved: Optimized Zen_ArrayFilterCondition, Zen_ArrayFilterValues, Zen_ArrayFindMax, Zen_ArrayFindMin, Zen_ArrayInsert
+2. Improved: Renamed Zen_ArrayInsertElement to Zen_ArrayInsert
+3. Improved: Renamed Zen_StringFindReplaceIn to Zen_StringFindReplace
+
+4/7/14
+1. Improved: Added JIP flag to Init Header
+2. Improved: Slightly optimized Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles
+
+3/30/14
+1. Fixed: Zen_MoveInVehicle did not work for some clients, strange locality issue
+2. Improved: Optimized Zen_MoveInVehicle by not calling any functions in remotely executed code
+3. Improved: Zen_TrackVehicles now shows name text if a player is the commander or gunner, for multiple players precedence is commander, gunner, driver
+4. Improved: Zen_OrderHelicopterPatrol renamed to Zen_OrderAircraftPatrol
+5. Documentation: Continued to incrementally update and improve documentation
+
+3/29/14
+1. Documentation: Corrected and improved for various functions
+
+3/26/14
+1. Fixed: Zen_OrderInsertion left the driver of the vehicle unable to move
+2. Fixed: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, and Zen_GiveLoadoutOpfor used a default value flag of the wrong type
+
+3/23/14
+1. Fixed: Zen_GiveLoadoutCustom modified the custom loadout if random matching weapons and magazines were used
+2. Fixed: Zen_MoveAsSet did not convert the first argument to an array before searching it for markers
+3. Fixed: Zen_TransformObject does not set people normal to the terrain
+4. Fixed: Zen_SpawnVehicle did not get the last optional argument correctly
+5. Fixed: Zen_SpawnVehicle did not set flying objects to the correct height over land when force position was false
+6. Fixed: Zen_InvokeTask did not set a task current for clients if it was the first task created in multiplayer
+7. Fixed: Zen_TriggerAreDead did not always convert the first argument to an array of objects
+8. Improved: Zen_ConvertToGroupArray and Zen_ConvertToObjectArray no longer print an error when given null arguments
+9. Improved: Zen_SetAISkill does not set skill for dead units
+10. Improved: Zen_OrderInsertion and Zen_OrderFastRope now order units to disembark more effectively
+11. Improved: Optimized and visually improved fastroping, affects Zen_OrderFastRope and Zen_AddFastRope
+12. Documentation: Continued to incrementally update and improve documentation
+
+3/22/14
+1. Fixed: Detection of missing functions for remote execution was incorrect for functions that return void
+2. Fixed: Zen_MultiplyDamage did not sync the eventhandler to all clients
+3. Fixed: Zen_SetWeather checked arguments wrong for remote execution
+4. Fixed: Zen_MoveInVehicle passed unparsed arguments to private functions for remote execution
+5. Improved: Optimized Zen_MoveInVehicle by only executing commands for objects where they are local
+6. Documentation: Continued to incrementally update and improve documentation
+
+3/21/14
+1. Improved: Optimized Init header side initialization
+2. Improved: Zen_AddEject now only allows the action for pilots and gunners, passengers already had the action
+3. Improved: Zen_SpawnConvoy uses the new Opfor trucks
+4. Documentation: Updated Framework Introduction AI section
+5. Documentation: Updated Notepad++ SQF language with 1.14 scripting commands
+
+3/19/14
+1. Fixed: Zen_InvokeFireSupport printed an error if some types of rounds were used
+2. Fixed: Zen_CreateObjective 'convoy' type now stops vehicles from getting into a formation at the end
+3. Fixed: Zen_SpawnVehicle spawned boats underwater
+4. Improved: Zen_GiveLoadoutCargo and Zen_GiveLoadoutCustom now only print an error from themselves if the loadout does not exist
+5. Improved: Zen_OrderVehicleMove sets the vehicle to 'safe' instead of 'careless' behavior
+6. Improved: Zen_OrderVehicleMove now lets the vehicle stop within a small radius of the given point
+7. Documentation: Improved Custom Loadout demonstration
+8. Documentation: Updated for Zen_GiveLoadout and Zen_GiveLoadoutCargo
+
+3/18/14
+1. New Function: Zen_TransformObject
+2. Fixed: Zen_OrderFastRope sometimes made the unit permanently invincible
+3. Fixed: Trigger functions printed an error if a side was given and no units of that side remained
+4. Improved: Used Zen_TransformObject in several functions
+5. Improved: Zen_SpawnVehicle now positions static (non physics) objects based upon terrain slope
+6. Documentation: Added for Zen_TransformObject
+7. Documentation: Updated Custom Loadouts demonstration
+
+3/17/14
+1. New Function: Zen_GiveLoadoutCargo
+2. Fixed: Zen_SpawnCamp and Zen_SpawnFortification did not place the objects in their exact positions
+3. Improved: Zen_GiveLoadoutCustom now checks for a valid custom loadout
+4. Improved: Optimized Zen_SpawnConvoy vehicle spawn position calculation
+5. Documentation: Added for Zen_GiveLoadoutCargo
+
+3/16/14
+1. Fixed: Zen_AddLoadoutDialog checked arguments wrong
+2. Fixed: Zen_CreateObjective printed an error if certain data types were given as the position of the convoy
+3. Improved: Zen_MP_Closure_Packet now prints an error if the function string is undefined
+4. Improved: Optimized Zen_MP_Closure_Packet execution
+5. Improved: Zen_ConvertToObjectArray no longer removes dead objects, use Zen_ArrayRemoveDead
+6. Improved: Zen_ConvertToGroupArray now removes dead objects, to prevent null groups
+7. Improved: Zen_SpawnVehicle now has a parameter to force the position of the object
+8. Improved: Zen_SpawnVehicle now makes a more complete check to validate the given classname
+9. Improved: Optimized Trigger Functions with Zen_ArrayRemoveDead
+10. Documentation: Corrected typos for various files
+11. Documentation: Updated for Zen_CreateObjective, Zen_SpawnVehicle, various Spawning Functions
+
+3/15/14
+1. Fixed: Zen_AddLoadoutDialog only counts a use if the player clicks OK, not cancel
+2. Fixed: Zen_OrderInfantryPatrol, Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, and Zen_OrderVehiclePatrol caused an error when removing dead units
+3. Fixed: Zen_SpawnAircraft did not specify jets when getting a random classname
+4. Fixed: Zen_SpawnVehicleCrew did not detect submarines correctly
+5. Improved: Zen_AddLoadoutDialog now supports a given number of uses
+6. Improved: Zen_AddLoadoutDialog does not use a global variable
+7. Improved: Optimized Zen_OrderInfantryPatrol, Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, and Zen_OrderVehiclePatrol
+8. Improved: Zen_SpawnVehicleCrew now performs default crew spawning behavior when encountering an error, to prevent later errors
+9. Documentation: Updated for Zen_AddLoadoutDialog
+
+3/14/14
+1. Fixed: Zen_CreateObjective caused an error if the convoy's extra troops were killed just as their vehicle stopped
+2. Fixed: Zen_OrderInfantryPatrol sometimes caused an error if all the groups were dead
+3. Fixed: Zen_TriggerAreDead failed the check of max living count when given group
+4. Fixed: Zen_SpawnParachute now makes the object invulnerable until it reaches the ground
+5. Improved: Zen_SpawnVehicle no longer forces the vehicle to be at the exact point given, to avoid collisions
+6. Documentation: Added Infantry Showcase Remake Demonstration
+
+3/10/14
+1. New Function: Zen_SpawnAircraft
+2. Fixed: Zen_StringGenerateRandom placed '' quotes in the string, ending it too early in a rare case
+3. Fixed: Zen_InvokeFireSupport guided rounds caused an error on impact
+4. Fixed: Zen_UpdateFireSupport placed the data back into the global array in the wrong format
+5. Fixed: Zen_CreateLoadout did not remove itself from the stack
+6. Fixed: Zen_MoveAsSet and Zen_RotateAsSet could tilt objects into the ground
+7. Fixed: Zen_SpawnInfantry did not provide the correct literal default for faction to Zen_ConfigGetVehicleClasses, although it worked anyway
+8. Fixed: Zen_SpawnVehicleCrew did not detect jet aircraft correctly
+9. Fixed: Zen_TriggerAreDead printed an error if the object died during the first iteration of the loop
+10. Improved: Zen_ArrayRemoveDead altered to function differently than Zen_ConvertToObjectArray
+11. Improved: Zen_ConfigGetVehicleClasses treated upper and lower case arguments differently, repeating previous filtering work
+12. Improved: Added error checking to Zen_SpawnGroup, Zen_SpawnVehicle
+13. Improved: Zen_SpawnGroup now checks that the classname is for a human
+14. Improved: Zen_SpawnParachute now makes use of a new parachute folding into ground animation
+15. Improved: Zen_SpawnVehicle now checks that the classname is not for a human
+16. Improved: Zen_SpawnVehicleCrew now recognizes UAV's and UGV's
+17. Tweaked: Zen_InvokeFireSupport guided rounds can now adjust more, but are less accurate
+18. Documentation: Fixed Notepad++ autocompletion file (upper/lower case issue), and added some magic variables and preprocessor keywords
+19. Documentation: Added for Zen_SpawnAircraft
+20. Documentation: Added Spawning Functions demonstration
+21. Documentation: Improved for various spawning functions, Zen_CreateObjective, Zen_ArrayRemoveDead
+22. Documentation: Updated Stack Track demonstration with the latest improvements
+
+3/9/14
+1. Fixed: Zen_StringGenerateRandom placed "" quotes in the string, ending it too early
+2. Fixed: Zen_FindGroundPosition, Zen_GetAllInArea, Zen_TrackGroups, Zen_OrderInfantryPatrol, Zen_SpawnAmbientVehicles, Zen_TriggerAreaClear checked arguments wrong
+3. Improved: All stack traces now print in ascending order with each plate on a separate line
+4. Improved: Zen_ConvertToObjectArray, Zen_ConvertToGroupArray now filter out null objects and groups when given a side
+5. Improved: Zen_ConvertToObjectArray now removes dead objects
+6. Improved: Zen_MultiplyDamage now checks if the unit is alive
+7. Improved: Zen_FindGroundPosition now returns the position of (1) if an argument error occurs
+8. Improved: Zen_FindGroundPosition argument checking now handled by only one function (optimization)
+9. Improved: Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles hide parameter now specifies units to hide from
+10. Improved: Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles hiding markers only works in multiplayer
+11. Improved: Zen_SpawnInfantryGarrison now checks for buildings with no valid positions
+12. Tweaked: Added a new vest to the guerilla loadout
+13. Tweaked: Removed urban camouflage from Zen_GiveLoadoutOpfor
+14. Documentation: Added section to FrameworkIntroduction
+15. Documentation: Updated HowToDebug file with most recent stack printing example
+16. Documentation: Updated for Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles
+
+3/5/14
+1. New Function: Zen_StringGenerateRandom
+2. Fixed: Argument checking errors now give the correct number of the argument
+3. Fixed: Zen_SpawnAmbientVehicles argument checking
+4. Fixed: Zen_SpawnInfantryGarrison entered an infinite loop for buildings with no roof
+5. Improved: Argument checking optimized for all functions
+6. Improved: Zen_ArrayFilterCondition, Zen_ArrayFilterValues, Zen_ArrayRemoveValuedSlice, Zen_CreateFireSupport, Zen_CreateLoadout, Zen_InvokeTask, and Zen_SpawnMarker now use Zen_StringGenerateRandom
+7. Improved: Zen_SpawnAmbientVehicles now garbage collects markers
+8. Improved: Zen_SetTaskCurrent now accepts groups and sides for the units to set for
+9. Documentation: Added for Zen_StringGenerateRandom
+10. Documentation: Added similar sqf language files for different color backgrounds
+11. Documentation: Legal.txt, Readme.txt, and Zen_Misc readme updated
+12. Documentation: Updated for Zen_SetTaskCurrent
+
+2/27/14
+1. Improved: Optimized all Stack Trace removals
+
+2/25/14
+1. Fixed: Zen_AddFireSupportAction used the wrong cursor texture, giving an error
+2. Fixed: Zen_AddFireSupportAction printed the wrong ETA time for called support
+3. Improved: Zen_SpawnInfantryGarrison no longer spawns units on the outside walls of buildings
+4. Documentation: Updated for Zen_OrderInsertion
+
+2/24/14
+1. Improved: Zen_AddGiveMagazine and Zen_AddRepackMagazines do not allow the action to appear when underwater
+2. Improved: Zen_InvokeTask and Zen_InvokeTaskBriefing now print an error if the parent task does not exist
+3. Documentation: Added an interesting section to SQFOverview.txt
+4. Documentation: Added Stack Trace demonstration
+
+2/23/14
+1. Fixed: Zen_ArrayReplaceValueNested did not replace values not nested in the given array
+2. Fixed: Zen_RemoveFireSupportAction expected an extra unnecessary argument
+3. Fixed: Zen_TrackVehicles did not update the marker text correctly
+4. Fixed: Zen_OrderAircraftPatrol did not correct the helicopter's destination using a trig angle
+5. Improved: All functions now also check for a minimum number of arguments
+6. Improved: Zen_ConvertToGroupArray and Zen_ConvertToObjectArray now remove null objects and groups
+7. Improved: Zen_FindInRange parameters reorganized for easier usage
+8. Improved: Optimized Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles
+9. Improved: Zen_OrderFastRope moving units on the rope greatly optimized, affects Zen_OrderInsertion
+10. Improved: Optimized Zen_FindGroundPosition by removing several private functions from the stack trace
+11. Documentation: Corrected for Zen_ArraySortDistance, Zen_FindAveragePosition, Zen_FindInRange, Zen_MultiplyDamage, Zen_OrderInsertion, Zen_SpawnAmmoBox, Zen_ReassignTask, Zen_RemoveTask, and Zen_SetTaskCurrent
+
+2/22/14
+1. New Function: Zen_ArrayReplaceValue
+2. New Function: Zen_ArrayReplaceValueNested
+3. New Function: Zen_ArraySortMax
+4. New Function: Zen_ArraySort
+5. New Function: Zen_FindNearHeight
+6. Fixed: Zen_ConfigGetVehicleClasses returned uav classes when asked for a helicopter
+7. Fixed: Zen_AddLoadoutDialog used the wrong textures for the scrollbar
+8. Fixed: Zen_SpawnGroup now spawns units at sea level instead of at the sea bottom
+9. Fixed: Zen_SpawnHelicopter attempted to spawn a crew for a uav
+10. Fixed: Zen_ValueFindInArray did not search for some types correctly
+11. Improved: All functions now check parameters for the correct type(s) or nil value
+12. Improved: Zen_CreateObjective did not default on task text when given a bad type
+13. Improved: Zen_FindGroundPosition now supports filtering based upon altitude
+14. Documentation: Corrected for Zen_FindMaxDistance, Zen_FindTerrainSlope, Zen_FindMinDistance, Zen_IsNearWater, Zen_IsPointInPoly, and Zen_IsRayInPoly
+15. Documentation: Added for Zen_ArrayReplaceValue, Zen_ArrayReplaceValueNested, Zen_ArraySortMax, Zen_ArraySort, and Zen_FindNearHeight
+16. Documentation: Added Readme files for Zen_Diagrams and Zen_SampleMissions
+17. Documentation: Updated for Zen_FindGroundPosition
+
+2/21/14
+1. Fixed: Numerous functions exited without removing themselves from the Stack Trace
+2. Fixed: Rare issue where Zen_InvokeFireSupport, using specific artillery rounds, printed an error
+3. Fixed: Zen_OrderInsertion now prevents the AI from becoming stuck as they try to exit a helicopter
+4. Fixed: Zen_OrderExtraction and Zen_OrderInsertion now keep a helicopter's engine running
+5. Improved: Zen_SpawnVehicle now prints an error when no object can be spawned from the given classname
+6. Documentation: Added 3 full sample missions using the framework
+7. Documentation: Added Diagrams for several functions
+8. Documentation: Added HowToDebug, HowToUseDocumentation files
+9. Documentation: Added FAQ file
+10. Documentation: Updated Readme and several functions
+
+2/20/14
+1. Fixed: Zen_TrackGroups, Zen_TrackInfantry, Zen_TrackVehicles did not default on marker text correctly in a rare case
+2. Fixed: Zen_SpawnCamp did not rotate the weapon on the table
+3. Improved: Stack Trace system implemented for all functions, errors will now return the stack trace
+4. Improved: Added error checking for several functions
+5. Improved: Renamed Zen_ArrayFindNestedIndex to Zen_ArrayGetNestedIndex
+6. Improved: Renamed Zen_ArrayFindNestedValue to Zen_ArrayGetNestedValue
+7. Documentation: Improved, all 'spawn' type functions now state their execution time envelope
+8. Documentation: Updated for Zen_ArrayGetNestedIndex, Zen_ArrayGetNestedValue
+
+2/19/14
+1. Fixed: Zen_GetUnitLoadout did not add the magazines from the currently equipped weapons properly
+2. Fixed: Zen_GiveLoadout did not distinguish custom from preset loadouts by side correctly
+3. Fixed: Zen_GiveLoadoutCustom did not check for empty arguments correctly
+4. Fixed: Zen_TriggerAreaSecure printed an error when given a side, and all objects of that side died upon completing the trigger condition
+5. Improved: Zen_GiveLoadoutCustom now supports random magazines
+6. Improved: Zen_GiveLoadoutCustom now supports pairing random magazines with random weapons
+7. Documentation: Updated for Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, Zen_OrderInfantryPatrol, Zen_OrderVehiclePatrol, Zen_SpawnBoat, Zen_SpawnHelicopter, Zen_SpawnGroundVehicle
+8. Documentation: Improved Custom Loadouts Demonstration
+
+2/17/14
+1. Improved: Zen_SetWeather instant overcast change now sync'd better
+2. Improved: Optimized Zen_FindGroundPosition marker calculations
+3. Improved: Zen_FindGroundPosition road parameter now supports avoiding roads
+4. Documentation: Fixed for Zen_SetAISkill
+5. Documentation: Added for Zen_FindGroundPosition demonstration
+6. Documentation: Updated for Zen_FindGroundPosition
+7. Documentation: Improved FrameworkIntroduction, Readme, and Legal files
+
+2/16/14
+1. New Function: Zen_ArrayGetType
+2. Fixed: Zen_RotateAsSet did not sync the new direction to clients
+3. Fixed: Zen_TriggerAreaClear printed an error when given a side, and all objects of that side died upon completing the trigger condition
+4. Improved: Zen_ArrayGetIndexedSlice now prints an error if the given array is empty
+5. Improved: Zen_AddGiveMagazine now plays an animation for the giving unit
+6. Improved: Zen_AddRepackMagazines now plays the animation 1 time for each magazine to repack
+7. Improved: Zen_AddRepackMagazines now plays the next animation with less delay
+8. Improved: Zen_MoveAsSet and Zen_RotateAsSet now use Zen_ArrayGetType
+9. Improved: Optimized Zen_TrackVehicles marker type selection
+10. Improved: Zen_SpawnParachute now makes the parachute fall to rest on the ground more realistically
+11. Documentation: Added for Zen_ArrayGetType
+12. Documentation: Updated for Zen_ArrayFilterCondition, Zen_AddFireSupportAction, Zen_InvokeFireSupport, Zen_CreateLoadout, Zen_GetLoadoutData, Zen_GiveLoadoutCustom
+
+2/15/14
+1. Fixed: Zen_GiveLoadoutIndfor and Zen_GiveLoadoutOpfor did not select from the correct gear for the 'guerrilla' loadout
+2. Fixed: Zen_RotateAsSet did not rotate the objects themselves
+3. Improved: Zen_AddRepackMagazines now does not repack if there are no partial magazines
+4. Improved: Removed plain helmets from Zen_GiveLoadoutBlufor, they are ugly
+5. Improved: Zen_GiveLoadoutCustom can now give weapons and attachments randomly
+6. Improved: Changed Zen_Damage_Increase default value to 2.0, following version 1.10 body armor fixes
+7. Improved: Zen_FindGroundPosition checking of icon marker argument removed, it should behave as though an object was given
+8. Documentation: Improved Custom Loadout Demonstration
+9. Documentation: Updated for Zen_MultiplyDamage
+
+2/14/14
+1. New Function: Zen_ArrayAppend
+2. New Function: Zen_ArrayAppendNested
+3. New Function: Zen_RotateAsSet
+4. Fixed: Zen_AddLoadoutDialog used the wrong font for ArmA version 1.10
+5. Improved: Used Zen_ArrayAppend and Zen_ArrayAppendNested in many functions
+6. Improved: Randomized several functions with Zen_RotateAsSet
+7. Improved: Zen_ArrayGetIndexedSlice upper index now defaults to the last element of the array
+8. Improved: Zen_ConvertToGroupArray and Zen_ConvertToObjectArray now print an error if an empty array is given
+9. Improved: Fire Support system internal data structure standardized
+10. Improved: Zen_AddLoadoutDialog remove parameter now optional
+11. Improved: Zen_AreInArea, Zen_AreNotInArea, Zen_GetAllInArea, Zen_TriggerAreaClear, and Zen_TriggerAreaSecure now accept a list of blacklisted markers
+12. Improved: Optimized and reorganized Zen_AreInArea, Zen_AreNotInArea, Zen_GetAllInArea, Zen_TriggerAreaClear, and Zen_TriggerAreaSecure
+13. Improved: Zen_MoveAsSet now works with markers
+14. Improved: Zen_UpdateTask now has a parameter for updating parent and child tasks
+15. Improved: Added legal text to documentation files
+16. Documentation: Updated for Zen_MoveAsSet, Zen_ArrayGetIndexedSlice, Zen_UpdateTask, Zen_AddLoadoutDialog, Zen_AreInArea, Zen_AreNotInArea, Zen_GetAllInArea, Zen_TriggerAreaClear, and Zen_TriggerAreaSecure
+17. Documentation: Added for Zen_ArrayAppend, Zen_ArrayAppendNested, Zen_RotateAsSet
+
+2/10/14
+1. Added: MP Remote Actions and Objectives Demonstration
+2. Documentation: Updated notepad++ sqf language file with 1.12 scripting commands
+3. Documentation: Fixed notepad++ sqf language file 'waitUntil' should be red
+
+2/9/14
+1. Fixed: Zen_TriggerAreNear did not exit when all of the units to check where dead
+2. Improved: Zen_TriggerAreDead now completes the task when no units are alive if a negative maximum was entered
+
+2/2/14
+1. Added: Custom Loadout Demonstration
+2. Improved: Zen_ConvertToGroupArray and Zen_ConvertToObjectArray now accept multiple elements
+3. Documentation: Improved for Zen_OrderExtraction and Zen_OrderInsertion
+4. Documentation: Updated for Zen_ConvertToGroupArray and Zen_ConvertToObjectArray
+5. Documentation: Fixed for Zen_FindAveragePosition
+
+1/31/14
+1. Documentation: Fixed for Zen_TriggerAreaSecure, Zen_TriggerAreNear
+
+1/28/14
+1. Fixed: Zen_MoveAsSet did not get the center of the objects correctly
+2. Improved: Zen_TriggerAreNear parameters reordered to conform to other trigger functions
+
+1/26/14
+1. Fixed: Zen_TriggerAreNear did not interpret an x,y,z position correctly
+2. Improved: Optimized Zen_FindTerrainSlope
+3. Improved: Zen_OrderHelicopterLand now opens the helicopter's doors upon landing, affects Zen_OrderInsertion and Zen_OrderExtraction
+4. Improved: Zen_TriggerAreNear now follows objects and groups dynamically
+5. Documentation: Updated for Zen_TriggerAreNear, Zen_MoveAsSet
+
+1/23/14
+1. Fixed: Zen_OrderInfantryPatrolBuilding placed all units in different groups
+2. Fixed: Zen_SpawnAmbientVehicles created debug markers
+3. Improved: Zen_GetAllInArea now supports filtering based upon side
+4. Improved: Added error reporting to Zen_InvokeTask, Zen_TriggerAreDead
+5. Documentation: Updated and revised for various Object, Objective, Orders, Spawning, Task, and Trigger Functions
+
+1/22/14
+1. Improved: Added error reporting to Zen_AddFireSupportAction, Zen_CreateLoadout
+2. Improved: Optimized Zen_FindValidDirection
+3. Documentation: Corrected for Zen_UpdateFireSupport
+4. Documentation: Updated and revised for various Fire Support, Loadout, Math, and Misc Functions
+
+1/21/14
+1. Fixed: Zen_ArraySortDistance considered units that it had already sorted
+2. Improved: Optimized Zen_ArrayFindAverage
+3. Improved: Added error reporting to Zen_ArrayFilterCondition, Zen_ArrayFilterValues, Zen_ArrayGetDelimitedSlice, Zen_ArrayGetIndexedSlice, Zen_ArrayRemoveDead, Zen_ArrayRemoveValuedSlice, Zen_ArraySortDistance, Zen_ArrayShuffle, Zen_StringCapitalizeLetter, Zen_StringFindReplace, Zen_StringGetDelimitedPart
+4. Documentation: Corrected and tweaked for various Data Functions
+
+1/20/14
+1. New Function: Zen_OrderVehicleDrop
+2. New Function: Zen_MultiplyDamage
+3. Fixed: Zen_MoveInVehicle did not account for a driver already being in the vehicle
+4. Fixed: Zen_MoveInVehicle assumed there would be enough units for every turret seat
+5. Fixed: Zen_MoveInVehicle did not fill all turret seats when some seats were already filled and too few units were given
+6. Documentation: Added for Zen_OrderVehicleDrop, Zen_MultiplyDamage
+7. Documentation: Fixed for Zen_PrintError, Zen_AreTasksComplete
+
+1/13/14
+1. Fixed: Zen_TrackVehicles did not change the marker color to gray if the crew was dead inside the vehicle
+2. Fixed: Zen_GetAllInArea did not return any vehicles
+
+1/11/14
+1. New Function: Zen_SpawnParachute
+2. Fixed: Zen_OrderFastRope assumed there could be a building over the ocean
+3. Added: List of private functions and reserved variables to Index.txt
+4. Improved: Renamed several internal variables for consistency, does not affect usage of public functions
+5. Documentation: Added for Zen_SpawnParachute
+
+1/10/14
+1. New Function: Zen_IsReady
+2. Improved: Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, and Zen_OrderVehiclePatrol now use Zen_IsReady
+3. Documentation: Added for Zen_IsReady
+
+1/9/14
+1. Tweaked: Loadout preset 'Guerrilla' GPS and sight removed, random weapons chances tweaked
+
+1/8/14
+1. Fixed: Zen_AddLoadoutDialog now restricts access to a 3m radius instead of infinite range
+2. Fixed: Zen_OrderFastRope now correctly determines the height of any building to within 0.1 meters
+3. Improved: Zen_OrderFastRope old handling of buildings (and errors in their heights) removed
+
+1/7/14
+1. Fixed: Zen_SetAISkill interpreted a range of values wrong, (all presets were also wrong)
+2. Fixed: Zen_OrderFastRope did not wait for nonlocal units to reach the ground
+3. Fixed: Zen_OrderFastRope did not end the fastroping sequence if some units were dead in the helicopter
+
+1/5/14
+1. Fixed: Zen_OrderFastRope detection of building touching the rope
+2. Documentation: Corrected for Zen_InvokeTask
+
+1/4/14
+1. Fixed: Zen_IsPointInPoly now checks for a radius of 0, (avoids 0 divisor error)
+2. Fixed: Zen_OrderBoatPatrol, Zen_OrderVehiclePatrol, and Zen_OrderAircraftPatrol did not stop ordering the vehicle when the crew is dead
+3. Fixed: Zen_ReassignTask did not refresh the correct state of the task for the units added
+
+1/2/14
+1. Tweaked: Loadout preset 'Guerrilla' now has no NVG's
+2. Tweaked: Zen_SetAISkill preset values
+
+1/1/14
+1. Fixed: Zen_ConfigGetTowns swapped the X and Y dimensions
+2. Fixed: Zen_OrderFastRope did not detect buildings properly
+3. Fixed: Zen_OrderHelicopterLand did not force a helicopter to hover lower than 50m for fastroping (rope is only 50m long)
+4. Added: New loadout presets 'Miner', 'EOD Specialist', 'Helicopter Crew', 'Diver Sapper', 'UAV Operator', 'Guerrilla'
+5. Improved: Zen_GiveLoadout all presets now give random smoke and chemlight colors
+6. Improved: Zen_SpawnVehicleCrew now adds a second pilot instead of a crewman to all helicopters
+7. Documentation: Updated for Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, and Zen_GiveLoadoutOpfor
+8. Documentation: Corrected for Zen_FindGroundPosition, Zen_ArrayGetIndexedSlice
+
+12/31/13
+1. Fixed: Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles did not show markers to players that had respawned when using default value
+
+12/30/13
+1. Fixed: Zen_UpdateLoadout did not retain the loadout name string correctly
+2. Fixed: Zen_OrderFastRope does not allow the helicopter to descend and twitch as much with an AI pilot
+3. Fixed: Zen_OrderInsertion sometimes did not make a helicopter proceed to the next point after a fastrope insertion
+4. Fixed: Zen_OrderHelicopterLand sometimes let the AI get stuck hovering
+5. Tweaked: Slight loadout preset gear changes
+
+12/29/13
+1. Fixed: Zen_TrackVehicles text issues for vehicles with no driver, mortars etc.
+2. Fixed: Zen_OrderFastRope now prevents an AI pilot from flying away during fastroping
+3. Fixed: Zen_OrderFastRope stops soldiers from fastroping underwater
+4. Improved: Zen_OrderHelicopterLand now makes the helicopter move to its destination more accurately
+5. Improved: Zen_OrderFastRope now allows fastroping onto buildings
+
+12/28/13
+1. Fixed: Zen_TrackGroups 'name' text did not disappear when a player teamswitched
+2. Improved: Zen_TrackGroups now places the marker at the average position of all group members
+3. Improved: Zen_TrackVehicles now shows the side color of the vehicle based upon the driver
+4. Tweaked: Loadout preset 'sapper' chemlights removed
+
+12/27/13
+1. New Function: Zen_AddFastRope
+2. New Function: Zen_OrderFastRope
+3. Fixed: Zen_CreateObjective 'box' type printed out the wrong task text
+4. Improved: Zen_AddGiveMagazines now prints out a message if the giver has no magazines at all
+5. Improved: Zen_AddRepackMagazines now prints out a message if the person has no repackable magazines
+6. Improved: Zen_CreateObjective 'wreck' type should now be easier to destroy with explosive charges
+7. Improved: Zen_OrderHelicopterLand and Zen_OrderInsertion now support fastroping from helicopters
+8. Documentation: Added for Zen_AddFastRope, Zen_OrderFastRope
+9. Documentation: Updated for Zen_OrderHelicopterLand, Zen_OrderInsertion, Zen_OrderInfantryPatrol
+
+12/26/13
+1. Improved: Zen_AddLoadoutDialog now does not appear when the object it is assigned to is destroyed
+
+12/25/13
+1. New Function: Zen_SpawnFortification
+2. Improved: Zen_GiveLoadoutOpfor urban camo and brown backpacks added
+3. Improved: Zen_CreateObjective 'mortar' and 'box' types now use Zen_SpawnFortification
+4. Improved: Zen_SpawnConvoy now features ammo, fuel, medical, and repair vehicles
+5. Documentation: Added for Zen_SpawnFortification
+
+12/22/13
+1. Fixed: Zen_AddGiveMagazine sometimes stated the receiver did not have inventory space when he did
+2. Fixed: Zen_CreateLoadout did not send data to client machine correctly
+3. Fixed: Loadout preset 'medic' sometimes had too much ammo or too many medkits
+4. Fixed: Zen_MoveInVehicle did not put units into a static mortar or machinegun correctly
+5. Fixed: Zen_SpawnConvoy made two vehicles stop, preventing the convoy from moving properly
+6. Fixed: Zen_SpawnHelicopter did not search the config for classes properly
+7. Fixed: Zen_SpawnVehicleCrew now uses the side argument
+8. Fixed: Zen_SpawnVehicleCrew assumed that static mortars and machineguns have a driver
+9. Fixed: Zen_SpawnVehicleCrew did not detect different types of helicopters properly
+10. Improved: Zen_InvokeFireSupport now supports more ammunition types
+11. Improved: Renamed Zen_AddLoadout to Zen_GiveLoadout
+12. Improved: Renamed Zen_AddLoadoutBlufor to Zen_GiveLoadoutBlufor
+13. Improved: Renamed Zen_AddLoadoutCustom to Zen_GiveLoadoutCustom
+14. Improved: Renamed Zen_AddLoadoutIndfor to Zen_GiveLoadoutIndfor
+15. Improved: Renamed Zen_AddLoadoutOpfor to Zen_GiveLoadoutOpfor
+16. Improved: Zen_GiveLoadoutOpfor urban uniforms added
+17. Improved: Loadout preset 'recon' now has IR grenades
+18. Improved: Blufor loadout presets 'recon', 'spotter', and 'diver land' now have a black MX rifle
+19. Improved: Opfor and independent loadout preset 'sniper' now has the LRPS scope
+20. Improved: Opfor loadout preset 'marksman' now has a DMS scope
+21. Improved: Zen_SpawnAmmoBox now has some M6 SLAM demolition charges, affects Zen_CreateObjective 'mortar' and 'box' types
+22. Improved: Zen_SpawnVehicleCrew now fills the vehicle with the correct type of crew based upon vehicle type
+23. Improved: Zen_SpawnVehicleCrew side argument is optional, default based upon vehicle given
+24. Improved: Zen_SpawnVehicleCrew now places helicopter pilots and crew in the correct slots
+25. Improved: Zen_SpawnVehicleCrew now spawns the crew directly next to their vehicle before moving them in
+26. Improved: Zen_SpawnVehicleCrew now properly supports ships
+27. Documentation: Updated for Zen_SpawnVehicleCrew, Fire Support System
+
+12/21/13
+1. Fixed: Zen_AddGiveMagazine did not correctly determine if the giver's magazines did not match the receiver's weapon
+2. Improved: Zen_SpawnGroup no longer requires a side
+3. Tweaked: Loadout presets slightly
+4. Tweaked: Zen_SetAISkill presets slightly
+5. Documentation: Updated for Zen_SpawnGroup
+
+12/17/13
+1. Improved: Loadout presets 'spotter' and 'sniper' now have more ammo
+
+12/16/13
+1. Fixed: Loadout preset 'medic' placed too many items in the uniform
+2. Fixed: Zen_TriggerAreRescued briefly showed the task as succeeded when there was only one hostage and that hostage died
+3. Improved: Zen_GiveLoadoutBlufor new helmets added
+4. Improved: Zen_GiveLoadoutBlufor soft hats removed from standard infantry, for SOF only
+5. Improved: Zen_AddGiveMagazine action now prints out a message if you have no matching magazines to give
+6. Improved: Zen_AddGiveMagazine action now prints out a message if the receiver does not have room in his inventory
+7. Improved: Zen_AddGiveMagazine action now prints out a message to the receiver, not just the giver
+8. Improved: Zen_AddGiveMagazine action now prints out a better name for the magazine given
+9. Improved: Zen_AddGiveMagazine action now always shows a hint, even with tutorial hints disabled
+
+12/15/13
+1. New Function: Zen_AddEject
+2. Fixed: Zen_TriggerAreRescued sometimes counted the rescued person as an enemy
+3. Improved: Zen_CreateFireSupport many arguments are now optional
+4. Improved: Zen_CreateObjective 'mortar' type now creates a crew for the mortars
+5. Improved: Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles can now sequentially number markers
+6. Documentation: Added for Zen_AddEject
+7. Documentation: Updated for Zen_TrackGroups, Zen_TrackInfantry, Zen_TrackVehicles, Zen_CreateFireSupport
+
+12/14/13
+1. Fixed: Zen_CreateObjective map marker disappeared on dedicated server
+2. Fixed: Zen_AddFireSupportAction action sent wrong arguments to other clients
+3. Improved: Zen_SetAISkill now accepts a range of skill values for each skill type
+4. Documentation: Improved for Zen_SpawnInfantry, Zen_SpawnInfantryGarrison
+5. Documentation: Updated for Zen_SetAISkill
+
+12/13/13
+1. Improved: Optimized and reorganized preset loadouts random gear selection, for easier additions and revisions
+2. Improved: Zen_GiveLoadoutIndfor lime green hat removed
+3. Tweaked: Zen_SetAISkill presets for accuracy
+
+12/11/13
+1. Fixed: Zen_AddFireSupportAction did not parse arguments properly for remote execution on a dedicated server
+2. Fixed: Zen_ShowHideMarkers now working properly on a dedicated server
+3. Fixed: Zen_TrackGroups, Zen_TrackInfantry, and Zen_TrackVehicles hid all markers on a dedicated server
+
+12/9/13
+1. Fixed: Various multiplayer issues with Fire Support system
+2. Improved: Zen_ShowHideMarkers optimized
+
+12/8/13
+1. Fixed: Zen_AddFireSupportAction did not remove a comm menu item properly when multiple items using the same template were given
+
+12/7/13
+1. Fixed: Zen_AddGiveMagazine sometimes did make the action show when it should
+2. Fixed: Zen_IsFacing now returns false to a unit facing itself
+3. Fixed: Zen_SpawnCamp sometimes caused a missing weapon error
+4. Improved: Zen_CreateObjective 'pow' type now uses loadout system to equip
+5. Improved: Zen_FindGroundPosition ambient clutter filter logic and skip value
+6. Documentation: Updated for Zen_FindGroundPosition
+
+12/6/13
+1. Improved: Optimized Zen_FindGroundPosition ellipse and rectangle position calculation
+2. Improved: Zen_SpawnConvoy placement of vehicles to avoid trees, rocks, and other vehicles
+3. Documentation: Updated for Zen_SpawnConvoy
+
+12/1/13
+1. New Function: Zen_TrackVehicles
+2. Improved: Zen_CreateObjective 'convoy' type now has infantry disembark and patrol once the convoy reaches its destination
+3. Improved: Zen_SpawnConvoy now does not require end destination or speed parameters, to match the style of other spawn functions
+4. Improved: Zen_SpawnConvoy now spawns vehicles in better places around the given point, so they get stuck less
+5. Improved: Zen_SpawnConvoy now does not spawn any heavy armor or tracked vehicles
+6. Improved: Zen_TriggerAreDead now accepts a number of living objects that completes
+7. Improved: Zen_TriggerAreRescued detection of rescuers and enemies
+8. Documentation: Added for Zen_TrackVehicles
+9. Documentation: Updated for Zen_SpawnConvoy, Zen_TriggerAreDead
+
+11/30/13
+1. Fixed: Loadout preset 'fighter pilot' now has a parachute
+2. Fixed: Zen_TrackGroups did not hide the group's destination correctly
+3. Improved: Zen_SetAISkill presets now randomizes skills among all given units, instead of one random value assigned to all units
+4. Improved: Zen_TrackGroups now places better group symbols for each side and shows group strength
+5. Improved: Zen_TrackGroups now updates the strength of the groups
+6. Improved: Zen_TrackGroups now deletes the group marker when all units are dead
+7. Tweaked: Loadout preset 'sapper'
+8. Documentation: Updated for Zen_TrackGroups, Zen_TrackInfantry
+
+11/29/13
+1. New Function: Zen_RemoveFireSupport
+2. New Function: Zen_RemoveFireSupportAction
+3. New Function: Zen_RemoveLoadout
+4. New Function: Zen_UpdateLoadout
+5. Fixed: Zen_AddLoadoutDialog printed an error when a player picked a preset loadout even though everything worked
+6. Improved: Zen_AddFireSupportAction multiplayer sync optimized
+7. Improved: Zen_SetViewDistance now accepts shadow view distance
+8. Improved: Zen_SetViewDistance now has optional parameters, with skipping
+9. Improved: Zen_SpawnBoat, Zen_SpawnGroundVehicle, and Zen_SpawnHelicopter now set the skill of the crew correctly, was too high
+10. Documentation: Added for Zen_RemoveFireSupport, Zen_RemoveFireSupportAction, Zen_RemoveLoadout, Zen_UpdateLoadout
+11. Documentation: Updated for Zen_AddFireSupportAction, Zen_AddLoadoutDialog, Zen_GetUnitLoadout, Zen_ArrayGetNestedIndex, Zen_ArrayGetNestedValue
+
+11/28/13
+1. New Function: Zen_GiveLoadoutCustom
+2. New Function: Zen_CreateLoadout
+3. New Function: Zen_GetLoadoutData
+4. New Function: Zen_GetUnitLoadout
+5. New Function: Zen_SetViewDistance
+6. Improved: Renamed Zen_ArrayPickRandom to Zen_ArrayGetRandom
+7. Improved: Zen_InvokeFireSupport guided ordinance now guides to a laser designated spot better
+8. Improved: Zen_GiveLoadout now supports custom loadouts
+9. Improved: Zen_AddLoadoutDialog now detects custom loadouts and equips them to the player, preset loadouts still assigned by player side
+10. Documentation: Added for Zen_GiveLoadoutCustom, Zen_CreateLoadout, Zen_GetLoadoutData, Zen_GetUnitLoadout, Zen_SetViewDistance
+11. Documentation: Updated for Zen_FindGroundPosition, Zen_ArrayGetRandom, Zen_GiveLoadout
+
+11/27/13
+1. Reorganized: Added Loadout functions folder, updated documentation
+2. New Function: Zen_InvokeTaskBriefing
+3. Fixed: Zen_OrderExtraction and Zen_OrderInsertion compared the empty seats of the vehicle incorrectly
+4. Fixed: Zen_FindGroundPosition read limited angles wrong when given a marker
+5. Added: Zen_FindGroundPosition limited angle now accepts argument for angle type, 'compass' or 'trig'
+6. Added: Zen_InvokeTask now accepts a string name for the task
+7. Improved: Zen_ArrayGetRandom now returns argument if it is not an array
+8. Improved: Optimized Zen_FindDistanceToPolyEdge time and error minimized
+9. Improved: Optimized loadout functions for more multiplayer compatibility
+10. Improved: Optimized Zen_FindGroundPosition finding roads when index is '2' (required)
+11. Improved: Zen_FindGroundPosition random position in rectangle function, for fewer checks of restrictions
+12. Improved: Added more weapon possibilities for the table in Zen_SpawnCamp
+13. Improved: Renamed Zen_TriggerRescue to Zen_TriggerAreRescued
+14. Tweaked: Minor changes to loadouts
+15. Tweaked: Edited Framework Introduction slightly
+16. Documentation: Updated for Zen_FindGroundPosition, Zen_InvokeTask, Zen_ArrayGetRandom
+17. Documentation: Added for Zen_InvokeTaskBriefing
+
+11/25/13
+1. New Function: Zen_GiveLoadout
+2. Fixed: Zen_GiveLoadoutOpfor gave a backpack with a green texture
+3. Fixed: Zen_GiveLoadoutBlufor gave 'officer' an Opfor sight
+4. Fixed: Zen_CreateObjective 'officer' now sets the officer's skill correctly, was too high
+5. Added: Zen_GiveLoadoutOpfor 'marksman' now has Opfor dmr
+6. Improved: Loadouts now give heavier pistols
+7. Improved: Zen_CreateObjective 'wreck' 'officer' types give loadouts to spawned units
+8. Tweaked: Zen_GiveLoadoutIndfor 'helicopter pilot' now uses the PDW 2000 submachinegun
+9. Tweaked: Zen_GiveLoadoutOpfor 'AT Rifleman' now gets an HE rocket
+10. Tweaked: Loadouts give units the correct nvgs for their side
+11. Tweaked: Loadouts 'spotter' now gets a laser designator
+12. Tweaked: Loadouts 'officer' now has a pistol
+13. Tweaked: Loadouts 'AT Specialist' now gets one HE rocket
+14. Tweaked: Zen_CreateObjective 'wreck' task title changed
+15. Documentation: Added for Zen_GiveLoadout
+
+11/23/13
+1. New Function: Zen_FindInRange
+2. New Function: Zen_UpdateFireSupport
+3. Improved: Zen_CreateFireSupport now accepts range of values for each parameter
+4. Improved: Zen_InvokeFireSupport now prints an error if the given template does not exist
+5. Fixed: Zen_AddFireSupportAction marker created on call removed on all machines after 90 seconds
+6. Added: Fire Support System now supports guided munitions, see documentation
+7. Documentation: Added for Zen_FindInRange, Zen_UpdateFireSupport
+8. Documentation: Updated for Fire Support System
+
+11/21/13
+1. Improved: Added 1.06 scripting commands to Notepad++ auto-complete and sqf language file
+2. Improved: Zen_SetWeather fog height and decay randomized slightly
+3. Improved: Zen_SetWeather handling of instant overcast and change to forecast improved
+4. Tweaked: Zen_SpawnAmmoBox now puts larger explosive into the box, small explosive is useless now, applies to Zen_CreateObjective 'box' and 'mortar' types
+5. Documentation: Updated for Zen_SetWeather
+
+11/18/13
+1. Fixed: Zen_TrackInfantry did not remove the name from a unit if a player teamswitched to that unit then back, leaving the unit as an AI
+
+11/17/13
+1. Improved: Zen_SetWeather handling of instant change to volumetric clouds tweaked
+
+11/16/13
+1. New Function: Zen_MoveAsSet
+2. Added: Documentation for Zen_MoveAsSet
+
+11/13/13
+1. Fixed: Zen_SpawnConvoy gave Zen_SpawnInfantry the wrong faction of troops to spawn, resulting in an error if the convoy was Opfor or Indfor
+
+11/12/13
+1. Improved: Expanded and revised legal text
+2. Improved: Renamed documentation files to the exact name of the corresponding folder whose functions they document
+3. Improved: Revised Readme.txt as a concise overview of documentation resources
+4. Added: Legal.txt file to documentation
+
+11/10/13
+1. Fixed: Zen_ArrayGetNestedIndex returned an index one higher than it should in some instances
+2. Fixed: Zen_FindGroundPosition did not move positions to road when a marker was given
+3. Fixed: Zen_FindGroundPosition did not distribute points evently around an object or position center
+4. Fixed: Zen_SpawnInfantry spawned one unit too many
+5. Fixed: Zen_InvokeTask failed to add a task as a child after using Zen_ReassignTask
+6. Fixed: Zen_ReassignTask did not update the correct part of the local task data when adding a task
+7. Fixed: Zen_TriggerAreRescued did not allow the hostage to move again, if movement was previously disabled
+8. Fixed: Zen_TriggerAreRescued did not handle some hostages dying and others being rescued properly
+9. Fixed: Trigger functions now only exit when the tasks they are given are set to the end state they are given
+10. Improved: Zen_FindGroundPosition limited angle in ellipse marker calculation optimized
+11. Improved: Zen_SpawnInfantry now limits spawns to NATO soldiers by default if given west side, no irregulars mixed in
+12. Improved: Zen_TriggerAreNear now has a parameter for distance from center
+13. Improved: Zen_TriggerAreNear now has a parameter for how many units must be near
+14. Tweaked: Zen_GiveLoadoutBlufor and Zen_GiveLoadoutIndfor have had helmets removed for recon kit
+15. Tweaked: Zen_GiveLoadoutOpfor regular infantry helmets removed from recon kit, SOF helmet remains
+16. Tweaked: Zen_SetAISkill preset values
+17. Added: Zen_GiveLoadoutBlufor now randomly gives British uniforms, vests, and helmets
+18. Improved: Updated documentation for Zen_TriggerAreNear, Zen_TriggerAreRescued, Zen_SpawnInfantry, Zen_SpawnInfantryGarrison
+19. Fixed: Documentation for Zen_TriggerAreNear
+
+11/9/13
+1. New Function: Zen_ConfigGetTowns
+2. New Function: Zen_SpawnAmbientVehicles
+3. Improved: Zen_CreateObjective custom type can now spawn multiple objects of any type and apply the condition to all of them
+4. Improved: Zen_SpawnInfantry and Zen_SpawnInfantryGarrison now accept a single number for how many soldiers to spawn
+5. Improved: Optimized Zen_ConfigGetVehicleClasses filter logic
+6. Improved: Zen_TriggerAreRescued now joins the hostage to the nearest rescuer, rather than any rescuer
+7. Improved: Updated documentation for Zen_SpawnInfantry, Zen_SpawnInfantryGarrison
+8. Added: Documentation for Zen_ConfigGetTowns, Zen_SpawnAmbientVehicles
+
+11/8/13
+1. Improved: Made several Zen_CreateObjective parameters required, to facilitate clear intentions when calling the system
+2. Removed: Zen_CreateObjective 'house' type, it did not fit with the style of other objectives
+3. Improved: Optimized Trigger Functions
+4. Improved: Zen_TriggerAreRescued now detects the side of the rescuers properly
+5. Improved: Zen_TriggerAreNear can now determine if the units are near multiple objects
+6. Improved: Zen_TriggerAreRescued can now handle rescuing multiple people
+7. Improved: Updated and clarified documentation for Zen_CreateObjective, Zen_AreInArea, Zen_TriggerAreNear, Zen_TriggerAreRescued
+
+11/4/13
+1. Improved: Updated legal text
+2. Tweaked: Zen_SetAISkill preset accuracy values
+
+11/3/13
+1. Found Issue: Zen_ShowHideMarkers not working for clients on dedicated server
+2. Tweaked: Zen_SetAISkill preset accuracy values
+3. Fixed: Zen_TriggerAreaSecure caused Zen_ValueIsInArray to print an error when nothing was wrong
+4. Fixed: AI local to a player now get loadouts correctly on a dedicated server
+5. Fixed: Zen_MoveInVehicle did not move a client on a dedicated server
+6. Fixed: Corrected documentation for Zen_AreNotInVehicle, Zen_ArrayFilterCondition, Zen_OrderInfantryPatrol, Zen_AddFireSupportAction
+
+11/2/13
+1. Improved: Zen_ArrayGetNestedIndex now returns the count of the array when no match is found
+2. Fixed: All spelling mistakes in documentation
+3. New Function: Zen_TriggerAreaClear
+4. Fixed: Zen_FindGroundPosition did not exclude non-road positions properly
+5. Improved: Updated documentation for Zen_ArrayGetNestedIndex, Zen_StringFindReplace, Zen_ValueIsInArray, Zen_ValuesAreInArray, Zen_IsSeen, Zen_SetAISkill, Zen_SpawnCamp, and Zen_TriggerAreaSecure
+6. Added: Documentation for Zen_TriggerAreaClear
+
+10/12/13
+1. Improved: Zen_GetTaskDataGlobal, Zen_AreTasksComplete, and Zen_AreUnitsTasksComplete now print an error if the given task does not exist
+2: Improved: Renamed Zen_ArraySum to Zen_ArrayFindSum
+3: Improved: Renamed Zen_ArrayAverage to Zen_ArrayFindAverage
+4: Fixed: Zen_AddFireSupportAction created an entry in the local array even if the player did not get the support
+5. Fixed: Zen_InvokeFireSupport did not print the support request sidechat to all players if the server called the support
+6. Fixed: Zen_AddGiveMagazine and Zen_AddRepackMagazines sometimes did not add an action on a client machine for a nonplayer unit
+7. Improved: Zen_GiveLoadoutBlufor, Zen_GiveLoadoutIndfor, Zen_GiveLoadoutOpfor, and Zen_MoveInVehicle now handle remote execute for non-local objects better
+8. Improved: Documentation for Zen_AreTasksComplete and Zen_AreUnitsTasksComplete
+9. Improved: Zen_SpawnConvoy now spawns vehicles further apart
+10. Improved: AI can now be ordered to use the loadout dialog action
+11. Improved: Zen_CreateObjective now spawns the convoy away from buildings and trees
+12. Improved: Zen_FindGroundPosition now accepts an array of counts for different ambient clutter object types
+
+10/11/13
+1. Improved: Optimized Zen_TriggerAreaSecure, Zen_TriggerAreDead, Zen_TriggerAreNear, Zen_ValueIsInArray, Zen_ValueFindInArray, Zen_ValuesAreInArray, and Zen_TriggerAreRescued
+2: Improved: Renamed Zen_AreTasksComplete to Zen_AreUnitsTasksComplete
+3. Improved: Reordered objective system parameters to offer more freedom and easier control
+4. New Function: Zen_AreTasksComplete; old one has been renamed, this one is different
+5. Improved: Zen_AddLoadoutDialog now accepts an array of objects
+6. Fixed: Zen_AddGiveMagazine sometimes showed the action when the player looked at himself
+7. Improved: Documentation for Zen_TriggerAreaSecure, Zen_CreateObjective, Zen_AreUnitsTasksComplete, and Zen_AddLoadoutDialog
+8. Added: Documentation for Zen_AreTasksComplete
+
+10/10/13
+1. New Function: Zen_ValuesAreInArray
+2: Improved: Zen_ValueIsInArray now accepts multiple values to test if any are in the array
+3: Improved: Zen_CreateObjective now prints an error if custom and convoy are in types array
+4: Added: Documentation for Zen_ValuesAreInArray
+5: Improved: Documentation for Zen_ValueIsInArray
+
+10/6/13
+1. Improved: Added enableSaving line to sample init.sqf to disable saving
+2. Improved: Added new sections to !FrameworkOverview file
+
+10/5/13
+1. Fixed: Zen_SetWeather now works with clouds set to standard or above
+2. Improved: Updated Notepad++ sqf language and autocompletion file with new scripting commands
+3. Improved: Zen_SetAISkill now accepts a short array of skills
+4. Tweaked: Zen_GiveLoadoutBlufor random backpacks
+5. Fixed: Zen_CreateObjective custom type with 'reach' condition gave Zen_TriggerAreNear the wrong arguments
+6. Fixed: Zen_ConfigGetVehicleClasses no longer returns the vehicle ammo box, as it is empty
+7. Added: Zen_CreateObjective new custom objective condition 'protect'
+8. Improved: Zen_CreateObjective custom objective can now create a soldier
+9. Fixed: Zen_SpawnItemsOnTable placed the items floating just above some tables
+10. Improved: Zen_AddFireSupportAction now supports a limited number of calls
+11. Improved: Zen_InvokeFireSupportAction now places a marker where fire support was called
+12. Fixed: Zen_AreUnitsTasksComplete did not count canceled tasks
+13. Improved: Zen_UpdateTask logic for completing parent and child tasks when some are canceled
+14. New Function: Zen_AddLoadoutDialog
+15. New Function: Zen_LoadoutDialogEquip
+16. New Function: Zen_ShowLoadoutDialog
+17. Added: Framework description.ext
+18. Added: Task Removed notification
+19. Added: Better support menu class for Zen_AddFireSupportAction, no more 'call' prefix
+20. Added: Custom dialog menu for selecting a loadout, see Zen_AddLoadoutDialog documentation
+21. Added: Documentation for Zen_AddLoadoutDialog
+22. Improved: Updated documentation for Zen_SetWeather, Zen_AddFireSupportAction, Zen_SetAISkill, Zen_SpawnInfantry, Zen_SpawnInfantryGarrison, and Zen_CreateObjective
+
+10/4/13
+1. Improved: Zen_GiveLoadoutIndfor uniforms, vests, backpacks, and headgear randomized
+2. Improved: Zen_GiveLoadoutOpfor uniforms, vests, backpacks, and headgear randomized
+3. Tweaked: Removed suppressor from sapper loadout
+
+10/3/13
+1. Improved: Zen_GiveLoadoutBlufor vests and backpacks randomized
+
+10/2/13
+1. Fixed: Zen_SpawnConvoy returned soldiers inside the spawned vehicles instead of the vehicles themselves
+2. Tweaked: Zen_CreateObjective convoy task text
+3. Improved: Zen_GiveLoadoutBlufor uniforms and headgear randomized
+
+10/1/13
+1. Improved: Zen_AreUnitsTasksComplete now accepts a string for the task
+2. Improved: Optimized Zen_ArraySortDistance
+3. Improved: Standardized the order of parameters for Data functions
+4. Fixed: Zen_InvokeTask no longer shows an extra notification when creating a child task
+5. Improved: Zen_InvokeTask now has a parameter for the unique task name
+6. Improved: Zen_UpdateTask now has a parameter to show a notification or not
+7. Improved: Updated documentation for Zen_AreUnitsTasksComplete, Zen_InvokeTask, Zen_UpdateTask, Zen_SpawnCamp, Zen_ArrayGetNestedIndex, Zen_ArrayGetNestedValue, Zen_ArrayRemoveValuedSlice, Zen_ArraySortDistance, Zen_StringFindReplace, and Zen_StringGetDelimitedPart
+8. Fixed: Zen_SetWeather reported special internal parameters used for multiplayer synch'ing an error
+9. Fixed: Zen_ShowHideMarkers did not pass the correct arguments to a client machine in remote execution
+10. Fixed: Zen_AreInArea and Zen_AreNotInArea modified the given argument array by reference
+11. Tweaked: Zen_SetAISkill preset values
+
+9/30/13
+1. Added: New skill preset to Zen_SetAISkill, 'Militia'
+2. Improved: Zen_SetAISkill now prints an error if an incorrect present name is given
+3. Tweaked: Skill values in presets of Zen_SetAISkill
+4. Improved: Zen_PrintError now prints errors in sidechat also
+5. Fixed: Zen_SetAISkill did not match presets correctly
+6. Fixed: Zen_SpawnCamp did not put weapons on the tables properly
+7. New Function: Zen_ArrayShuffle
+8. New Function: Zen_SpawnItemsOnTable
+9. New Function: Zen_ValueFindInArray
+10. Improved: Zen_CreateObjective now offsets the camp position slightly from the objective position
+11. Fixed: Zen_ShowHideMarkers did not consider the third argument as optional
+12. Added: Documentation for Zen_ArrayShuffle, Zen_SpawnItemsOnTable, and Zen_ValueFindInArray
+13. Improved: Updated documentation for Zen_ArrayGetDelimitedSlice, Zen_SpawnMarker, Zen_SetAISkill, and Zen_ShowHideMarkers
+
+9/29/13
+1. Improved: Updated loadouts documentation
+2. Improved: Updated Zen_CreateObjective, Zen_FindGroundPosition, Zen_SetWeather, and Zen_OrderInfantryPatrol documentation
+3. Improved: Zen_OrderInfantryPatrol now parses first argument into an array of groups properly
+4. Improved: Finished improving most documentation
+5. Removed: All private functions from Notepad++ autocompletion file
+6. Added: Zen_CreateObjective now places a small camp around some objectives
+7. New Function: Zen_ShowHideMarkers
+8. Added: Documentation for Zen_ShowHideMarkers
+9. Improved: Handling of hiding markers in Zen_CreateObjective, Zen_TrackGroups, and Zen_TrackInfantry
+
+9/28/13
+1. Improved: Renamed all orders functions following standard scheme, Zen_Order*Target*Command
+2. Improved: Renamed loadout functions to Zen_GiveLoadoutBlufor etc.
+3. Improved: Renamed Zen_SetDynamicTaskDestination to Zen_SetTaskTarget
+4. Improved: Reordered parameters of Zen_OrderHelicopterLand
+5. Improved: Zen_OrderInsertion and Zen_OrderExtraction now handle both helicopters and ground vehicles
+6. New Function: Zen_SetTaskTargetClient
+7. Improved: Zen_SetTaskTarget is now much better organized and more efficient
+8. Improved: Zen_SetTaskTarget prints an error if not given an object
+9. Improved: All task system functions checks for locality removed to solve issues when teamswitching in multiplayer
+10. Improved: Optimized Zen_ArrayGetRandom
+11. Improved: Task system functions now print an error when the given task does not exist
+12. Fixed: Patrol functions did not interpret icon markers correctly when given less than 3 arguments
+13. Added: Squad leader, Officer, Fighter pilot, and Crewman loadouts
+14. Improved: Diver land loadout now has uniform, vest, and helmet in backpack
+
+9/27/13
+1. Improved: Zen_SetWeather now uses improved fog
+2. Improved: Updated Zen_SetWeather documentation
+3. Improved: Zen_OrderInfantryPatrol does not order a group to move if a player is the leader
+4. Fixed: Zen_InvokeFireSupport did not convert the first argument to a position
+5. Improved: Zen_FindGroundPosition handling of different min or min/max distance arguments
+
+9/22/13
+1. Improved: Continued to slowly improve documentation
+2. Added: Complete install and usage instructions to Notepad++ sqf language and autocompletion file
+3. Improved: Zen_OrderInfantryPatrol, Zen_OrderAircraftPatrol, Zen_OrderBoatPatrol, Zen_OrderVehiclePatrol now handle icon markers as though they were positions
+4. Fixed: Task system is now working properly on a dedicated server
+
+9/21/13
+1. Fixed: Zen_GiveLoadoutOpfor did not give enough ammo to autorifleman loadout, now has a backpack
+2. Fixed: Zen_SpawnConvoy gave the wrong arguments to Zen_SpawnGroundVehicle and did not spawn anything
+3. Added: Documentation for Zen_ArraySortDistance
+4. Improved: Continued to slowly improve documentation
+
+9/20/13
+1. New Function: Zen_ArraySortDistance
+
+9/19/13
+1. Improved: Continued to slowly improve documentation
+2. Improved: Starting use a new notepad++ functions hint style that shows all the function's documentation
+
+9/18/13
+1. Improved: Continued to slowly improve documentation
+
+9/17/13
+1. Improved: Continued to slowly improve documentation
+2. Improved: Zen_SetWeather now sets rain for a future value if the future value of overcast > 0.7, even if the current value of overcast < 0.7
+
+9/16/13
+1. Improved: Zen_SetWeather only sets rain if overcast is greater than 0.7
+2. Improved: Updated Zen_SetWeather documentation
+3. Improved: Continued to slowly improve documentation
+
+9/15/13
+1. Improved: Updated and revised the introduction file
+2. Improved: Added lazy eval to Zen_ArrayRemoveDead
+3. Added: Documentation for Zen_ArrayInsert
+4. Improved: Zen_AddFireSupportAction now adds actions only to players
+5. Fixed: Documentation errors about patrol functions
+
+9/14/13
+1. Improved: Demonstrations revised and improved
+2. Improved: Reformatted and reworded documentation, standardizing the style
+3. Improved: Revised legal text
+
+9/13/13
+1. Improved: Updated Zen_CreateObjective documentation
+
+9/12/13
+1. Improved: Zen_ConfigGetVehicleClasses optimized with new checking algorithms, now completes in about 1/3 of a second, and instantly when given the same arguments again
+2. Improved: Zen_SetWeather now supports waves
+3. Found Issue: Tested and clarified task known issue
+
+9/11/13
+1. New Function: Zen_SpawnCamp
+2. Added: Documentation for Zen_SpawnCamp
+3. Fixed: Zen_SpawnInfantry included factions that are not in the editor
+4. Improved: Optimized and improved Zen_RepackMagazines with magazinesAmmoFull
+5. Improved: Zen_AddFireSupportAction allows only one use per person
+6. Removed: Zen_FindGridCoordinate
+7. Improved: Added documentation for Zen_SpawnConvoy
+8. Improved: Added more vehicles to Zen_SpawnConvoy
+9. Fixed: Zen_UpdateTask reset a task to created if a player selected it as their current task and the task was updated
+
+9/10/13
+1. Fixed: Zen_FindGroundPosition now shows the arguments as originally given when printing an error
+2. Fixed: Zen_SetWeather did not cause it to start raining if the current value was rain and the future value was not rain
+3. Improved: Zen_ConfigGetVehicleClasses now saves filtered classes and returns them without filtering again if given the same arguments
+
+9/9/13
+1. Improved: Renamed Zen_SpawnBox to Zen_SpawnAmmoBox
+2. Added: Documentation for Zen_SpawnAmmoBox
+3. New Function: Zen_CheckPosition
+4. Improved: Renamed Zen_CheckPositionMarker to Zen_CalculatePositionMarker
+5. Improved: Renamed Zen_CheckPositionObject to Zen_CalculatePositionObject
+6. Improved: Reorganized and optimized Zen_FindGroundPosition point checking functions
+7. Improved: Zen_FindGroundPosition returns the last point calculated instead of [0,0,0] even if it fails to meet the given arguments
+8. Improved: Optimized Zen_FindDistanceToPolyEdge
+9. Improved: Increased accuracy of Zen_FindDistanceToPolyEdge and Zen_IsRayInPoly
+10. Improved: Zen_CreateObjective extra arguments split up from their array
+11. Improved: Zen_CreateObjective now prints an error if extra arguments are missing when given custom type
+12. Improved: Updated Zen_CreateObjective documentation
+13. Fixed: Zen_ConfigGetVehicleClasses now includes all real vehicles
+14. Improved: Overhauled Zen_SetWeather parameters and features
+15. Improved: Updated Zen_SetWeather documentation
+
+9/8/13
+1. Improved: Data functions do not alter any given arrays by reference, but always copy the array
+2. Improved: Zen_SpawnInfantry now filters out pilots etc from dynamically generated spawn lists using Zen_ArrayFilterValues
+3. Improved: Optimized Zen_ArrayInsert
+4. New Function: Zen_ArrayFilterCondition
+5. Added: Documentation for Zen_ArrayFilterCondition
+6. Improved: Zen_SpawnInfantry and Zen_SpawnInfantryGarrison now accept a faction of soldiers as a parameter
+7. Improved: Updated documentation for Zen_SpawnInfantry and Zen_SpawnInfantryGarrison
+8. Improved: Zen_CreateObjective POW now has proper skill setting for being a pilot
+9. Improved: Zen_FindGroundPosition now handles icon markers better
+10. Improved: Zen_FindGroundPosition can accepts a 0 for min/max distance to accept the default value
+11. Fixed: Zen_FindGroundPosition always picked the first road found, causing a failure in some cases
+
+9/7/13
+1. Found Issue: Zen_ConfigGetVehicleClasses filters out a few real vehicles
+2. Fixed: Zen_OrderExtraction and Zen_OrderExtraction did not get the number of cargo seats correctly
+3. New Function: Zen_ArrayGetDelimitedSlice
+4. New Function: Zen_ArrayGetIndexedSlice
+5. New Function: Zen_ArrayRemoveValuedSlice
+6. New Function: Zen_GetAllInArea
+7. New Function: Zen_ArrayFilterValues
+8. Added: Documentation for Zen_ArrayGetDelimitedSlice, Zen_ArrayGetIndexedSlice, Zen_ArrayRemoveValuedSlice, Zen_ArrayFilterValues, and Zen_GetAllInArea
+9. Improved: Zen_StringIsInString and Zen_StringFindReplaceInString now use Zen_ArrayGetIndexedSlice
+10. Improved: Zen_SpawnInfantry now uses Zen_ConfigGetVehicleClasses to dynamically generate classnames
+11. Improved: Updated documentation for Zen_SpawnInfantry and Zen_SpawnInfantryGarrison
+12. Fixed: Zen_OrderVehiclePatrol could order the vehicle to more outside the given area due to roads
+13. Improved: Loadout functions now have more random civilian clothes, hats, and glasses
+14. Improved: Loadout functions now use addWeaponGlobal
+15. Improved: Fire Support system uses mapGridPosition to when printing a support request
+
+9/6/13
+1. Fixed: Zen_FindGroundPosition calculated limited angles wrong in an ellipse marker
+2. Fixed: Zen_OrderInfantryPatrol zero divisor error
+3. Found Issue: Zen_SpawnInfantryGarrison causes a CTD
+4. Improved: Zen_MP_Closure_Packet now uses missionNamespace getVariable to get the code to execute
+5. Improved: Updated demonstrations
+
+9/2/13
+1. Improved: Zen_TrackGroups and Zen_TrackInfantry now have a parameter for who can see the markers
+2. Improved: Zen_CreateObjective now shows the marker for the objective to only the given units
+3. Improved: Reordered parameters of Zen_IsRayInPoly
+4. Improved: Zen_OrderInsertion and Zen_OrderInsertion now order the vehicle to move on when its cargo seats are empty
+5. Improved: Zen_OrderExtraction and Zen_OrderExtraction now order the vehicle to move on when its cargo seats are full
+6. Improved: Updated documentation for Zen_TrackGroups, Zen_TrackInfantry, Zen_IsRayInPoly
+
+9/1/13
+1. Removed: Numerous scripts dealing with spawning for insertion and extraction, ferry scripts, and retreat scripts
+3. Removed: Zen_AreInVehicle and Zen_AreNotInVehicle do not print an error if all of the given units are dead
+4. Improved: Zen_SpawnHelicopter now has a parameter for starting height
+5. Improved: Greatly altered and improved Insertion and Extraction
+6. Fixed: Zen_OrderInfantryPatrol ordered units to chase down helicopters and other vehicles
+7. Improved: Zen_GiveMagazine and Zen_RepackMagazines are now compiled into variables used in Zen_AddRepackMagazines and Zen_AddGiveMagazine
+8. Improved: Zen_SpawnBoat, Zen_SpawnGroundVehicle, and Zen_SpawnHelicopter parameters condensed
+9. Fixed: Zen_ConfigGetVehicleClasses did not return ammo boxes if no side was given
+10. Improved: Zen_IsRayInPoly now requires a parameter for ray length
+11. Improved: Updated and cleaned various documentation
+
+8/26/13
+1. Improved: Zen_StringCapitalizeLetter can now capitalize any letter by given index
+2. Improved: Renamed Zen_StringUpperFirstLetter to Zen_StringCapitalizeLetter
+3. Improved: Renamed Zen_ArrayFindNestedArrayIndex to Zen_ArrayGetNestedIndex
+4. Improved: Renamed Zen_ArrayFindNestedArrayValue to Zen_ArrayGetNestedValue
+5. Fixed: Zen_ArrayGetNestedIndex reported the wrong scriptname when printing an error
+6. Improved: Zen_GetSide now returns sideLogic if no real side is found
+7. Improved: Updated Zen_StringCapitalizeLetter, Zen_ArrayGetNestedIndex, Zen_ArrayGetNestedValue documentation
+
+8/25/13
+1. New Function: Zen_GetSide
+2. Improved: Zen_GetSideColor now accepts classnames
+3. Improved: Optimized Zen_SpawnBoatFerry, Zen_SpawnGroundVehicleFerry, and Zen_SpawnHelicopterFerry with Zen_GetSide
+4. Improved: Zen_SetAISkill now has a preset for vehicle crew
+5. New Function: Zen_StringFindReplace
+6. New Function: Zen_ArrayInsert
+7. Fixed: Zen_StringIsInString did not match strings of equal length
+8. Fixed: Zen_StringIsInString did not find the key string if it was at the end of the searched string
+9. Improved: Zen_StringIsInString now accepts a '#' as a wildcard to match any character
+10. Improved: Updated documentation for Zen_GetSideColor and Zen_StringIsInString
+11. Added: Documentation for Zen_GetSide, Zen_StringFindReplace, Zen_ArrayInsert
+
+8/24/13
+1. Fixed: Zen_ArrayFindMax and Zen_ArrayFindMin did not initialize the return value correctly
+2. Fixed: Zen_IsPointInPoly did not account for the angle of a marker correctly
+3. Fixed: Hundreds of errors, typos, inconsistencies, and oddities in the documentation and demonstrations
+
+8/23/13
+1. New Function: Zen_FindTerrainSlope
+2. Fixed: Zen_OrderInfantryPatrol did not order groups to move if they spawned inside the minimum distance from the center
+3. Fixed: Zen_FindGroundPosition did not properly include positions near water
+4. Improved: Zen_FindGroundPosition position checking functions
+5. Improved: Zen_FindGroundPosition now has a parameter to include or exclude positions based upon nearby terrain slope
+6. New Function: Zen_GetAmbientClutterCount
+7. New Function: Zen_ArrayFindSum
+8. Added: Documentation for Zen_FindTerrainSlope, Zen_GetAmbientClutterCount, and Zen_ArrayFindSum
+9. Improved: Zen_FindGroundPosition now has a parameter to include or exclude positions based upon nearby ambient clutter
+10. Improved: Updated Zen_FindGroundPosition documentation
+11. Improved: Zen_ArrayFindAverage, Zen_ArrayFindMax, and Zen_ArrayFindMin now has their arguments in an array
+12. Fixed: Zen_SpawnInfantryGarrison and Zen_OrderInfantryPatrolBuilding did not get the correct number of building positions
+13. Fixed: Zen_IsRayInPoly drew the ray from the wrong center
+14. Improved: Massively optimized Zen_ConfigGetVehicleClasses, it now completes almost instantly instead of several seconds
+15. Fixed: Zen_HelicopterOrdersRetreat did not give Zen_FindGroundPosition the correct arguments
+
+8/22/13
+1. Improved: Zen_OrderInfantryPatrolBuilding now has a parameter to patrol just outside the building as well as inside
+2. Improved: Updated Zen_OrderInfantryPatrolBuilding documentation
+3. Improved: Renamed Zen_StringCapFirstLetter to Zen_StringCapitalizeLetter
+4. New Function: Zen_StringIsInString
+5. New Function: Zen_ConfigGetVehicleClasses
+6. Improved: Zen_ValueIsInArray now converts the second argument to an array if it is not one
+7. Improved: Removed WIP scripts from Zen_ObjectiveSystem folder
+8. Improved: Zen_SpawnGroundVehicle, Zen_SpawnBoat, Zen_SpawnHelicopter, Zen_SpawnAmmoBox, and Zen_SpawnWreck now use Zen_ConfigGetVehicleClasses to dynamically get vehicles
+9. New Function: Zen_StringGetDelimitedPart
+10. Improved: Optimized Zen_RepackMagazines with Zen_StringGetDelimitedPart
+11. New Function: Zen_SetTaskTarget
+12. Added: Documentation for Zen_StringIsInString, Zen_ConfigGetVehicleClasses, Zen_StringGetDelimitedPart, and Zen_SetTaskTarget
+13. Fixed: Zen_TrackGroups now does not update the group's destination to reflect AI path-finding during combat
+14. Improved: Optimized Zen_SpawnGroundVehicle, Zen_SpawnBoat, and Zen_SpawnHelicopter selection of vehicle to spawn
+15. Improved: Zen_FindDistanceToPolyEdge now finds the distance from outside of a polygon as well
+16. Improved: Optimized Zen_FindDistanceToPolyEdge, Zen_IsRayInPoly, and Zen_IsNearWater
+17. Improved: Revised demonstration missions
+18. Added: !Readme file to demonstrations folder
+19. Added: Demonstration of remote execution
+
+8/21/13
+1. Improved: Zen_AddGiveMagazine only shows the give magazine action if there is someone to receive it
+2. Improved: Optimized Zen_GiveMagazine
+3. Improved: Zen_AddGiveMagazine documentation
+4. Added: Zen_GiveMagazine now hints that you have given a magazine
+5. Improved: Optimized Zen_OrderInfantryPatrol seek and destroy known enemy feature
+6. Improved: Zen_SpawnInfantryGarrison now makes spawned units patrol the building alone instead of as a group
+7. Improved: Zen_TrackGroups can now display the destination of the group
+8. Improved: Updated Zen_TrackGroups documentation
+9. Fixed: Zen_ConvertToGroupArray did not return an array if given a single group
+10. New Function: Zen_OrderInfantryPatrolBuilding
+11. Added: Documentation for Zen_OrderInfantryPatrolBuilding
+12. Removed: Zen_SpawnInfantryGarrison patrol boolean parameter, it will no longer call Zen_OrderInfantryPatrolBuilding for you
+13. Improved: Updated Zen_SpawnInfantryGarrison documentation
+14. Improved: Zen_CreateObjective now uses Zen_OrderInfantryPatrolBuilding
+15. Improved: Optimized Zen_SpawnInfantryGarrison
+16. Improved: Reworded !FrameworkIntroduction file
+
+8/20/13
+1. Fixed: Various renaming errors
+2. Improved: Zen_GiveMagazine now uses addMagazineGlobal and removeMagazineGlobal to reduce network traffic
+3. Removed: Zen_GiveMagazine_AddMagazine_MP function
+4. Improved: Zen_ArrayRemoveNonLocal and Zen_ArrayRemoveDead now remove all other data types from the array
+5. Fixed: AI local to a player now get tasks on a dedicated server
+
+8/19/13
+1. Added: Presets for skill types to Zen_SetAISkill, support for array of skill numbers
+
+8/18/13
+1. Added: All function hints for Notepad++ sqf language
+2. Improved: Zen_SpawnInfantryGarrison now puts all spawned units in a single group, accepts an array for a variable number of units, and returns the group
+3. Added: Zen_GetUnitTasks documentation
+4. Improved: Renamed all framework functions and global variables with Zen_ prefix
+5. Improved: Renamed Zen_GetGridCoord to Zen_GetGridCoordinate
+
+8/12/13
+1. Added: Documentation for Zen_ArrayRemoveNonLocal
+2. Improved: Zen_TrackGroups and Zen_TrackInfantry now use Zen_ArrayRemoveDuplicates
+3. Improved: Optimized Zen_TrackGroups and Zen_TrackInfantry
+4. Improved: Fixed Zen_ExtendPosition documentation
+5. Improved: Zen_ExtendPosition now uses a string param to determine angle type
+6. Improved: Optimized Zen_ConvertToGroupArray and Zen_ConvertToObjectArray using recursion
+7. Improved: Zen_ConvertToGroupArray and Zen_ConvertToObjectArray use Zen_ArrayRemoveDuplicates
+8. Fixed: Documentation for Zen_FerryInfantryBoat, Zen_FerryInfantryVehicle, Zen_InsertionBoat, and Zen_OrderInsertion
+9. Added: Misc Documentation section with Notepad++ language files
+10. Improved: Zen_ArrayGetRandom parameters are now in an array
+
+8/7/13
+1. Fixed: Zen_RepackMagazines issues with removing ammo in multiplayer
+2. Improved: Renamed AreValuesEqual to Zen_ValuesAreEqual
+3. New Function: Zen_ArrayRemoveDuplicates
+4. New Function: Zen_ValueIsInArray
+5. New Function: Zen_ConvertToGroupArray
+6. New Function: Zen_TrackGroups
+7. Added: Documentation for Zen_ArrayRemoveDuplicates, Zen_ValueIsInArray, Zen_ConvertToGroupArray, and Zen_TrackGroups
+8. Improved: Zen_TrackInfantry now has options for different types of text on the markers
+9. Improved: Zen_TrackInfantry now returns the array of markers that it created
+10. Improved: Updated Zen_TrackInfantry documentation
+11. Improved: Removed markers from and optimized Zen_OrderInfantryPatrol, Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, and Zen_OrderVehiclePatrol
+12. Improved: Updated documentation for Zen_OrderInfantryPatrol, Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, and Zen_OrderVehiclePatrol
+13. Improved: Updated demonstration scripts
+
+8/6/13
+1. Tweaked: Zen_SetAISkill values, only accuracy and spot time are weighted now
+2. Improved: Optimized Zen_ArraysAreEqual
+3. Fixed: Zen_ValuesAreEqual and Zen_ArraysAreEqual could enter into a infinite recursion loop
+4. Fixed: Trigger functions evaluated the completion state of given tasks wrong
+
+8/5/13
+1. Improved: Zen_UpdateTask now checks that its arguments are a change to the task and does nothing if they are not
+2. New Function: Zen_ArrayFindAverage
+3. Added: Documentation for Zen_ArrayFindAverage
+4. Added: Documentation folder for demonstration scripts for intermediate level scripters
+
+8/4/13
+1. New Function: Zen_StringRemoveWhiteSpace
+2. Added: Documentation for Zen_StringRemoveWhiteSpace
+3. Improved: Loadouts now accept strings with spaces
+4. Improved: Renamed GetObjectSideColor to Zen_GetSideColor
+5. Improved: Renamed MoveUnitsInVehicle to Zen_MoveInVehicle
+6. Improved: Renamed GetVehicleTurretPaths to Zen_GetTurretPaths
+7. Improved: Renamed SetUnitsSkill to Zen_SetAISkill
+8. Improved: Renamed GetTaskData to Zen_GetTaskDataGlobal
+9. Improved: Optimized Zen_GetTaskDataGlobal
+10. Improved: Updated loadouts documentation, renamed all in documentation
+11. New Function: Zen_GetTaskDataLocal
+12. Improved: Task System now supports child tasks
+13. Improved: Updated Zen_InvokeTask and Zen_UpdateTask documentation
+14. Improved: Updated and optimized Zen_SetTaskCurrentClient, Zen_UpdateTaskClient, and Zen_RemoveTaskClient with Zen_GetTaskDataLocal
+15. Improved: Renamed ArrayFindNestedArray to Zen_ArrayGetNestedValue
+16. New Function: Zen_ArrayGetNestedIndex
+17. Added: Documentation for Zen_ArrayGetNestedIndex
+18. Added: Documentation for Zen_ArrayGetNestedValue
+19. Improved: Optimized Zen_ArrayGetNestedValue
+20. Fixed: Zen_InvokeTaskClient and Zen_RemoveTaskClient did not update the local array properly
+21. Fixed: Zen_ReassignTask created tasks that could not be completed
+22. Improved: Zen_UpdateTask now updates the state of a task's child tasks when that task is succeeded or failed
+23. Improved: Zen_UpdateTask now succeeds a parent task if all child tasks are succeeded
+24. Improved: All trigger functions now exit if the task(s) they are given are completed by another script
+25. Improved: Zen_OrderInfantryPatrol now tells groups to chase down and destroy enemies that they spot
+26. Fixed: Zen_OrderInfantryPatrol let groups move through the minimum distance circle
+27. Improved: Increased the accuracy of Zen_IsRayInPoly and Zen_FindDistanceToPolyEdge
+28. Improved: Updated Zen_UpdateTask and Zen_GetTaskDataGlobal documentation
+
+8/3/13
+1. Improved: Renamed IsUnitSeen to Zen_IsSeen
+2. New Function: Zen_IsFacing
+3. New Function: Zen_GiveMagazine
+4. New Function: Zen_AddGiveMagazine
+4. New Function: Zen_IsVisible
+5. Improved: Updated documentation for Zen_IsSeen
+6. Added: Documentation for Zen_IsFacing, Zen_AddGiveMagazine, and Zen_IsVisible
+7. Improved: Zen_IsSeen now uses Zen_IsVisible
+8. Removed: isServer check at the beginning of all scripts
+9. Fixed: Zen_InvokeTask handled setting a new task as current incorrectly in multiplayer
+10. Improved: Fire Support System data now visible to all clients in multiplayer
+11. Fixed: Zen_ReassignTask did not give Zen_InvokeTaskClient the correct arguments in multiplayer
+12. Fixed: Zen_AddFireSupportAction did get arguments properly when using remote execution recursion
+
+8/1/13
+1. Tweaked: Objective System 'officer' skill reduced slightly
+2. Fixed: Loadouts gave night vision goggles to 'civilian' loadout
+3. Fixed: All insertion, extraction, and ferry scripts did not use the original position of a given object
+4. Improved: Handling of given positions and conversions of objects and markers in all insertion, extraction, and ferry scripts
+5. Fixed: Zen_TriggerAreRescued counted dead units and non-human entities near the person to be rescued
+6. Fixed: Zen_TriggerAreaSecure behaved as though all defenders were dead when some were not
+
+7/31/13
+1. Tweaked: Zen_GiveLoadoutOpfor teamleader
+2. Improved: Moved check for road arguments in Position System
+3. Improved: Loadouts multiplayer remote execution redesigned and optimized
+4. Fixed: Temporary fix for issue with Task System of AI getting tasks in multiplayer, removed locality checking
+5. Tweaked: Zen_OrderHelicopterLand makes the helicopter land faster without hovering as long
+6. Added: 'HelicopterPilot' loadout
+7. Improved: Updated loadouts documentation
+
+7/30/13
+1. Improved: Updated loadouts documentation
+2. Improved: Added delay in trigger functions between using Zen_UpdateTask when given multiple tasks
+3. Improved: Added parameter for vehicle direction to Zen_SpawnBoat, Zen_SpawnHelicopter, and Zen_SpawnGroundVehicle
+4. Improved: Zen_SpawnGroundVehicle now allows crew to stay in a vehicle that is immobilized
+5. New Function: Zen_GetTurretPaths
+6. Fixed: Zen_SpawnVehicleCrew did not spawn the correct number of crewman for some APC's
+7. Fixed: Zen_MoveInVehicle did not correctly account for some seats in APC's
+8. Improved: Reorganized and improved logic for putting units in turrets in Zen_SpawnVehicleCrew and Zen_MoveInVehicle
+9. Added: Documentation for Zen_GetTurretPaths
+10. Tweaked: Zen_SetAISkill values
+11. Improved: Changed Zen_AreIndoors to function like Zen_AreLocal and Zen_AreInVehicle
+12. Improved: Updated and improved documentation for Zen_SpawnBoat, Zen_SpawnHelicopter, Zen_SpawnGroundVehicle, Zen_AreInVehicle, Zen_AreNotInVehicle, and Zen_AreIndoors
+13. New Function: Zen_AreNotIndoors
+13. New Function: Zen_AreInArea
+13. New Function: Zen_AreNotInArea
+16. Added: Documentation for Zen_AreNotIndoors, Zen_AreInArea, and Zen_AreNotInArea
+17. Improved: Zen_ArrayRemoveDead and Zen_ArrayRemoveNonLocal can now accept an array of objects or groups, group, object, or side
+18. Fixed: Corrected documentation error in which many scripts failed to state that they accept an array of groups
+19. Fixed: Zen_ConvertToObjectArray printed an error unnecessarily when an empty array was given
+20. Improved: Zen_TriggerAreaSecure now exits when no attackers are left alive
+21. Improved: Zen_ConvertToPosition prints an error if the given marker does not exist
+22. Improved: Zen_ConvertToPosition makes a copy of a given position array
+23. Fixed: Zen_MoveInVehicle was buggy when moving a player into the driver seat on a dedicated server
+24. Improved: Zen_MoveInVehicle recursion and locality logic for "all" type reorganized and optimized
+25. Fixed: Zen_SetWeather did not affect clients on a dedicated server
+
+7/29/13
+1. Improved: Zen_SpawnVehicle logic for starting a vehicle as 'flying'
+2. New Function: Zen_FindGridCoordinate
+3. Added: Documentation for Zen_FindGridCoordinate
+4. Improved: Fire Support System now prints sideChats when the Zen_AddFireSupportAction proxy function is used
+5. Tweaked: Zen_InsertionBoat, Zen_OrderInsertion, Zen_FerryInfantryBoat, and Zen_FerryInfantryVehicle do not tell the vehicle to move away after passengers get out
+6. Tweaked: Zen_InvokeFireSupport takes longer to start the first salvo
+7. Added: Sapper and AT Rifleman loadouts
+8. Improved: Added UH-80 camo variant to Zen_SpawnHelicopter
+9. Improved: All trigger functions can accept an array of strings for tasks to complete
+10. Improved: Trigger functions documentation updated
+11. Improved: Zen_SpawnVehicleCrew now uses Zen_SetAISkill
+
+7/28/13
+1. Improved: Zen_SpawnVehicle now has a vehicle direction parameter
+2. Improved: Added blacklist markers to Zen_FindGroundPosition object mode
+3. Improved: Added minimum distance to Zen_FindGroundPosition marker mode
+4. Fixed: Zen_FindGroundPosition did not correctly consider markers in the blacklist parameter
+5. Improved: Updated Zen_SpawnVehicle and Zen_FindGroundPosition documentation
+6. Improved: Optimized Zen_OrderBoatPatrol, Zen_OrderAircraftPatrol, Zen_OrderVehiclePatrol, and Zen_OrderInfantryPatrol by using only unitReady to trigger the next waypoint
+7. Tweaked: Removed flashlight from AT and AA specialists in loadouts
+8. Improved: Optimized Zen_AreIndoors, Zen_AreInVehicle, Zen_AreLocal, Zen_AreNotInVehicle, and Zen_AreNotLocal
+9. New Function: Zen_AddFireSupportAction
+10. New Function: Zen_InvokeFireSupportAction
+11. Added: Documentation for Zen_AddFireSupportAction
+12. Improved: Fire Support System now has a proxy function for a player to call for fire support, using BIS support menu interface
+13. Tweaked: Zen_SetAISkill values
+
+7/26/13
+1. Fixed: Zen_TriggerAreaSecure and Zen_TriggerAreNear considered dead units when given an array of objects
+2. Fixed: Zen_TriggerAreaSecure now considers if all given attackers are in the given area instead of just a single random one
+3. Improved: All trigger functions now require the resulting state of the task
+4. Improved: Updated documentation for all trigger functions, Zen_FindMaxDistance, and Zen_FindMinDistance
+5. New Function: Zen_TriggerAreRescued
+6. Added: Documentation for Zen_TriggerAreRescued
+7. Fixed: Documentation for Zen_IsPointInPoly, Zen_FindDistanceToPolyEdge, Zen_IsRayInPoly, and Zen_TriggerAreaSecure
+8. Improved: Zen_InitHeader.sqf moved into Framework Functions folder for easier updating and distribution
+9. Fixed: Zen_OrderVehicleMove did not convert the second parameter to a position
+10. Improved: Zen_OrderVehicleMove and Zen_IsNearWater documentation
+11. Fixed: Zen_OrderVehiclePatrol generated points on water
+12. New Function: Zen_OrderBoatPatrol
+13. New Function: Zen_BoatOrdersRetreat
+14. New Function: Zen_InsertionBoat
+15. New Function: Zen_ExtractionBoat
+16. New Function: Zen_FerryInfantryBoat
+17. New Function: Zen_SpawnBoatFerry
+18. Added: Documentation for Zen_OrderBoatPatrol, Zen_BoatOrdersRetreat, Zen_InsertionBoat, Zen_ExtractionBoat, and Zen_FerryInfantryBoat
+19. Improved: Zen_GetTaskDataGlobal and Zen_GetFireSupportData now use Zen_ValuesAreEqual
+20. Improved: Zen_TriggerAreRescued now uses Zen_TriggerAreDead
+
+7/25/13
+1. Improved: Updated Zen_SpawnGroundVehicle and Zen_SpawnWreck with the new APC's from stable patch 0.74.108135
+2. Fixed: Zen_TriggerAreNear now correctly interprets the first parameter
+3. Improved: All trigger functions now account for units spawned after the trigger started if a side was given as an argument
+4. Improved: Trigger functions do not consider dead units if a side was given as the argument, except Zen_TriggerAreDead
+5. Improved: Zen_ArrayRemoveDead and Zen_ArrayRemoveNonLocal return an empty array if given an empty array
+6. Improved: Zen_ArrayGetNestedValue prints an error if given an empty array to search in
+7. Fixed: Zen_OrderVehiclePatrol did not use a given marker's x,y size correctly
+
+7/24/13
+1. Improved: Zen_MoveInVehicle now prints an error if two or more units are given for driver seat
+2. Added: Readme file with legal text
+3. Fixed: Zen_SpawnGroundVehicle and Zen_SpawnHelicopter side error printed the wrong script name
+4. New Function: Zen_SpawnBoat
+5. Added: Documentation for Zen_SpawnBoat
+6. Improved: Documentation for Zen_SpawnGroup and Zen_SpawnVehicle
+7. Fixed: Documentation for Zen_SpawnHelicopter, Zen_SpawnBoat, and Zen_SpawnGroundVehicle claimed they returned Void
+8. Improved: Zen_SpawnVehicle and Zen_SpawnGroup now use Zen_ConvertToPosition, objects and markers can be used
+9. Improved: Added civilian vehicles to Zen_SpawnBoat, Zen_SpawnGroundVehicle, and Zen_SpawnHelicopter
+10. Improved: Zen_SpawnHelicopter prints an error when side is civilian, there are no civilian helicopters
+11. Fixed: Zen_TriggerAreaSecure did not pass arguments to Zen_IsPointInPoly correctly
+
+7/22/13
+1. Improved: TriggerAreObjectsDead renamed to Zen_TriggerAreDead
+2. Improved: TriggerPOW renamed to Zen_TriggerAreRescued
+3. New Function: Zen_TriggerAreaSecure
+4. Added: New group of trigger functions with Task System tie-in created
+5. Added: Documentation for Zen_TriggerAreaSecure, Zen_TriggerAreDead, and Zen_TriggerAreNear
+6. Improved: Zen_MoveInVehicle now reports an error if there are not enough cargo spaces or if the given vehicle is dead
+
+7/21/13
+1. Added: Documentation for Zen_StringCapitalizeLetter, Zen_CreateFireSupport, Zen_GetFireSupportData, Zen_InvokeFireSupport, Zen_FindDistanceToPolyEdge, Zen_IsPointInPoly, Zen_IsRayInPoly, Zen_SetWeather, Zen_MoveInVehicle, Zen_SetAISkill, Zen_OrderHelicopterLand, Zen_OrderAircraftPatrol, Zen_HelicopterOrdersRetreat, Zen_OrderVehicleMove, Zen_OrderVehiclePatrol, Zen_VehicleOrdersRetreat, Zen_SpawnGroundVehicle, Zen_SpawnHelicopter, Zen_SpawnVehicleCrew, and Zen_GetSideColor
+3. Improved: Creating an invisible helipad removed from Zen_SpawnHelicopterFerry and added to Zen_OrderHelicopterLand
+4. Improved: HelictoperOrdersPatrol and Zen_OrderVehiclePatrol optimized by using Data Functions
+5. Improved: Updated documentation for Zen_OrderInfantryPatrol, Zen_CreateObjective, and !Index
+6. Added: !KnownIssues file
+7. New Function: Zen_GetSideColor
+8. Improved: Used Zen_GetSideColor in Zen_TrackInfantry, Zen_OrderVehiclePatrol, Zen_OrderInfantryPatrol, and Zen_OrderAircraftPatrol
+9. Tweaked: Zen_SetAISkill values
+
+7/19/13
+1. Improved: Zen_MoveInVehicle Zen_MP_Closure_Packet usage reorganized and optimized
+2. Improved: Zen_SpawnWreck Zen_MP_Closure_Packet usage optimized
+3. New Functions: Zen_MoveInVehicle_All_MP, Zen_MoveInVehicle_Cargo_MP, Zen_MoveInVehicle_Driver_MP, Zen_MoveInVehicle_Turret_MP, Zen_SpawnWreck_LockVehicle_MP, Init_SetViewDist_MP
+4. Improved: Usage of code in Zen_MP_Closure_Packet deprecated and removed from all functions
+5. Improved: Optimized Zen_MoveInVehicle and the Task System with more locality checks in functions executed remotely
+6. Improved: Zen_SpawnVehicle now defaults to a height of 0.01 meters
+7. Fixed: Insertion, Extraction, and Ferry scripts did not delete the helicopter after it flew away
+8. Tweaked: Zen_SetAISkill values adjusted
+9. Fixed: Zen_CreateObjective house type did not put the marker and task destination directly on the correct building
+10. Improved: Zen_InvokeFireSupport now spawns munitions in the air and points them down
+
+7/18/13
+1. Added: Split ArrayMinorMax into Zen_ArrayFindMax and Zen_ArrayFindMin
+2. Added: Split ArrayMinorMaxDistance into Zen_FindMaxDistance and Zen_FindMinDistance
+3. Improved: Zen_FindMaxDistance and Zen_FindMinDistance return 0 and print an error if given an empty array
+4. Improved: Zen_ArrayFindMax and Zen_ArrayFindMin report an error if given an empty array
+5. Improved: Massive reorganization of documentation
+6. Added: All existing documentation from scripts put into correct files
+7. Improved: Zen_IsNearWater is now a math function, rough documentation added
+8. Tweaked: Zen_CreateObjective custom trigger type 'kill' changed to 'eliminate'
+9. Fixed: Zen_CreateObjective now always prints the custom trigger type in lower case (except for the first letter) for the map and task
+10. Improved: Task System uses BIS internal config for notifications, description.ext #include not necessary
+11. Improved: Zen_SpawnVehicleCrew no longer requires the classname of the vehicle
+12. Fixed: Zen_CreateObjective now puts the object created for a custom objective in an array
+13. Fixed: Zen_RemoveTask now uses TaskCanceled because TaskRemoved does not exist
+14. Fixed: Zen_CreateObjective spawned two trigger scripts for a custom objective
+15. Fixed: Zen_CreateObjective convoy type handled passing objects to the trigger wrong
+16. Improved: Objective System triggers now use flag-controlled loops instead of checking again for exitWith
+17. Improved: Insertion, Extraction, and Ferry scripts do not delete the helicopter if it is shot down and cannot fly away
+18. Found Issue: BIS configs missing TaskRemoved class
+
+7/17/13
+1. Improved: Zen_CreateObjective's internal handling of objects standardized
+2. Fixed: Zen_ConvertToObjectArray no longer uses variables from the wrong scope in loops
+3. Improved: Zen_ConvertToObjectArray prints an error if given an empty array
+4. Improved: Zen_ConvertToObjectArray uses a private copy of allUnits
+5. Fixed: Zen_SpawnHelicopter used the wrong classname for the black Mi-48
+6. Improved: Zen_InvokeFireSupport now uses Zen_ConvertToPosition
+7. Improved: Zen_InvokeFireSupport no longer avoids firing on water
+8. Fixed: Zen_InvokeFireSupport shells and rockets no longer fly away
+9. Improved: Zen_CreateObjective names target markers with task title
+10. Improved: Zen_CreateObjective custom task gets a marker
+11. Improved: Zen_CreateObjective capitalizes the first letter of a custom trigger type
+12. Tweaked: ObjectiveCreateMarker random marker placement radius expanded slightly
+13. Improved: Zen_VehicleOrdersRetreat does not delete the vehicle
+14. Fixed: Zen_MoveInVehicle exits if given an empty array
+15. Fixed: Zen_MoveInVehicle accounts for vehicles with no turret seats
+16. Improved: Reorganized all functions into new folders, placed those in one main folder
+
+7/16/13
+1. Improved: Zen_CreateObjective returns an array of all objects it created
+2. Added: Zen_CreateObjective now has a custom objective type
+3. New Function: Zen_StringCapitalizeLetter
+4. New Function: Zen_TriggerAreNear
+
+7/15/13
+1. Improved: Zen_ArrayGetRandom returns empty array if given an empty array
+2. Improved: Zen_ConvertToObjectArray scope safety for array recursion
+3. New Framework Global Variable: Hint_All_Errors, defaults to true
+4. Improved: Zen_PrintError now checks Hint_All_Errors before hinting
+
+7/14/13
+1. Improved: Zen_UpdateTask logic when skipping destination parameter
+2. Fixed: AI local to client not getting tasks on dedicated server
+3. Found Issue: Blufor 'Ammo Bearer' AI not getting mags in vest with loadouts
+4. Found Issue: AI local to a dedicated server not getting tasks
+5. Found Issue: Zen_RepackMagazines removes some mags completely in multiplayer
+6. Improved: Zen_RepackMagazines does not consider grenades
+
+7/13/13
+1. New Function: Zen_SpawnVehicleCrew
+2. Removed: Adding crew to vehicle in Zen_SpawnVehicle
+3. Improved: Objective system spawn functions now use Zen_SpawnVehicle
+4. Improved: isMultiplayer check added to all Zen_MP_Closure_Packet usages
+5. Added: Assistant AT, AA, and AR loadouts
+6. Tweaked: Default random loadout select array
+7. Improved: Zen_TrackInfantry updates the name of the marker in case of player teamswitch
+8. Improved: Zen_FindAveragePosition can now average any number of positions
+9. Improved: Zen_CreateObjective can pick randomly from an array of strings
+10. Found Issue: Blufor 'Rifleman' AI not getting mags in vest with loadouts
+
+7/12/13
+1. Added: Teamleader and diver loadouts
+2. Improved: Objectives are now selected by string
+3. Improved: Loadouts are now selected by string
+4. Improved: Loadouts can pick randomly from an array of strings
+5. Improved: Loadouts randomized slightly
+6. Improved: Loadouts add NVG's to inventory during the day, and equip them at night

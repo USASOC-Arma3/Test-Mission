@@ -1,0 +1,224 @@
+This file is part of Zenophon's ArmA 3 Co-op Mission Framework
+This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+See Legal.txt
+
+Fire Support System
+
+The Fire Support System is designed as a very general alternative to real artillery.  It can create everything from a single laser-guided bomb strike to carpet-bombing a city.  It is intended to be used primarily as a scripted mission event, but it also can be used to give a support option to players.  This system is not meant to simulate real artillery; it is a tool for mission makers who want to quickly and easily generate an effect that no unit in the game can produce.  A list of working classnames for artillery shells and rockets is included as well.
+
+List of shell classnames:
+
+Working:
+    r_60mm_he
+    r_80mm_he
+    Sh_82mm_AMOS
+    Sh_155mm_AMOS
+    cluster_155mm_amos
+    R_230mm_HE
+    Bo_Mk82
+    Bo_GBU12_LGB
+    M_Titan_AT
+    M_Titan_AP
+    M_Mo_120mm_AT
+    M_Mo_82mm_AT
+    smoke_82mm_amos_white
+    flare_82mm_amos_white
+    Smoke_120mm_AMOS
+    mine_155mm_amos_range
+    at_mine_155mm_amos_range
+
+Not Working:
+    Sh_120mm_HE
+    G_40mm_HE
+
+Zen_AddFireSupportAction
+
+Creates a action menu entry to use the given fire support template.  It follows the template
+exactly.  For guided rounds, if (6) is 'designator', (5) must have a laser designator, or
+guidance will not work.  Counts uses by support template; a use by one client counts for all.
+When uses reaches (4), the action associated with this support is removed from all (1) on all clients.
+For (5), 'player' automatically sets the designating unit to the object that called the action.
+Usage : Call
+Params: 1. Array, object, group, side, who to get the support option
+        2. String, the fire support template name
+        3. String, a name for this support to show in the menu
+        4. Scalar, the maximum number of usages, -1 for infinite
+    AND IF the template has 'true' for guided
+        5. Object or string, the target, the designating unit, or 'player'
+ (opt.) 6. String, what the object is, 'target' 'designator', (default: 'designator')
+Return: String, the fire support action name
+
+Zen_CreateFireSupport
+
+Creates a template in the global array with the given arguments.  For (5), this is half
+the time the function waits before firing the first round. For (8), guided means the
+rounds are directed towards a target by a function.  See Zen_InvokeFireSupport and
+Zen_AddFireSupport action for how to select this target and limitations.
+Usage : Call
+Params: 1: String, classname of round fired
+ (opt.) 2: Scalar, rounds per salvo, (default: 5)
+    OR
+ (opt.) 2: Array, rounds per salvo, (default: [5, 5])
+            1. Scalar, the minimum rounds per salvo
+            2. Scalar, the maximum rounds per salvo
+    AND
+ (opt.) 3: Scalar, number of salvos, (default: 1)
+    OR
+ (opt.) 3: Array, number of salvos, (default: [1, 1])
+            1. Scalar, the minimum number of salvos
+            2. Scalar, the maximum number of salvos
+    AND
+ (opt.) 4: Scalar, time between rounds, (default: 5)
+    OR
+ (opt.) 4: Array, time between rounds, (default: [5, 5])
+            1. Scalar, the minimum time between rounds
+            2. Scalar, the maximum time between rounds
+    AND
+ (opt.) 5: Scalar, time between salvos, (default: 10)
+    OR
+ (opt.) 5: Array, time between salvos, (default: [10, 10])
+            1. Scalar, the minimum time between salvos
+            2. Scalar, the maximum time between salvos
+    AND
+ (opt.) 6: Scalar, round spread radius, meters, (default: 100)
+    OR
+ (opt.) 6: String, a marker, the fire support shape
+    AND
+ (opt.) 7: Scalar, salvo drift from center, meters, (default: 25)
+    OR
+ (opt.) 7: Array, salvo drift from center, meters, (default: [25, 25])
+            1. Scalar, the minimum salvo drift from center, meters
+            2. Scalar, the maximum salvo drift from center, meters
+    AND
+ (opt.) 8: Boolean, true if the munitions are guided, (default: false)
+Return: String, the fire support template name
+
+Zen_GetFireSupportActionData
+
+Gets all data associated with (1).
+Usage : Call
+Params: 1. String, the fire support action name
+Return: Array
+        1. String, the fire support action name
+        2. Array of objects, units the action is assigned to
+        3. String, the name of the action
+        4. String, the fire support template name
+        5. Object or String, the guiding object
+        6. String, guidance type
+        7. Scalar, maximum number of usages
+        8. Scalar, current number of usages
+
+Zen_GetFireSupportData
+
+Gets all data associated with (1).  This data is the same as given to
+Zen_CreateFireSupport when the template was created.
+Usage : Call
+Params: 1: String, fire support template name
+Return: Array
+        1. String, the fire support template name
+        2. String, classname of round fired
+        3. Array of scalars, min and max rounds per salvo
+        4. Array of scalars, min and max number of salvos
+        5. Array of scalars, min and max time between rounds
+        6. Array of scalars, min and max time between salvos
+        7. Array, shape data
+            1. Scalar, the X radius
+            2. Scalar, the Y radius
+            3. String, the shape, 'rectangle' or 'ellipse'
+            4. Scalar, marker angle in degrees
+        8. Array of scalars, min and max salvo drift from center
+        9. Boolean, true if the munitions are guided
+
+Zen_GetUnitFireSupportActions
+
+Gets all unique fire support action names given to (1).
+Usage : Call
+Params: 1: Object, the unit to get the fire support actions for
+Return: Array of strings
+
+Zen_InvokeFireSupport
+
+Generates the fire support effect of (2) at (1).  For guided rounds, if (4) is 'designator',
+(3) must have a laser designator, or guidance will not work.  Stops
+executing when the fire support ends.
+Usage : Spawn
+Params: 1: Object, marker, group, position, the center
+        2: String, the fire support template name
+    AND IF the template has 'true' for guided
+        3. Object, the target or the designating unit
+ (opt.) 4. String, what the object is, 'target' 'designator', (default: 'designator')
+Return: Void
+
+Zen_RemoveFireSupport
+
+Deletes the data of (1) from the global array.  Do not use this to remove
+a fire support that is given as an action, use Zen_RemoveFireSupportAction.
+Usage : Call
+Params: 1. String, the fire support template name
+Return: Void
+
+Zen_RemoveFireSupportAction
+
+Removes the action associated with (1) from (2) assigned in Zen_AddFireSupportAction
+from all clients.
+Usage : Call
+Params: 1. String, the fire support action name
+ (opt.) 2. Array, group, object, side, units to remove from, (default: All)
+Return: Void
+
+Zen_UpdateFireSupport
+
+Alters (1) with new values.  All but (1) can be skipped with a -1.  All but
+(1) and (2) are optional. Otherwise, params are the same as Zen_CreateFireSupport.
+Usage : Call
+Params: 1. String, the fire support template name
+        2: String, classname of round fired
+ (opt.) 3: Scalar, rounds per salvo
+    OR
+ (opt.) 3: Array, rounds per salvo
+            1. Scalar, the minimum rounds per salvo
+            2. Scalar, the maximum rounds per salvo
+    AND
+ (opt.) 4: Scalar, number of salvos, (default: no change)
+    OR
+ (opt.) 4: Array, number of salvos, (default: no change)
+            1. Scalar, the minimum number of salvos
+            2. Scalar, the maximum number of salvos
+    AND
+ (opt.) 5: Scalar, time between rounds, (default: no change)
+    OR
+ (opt.) 5: Array, time between rounds, (default: no change)
+            1. Scalar, the minimum time between rounds
+            2. Scalar, the maximum time between rounds
+    AND
+ (opt.) 6: Scalar, time between salvos, (default: no change)
+    OR
+ (opt.) 6: Array, time between salvos, (default: no change)
+            1. Scalar, the minimum time between salvos
+            2. Scalar, the maximum time between salvos
+    AND
+ (opt.) 7: Scalar, round spread radius, meters, (default: no change)
+    OR
+ (opt.) 7: String, a marker, the fire support shape, (default: no change)
+    AND
+ (opt.) 8: Scalar, salvo drift from center, meters, (default: no change)
+    OR
+ (opt.) 8: Array, salvo drift from center, meters, (default: no change)
+            1. Scalar, the minimum salvo drift from center, meters
+            2. Scalar, the maximum salvo drift from center, meters
+    AND
+ (opt.) 9: Boolean, true if the munitions are guided, (default: no change)
+Return: Void
+
+Zen_UpdateFireSupportAction
+
+Modifies the global data of the fire support actions for (1).  Adds the action to all (2)
+on all clients.  Does not modify the current number of uses.  Use 0 to skip (2,6).
+Usage : Call
+Params: 1. String, the fire support template name
+        2. Array, group, object, side, units to add to
+ (opt.) 3. String, the fire support template name, (default: 0)
+ (opt.) 4. Object or String, the target, the designating unit, or 'player', (default: 0)
+ (opt.) 5. String, what the object is, 'target' 'designator', (default: 0)
+ (opt.) 6. Scalar, maximum number of usages, (default: 0)
+Return: Void

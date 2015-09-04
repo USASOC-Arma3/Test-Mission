@@ -1,0 +1,40 @@
+/* extracted from http://bottlecaps.de/rr/ui on Tue Nov 26, 2013, 11:43 (UTC-08)
+ */
+
+Zen_SpawnInfantry
+          ::= '(' 
+               (Object|Position|IconMarkerName|Group) ',' 
+               Side ','
+               AISkill ',' 
+               (NumberofUnits ',')
+               (UnitTypes ',')?
+               (UnitFaction ',')?
+               (TypeExclusion ',')?
+               ')'
+
+Side::= 'EAST'|'WEST'|'CIVILIAN'|'RESISTANCE'
+
+AISkill ::= (AllSkills|SubSkillsByValue|PresetSkill)
+
+AllSkills::= ('0' | '1' | ( '0' '.' [1-9]+))
+
+SubSkillsByValue::= '[' AimingAccuracy ',' 
+                         ((AimingShake ',') (AimingSpeed ',')
+                          (Commanding',')   (Courage',')
+                          (Endurance',')    (General',')
+                          (ReloadSpeed',')  (SpotDistance',')
+                          (SpotTime','))?
+                      ']'
+
+PresetSkill::=  ('Militia' | 'Infantry' | 'Sniper' | 'SOF' | 'Officer' | 'Crew')
+
+NumberofUnits ::= ('[' [1-9]+ ',' [1-9]+ ']') | [1-9]+
+
+UnitTypes ::= '[' ( 'Men' | 'MenDiver' | 'MenRecon' | 'MenSniper' ) ']'
+
+UnitFaction ::= '[' ( 'All' | 
+                      (('BLU_F'|'IND_F'|'OPF_F'|'BLU_G_F')(',' ('BLU_F'|'IND_F'|'OPF_F'|'BLU_G_F'))*)
+                     )
+                      ']'
+
+TypeExclusion ::= '[' (('Men'|'MenDiver'|'MenRecon'|'MenSniper') (',' ('Men'|'MenDiver'|'MenRecon'|'MenSniper'))*)  ']'

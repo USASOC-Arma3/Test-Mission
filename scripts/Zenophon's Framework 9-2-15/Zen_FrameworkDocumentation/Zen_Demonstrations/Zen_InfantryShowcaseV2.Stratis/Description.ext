@@ -1,0 +1,27 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+debriefing = 1;
+enableItemsDropping = 0;
+
+onLoadName = "Infantry Show Remake";
+author = "Zenophon";
+OnLoadMission = "Assault and secure the town of Girna, save Bravo team.";
+
+overviewText = "Assault and secure the town of Girna, save Bravo team.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+
+doneKeys[] = {"BIS_InfShowV2.Stratis_done"};
+
+class CfgDebriefing {
+    class End {
+        title = "Mission Completed";
+        subtitle = "Excellent Work";
+        description = "You rescued Bravo squad and defeated an Opfor counter attack.  However, you were forced to retreat by overwhelming Opfor firepower.";
+    };
+};

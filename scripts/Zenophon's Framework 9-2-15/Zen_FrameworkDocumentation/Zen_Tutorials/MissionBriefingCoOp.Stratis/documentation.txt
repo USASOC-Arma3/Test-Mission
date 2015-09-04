@@ -1,0 +1,73 @@
+﻿
+f_housekeeping
+
+Per the designer's needs, basic logic for any co-op mission
+
+Usage : Call
+Params: 1. Array of objects of type Group
+Return: Void
+
+f_getPrimaryObjectiveMarker
+
+Usage : Call
+Params: none
+Return: Area Marker
+
+f_getrandomcityAreaMarker
+
+Usage : Call
+Params: none
+Return: Area Marker
+
+f_createSecondaryAreaMarkers
+
+Usage : Call
+Params: 1. Object of type Area Marker
+Return: Array of of objects of type Area Marker
+
+f_createSecondaryObjectives
+
+Usage : Call
+Params: 1. Array of objects of type Group
+	2. Array of objects of type Area Marker
+Return: Array of [array of Objects, String]
+
+f_createSecondaryObjectiveMarker
+
+Usage : Call
+Params: 1. Array of objects of type Area Marker
+Return: [int,int,int] (Position)
+
+f_createPrimaryObjective
+
+Usage : Call
+Params: 1. Object of type Area Marker
+	2.  Array of objects of type Group
+Return: Array of [array of Objects, String]
+
+f_getnearbyPositionsNine
+
+Creates an array of nine positions with center (1) and offset of (2).
+
+Usage : Call
+Params: 1. [int,int]
+        2. Integer
+Return: Array of [int,int]
+
+f_createMarkersfromArray
+
+Converts the array of positions (1) into an array of square area markers with side length (2).
+
+Usage : Call
+Params: 1. Array of [int,int]
+        2. Integer
+Return: Array of objects of type Area Marker
+
+f_filterpositionsbyTerrain
+
+Filters (1). If the position is water, remove it from the array.
+
+Usage : Call
+Params: 1. Array of objects of type Area Marker
+Return: Array of objects of type Area Marker
+

@@ -1,0 +1,69 @@
+#include "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_LoadoutDialog.hpp"
+class CfgNotifications {
+    #include "Zen_FrameworkFunctions\Zen_TaskSystem\Zen_TaskNotifications.hpp"
+};
+class CfgCommunicationMenu {
+    #include "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportMenu.hpp"
+};
+
+respawn = 4;
+respawndelay = 60;
+
+//ensure AI exist
+disabledAI = 0;
+
+//show scoreboard on player death
+respawnDialog = 1;
+
+//settings shown in the small box
+onLoadName = "Airbase Assault";
+author = "Zenophon";
+OnLoadMission = "Perform a Combined Arms Assault on Stratis Airbase.";
+loadScreen = "SAA.jpg";
+// pics must be 1024x512
+// pics must be .paa or .jpg
+
+// setting in scenario menu
+overviewText = "Perform a Combined Arms Assault on Stratis Airbase.";
+overviewTextLocked = "If you are seeing this message, an error has occurred.";
+overviewPicture = "SAA.jpg";
+// pics must be 1024x512
+// pics must be .jpg
+
+//ensure that the scoreboard appears
+debriefing = 1;
+
+//do not drop items while swimming
+enableItemsDropping = 0;
+
+// debug for admin
+enableDebugConsole = 1;
+
+// check box green when completed, see init
+doneKeys[] = {"BIS_Zen_AirbaseAssault.Stratis_done"};
+
+//defines settings that the server browser reads
+class Header {
+    gameType = COOP;
+    minPlayers = 2;
+    maxPlayers = 10;
+};
+
+class CfgDebriefing {
+    class End1 {
+        title = "Mission Completed";
+        subtitle = "Total Success";
+        description = "All objectives completed. Stratis Airbase is secure and Opfor units are safely back at Camp Rogain.";
+        // pictureBackground = "";
+        // picture = "b_inf";
+        // pictureColor[] = {0.0,0.3,0.6,1};
+    };
+    class End2 {
+        title = "Mission Completed";
+        subtitle = "Moderate Success";
+        description = "The Opfor have taken Stratis Airbase, but they lost their helicopter, stranding their infantry.";
+        // pictureBackground = "";
+        // picture = "b_inf";
+        // pictureColor[] = {0.0,0.3,0.6,1};
+    };
+};
