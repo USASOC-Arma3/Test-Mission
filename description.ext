@@ -6,6 +6,6 @@
 Author="Heintz";
 OnLoadName = "test mission";
 OnLoadMission = "USASOC: One Force Without Equal";
-LoadScreen = "USASOC_Banner.JPEG";
+LoadScreen = "USASOC_Banner.jpg";
 
 enableDebugConsole = 1;
